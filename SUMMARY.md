@@ -49,7 +49,7 @@
     * [九、JVM和底层实现原理](chapter1/bing-fa-bian-cheng-jin-jie/jiu-3001-jvm-he-di-ceng-shi-xian-yuan-li.md)
       * 9.1 现代计算机物理上的内存模型
       * 9.2 Java内存模型（JVM）
-  * 高性能架构专题
+  * [高性能架构专题](chapter1/gao-xing-neng-jia-gou-zhuan-ti.md)
     * [分布式常见场景解决方案实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan.md)
       * [分布式事物和锁](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
 
