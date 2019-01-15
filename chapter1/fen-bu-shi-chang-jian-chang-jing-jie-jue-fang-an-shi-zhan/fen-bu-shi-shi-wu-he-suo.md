@@ -254,7 +254,6 @@ public class DataSourceConfig {
     }
 
 }
-
 ```
 
 RedisConfig.java
@@ -289,7 +288,6 @@ public class RedisConfig {
         return jedisConnectionFactory;
     }
 }
-
 ```
 
 controller
@@ -375,8 +373,6 @@ public class LockController {
         }
     }
 }
-
-
 ```
 
 lock
@@ -462,7 +458,6 @@ public class MysqlLock implements Lock {
     }
 
 }
-
 ```
 
 lockApp.java
