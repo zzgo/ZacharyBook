@@ -474,7 +474,6 @@ public class LockApp {
         SpringApplication.run(LockApp.class, args);
     }
 }
-
 ```
 
 Swagger2.java
@@ -517,5 +516,5 @@ public class Swagger2 {
 }
 ```
 
-
+MySql作为这个公证人，实现锁---可以作为锁，他本身的操作必须是原子性的。利用插入一条sql是原子性的操作，且有两个信号量（主键唯一，插入成功，插入失败）
 
