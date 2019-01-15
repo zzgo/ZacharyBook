@@ -184,8 +184,288 @@ pom.xml
         </plugins>
     </build>
 </project>
+```
+
+构建项目结构
+
+![](/assets/fg2.png)
+
+resources文件
+
+application.xml
 
 ```
+server:
+  port: 8090
+  compression:
+    enabled: true
+  connection-timeout: 3000
+swagger:
+  host: local.dev.com
+```
+
+config小的java文件
+
+DataSourceConfig.java
+
+```
+package com.zachary.config;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+@Configuration
+public class DataSourceConfig {
+
+    @Bean
+    public DataSource dataSource() throws PropertyVetoException {
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/lock?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull");
+        dataSource.setDriverClass("com.mysql.jdbc.Driver");
+        dataSource.setUser("root");
+        dataSource.setPassword("zhangqi");
+
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    //事务管理器
+    @Bean
+    DataSourceTransactionManager transactionManager(DataSource dataSource) {//事务管理
+        return new DataSourceTransactionManager(dataSource);
+    }
+
+    //事务模板
+    @Bean
+    TransactionTemplate transactionTemplate(PlatformTransactionManager platformTransactionManager) {
+        return new TransactionTemplate(platformTransactionManager);
+    }
+
+}
+
+```
+
+RedisConfig.java
+
+```
+package com.zachary.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import redis.clients.jedis.JedisPoolConfig;
+
+@Configuration
+public class RedisConfig {
+
+    @Bean
+    public JedisPoolConfig jedisPoolConfig() {
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        jedisPoolConfig.setMaxIdle(10);
+        jedisPoolConfig.setMaxTotal(10000);
+        return jedisPoolConfig;
+    }
+
+    @Bean
+    public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig)  {
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setHostName("127.0.0.1");
+        jedisConnectionFactory.setPort(6379);
+        jedisConnectionFactory.setUsePool(true);
+        jedisConnectionFactory.setPoolConfig(jedisPoolConfig);
+
+        return jedisConnectionFactory;
+    }
+}
+
+```
+
+controller
+
+LockController.java
+
+```
+package com.zachary.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Lock;
+
+/**
+ * @Title:
+ * @Author:Zachary
+ * @Desc:
+ * @Date:2019/1/15
+ **/
+@RestController
+@RequestMapping("lock")
+@Api(value = "锁机制" , description = "锁机制说明")
+public class LockController {
+    private static long count = 20;
+    CountDownLatch countDownLatch = new CountDownLatch(5);
+
+    @Resource(name = "mysqlLock")
+    private Lock lock;
+
+    @RequestMapping("/sale")
+    @ApiOperation(value = "售票")
+    public Long query() {
+        count = 20;
+        countDownLatch = new CountDownLatch(5);
+        new PlusThread().start();
+        new PlusThread().start();
+        new PlusThread().start();
+        new PlusThread().start();
+        new PlusThread().start();
+        return count;
+    }
+
+    //    模拟火车窗口买车票
+    class PlusThread extends Thread {
+        private int amount = 0;
+
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + "开始售票");
+            countDownLatch.countDown();
+            if (countDownLatch.getCount() == 0) {
+                System.out.println("售票结果");
+            }
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            while (count > 0) {
+                //加锁
+                lock.lock();
+                try {
+                    if (count > 0) {
+                        amount++;
+                        count--;
+                    }
+                } finally {
+                    //解锁
+                    lock.unlock();
+                }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(Thread.currentThread().getName() + "售出" + (amount) + "张票");
+        }
+    }
+}
+
+
+```
+
+lock
+
+MysqlLock.java
+
+```
+package com.zachary.lock;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+
+/**
+ * @Title:
+ * @Author:Zachary
+ * @Desc:
+ * @Date:2019/1/15
+ **/
+@Service
+public class MysqlLock implements Lock {
+    private static final int ID_NUM = 1;
+    //引入数据库操作模板，就是一些常规的增删改查
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+
+    @Override
+    //加锁
+    public void lock() {
+        //尝试获取锁,获取到锁，直接返回
+        if (tryLock()) {
+            return;
+        }
+        //获取锁失败，线程休眠一会
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //递归，尝试重新获取锁
+        lock();
+
+    }
+
+    @Override
+    //尝试获取锁
+//    非阻塞式加锁,往数据库写入id为1的数据，能写成功的即加锁成功
+    public boolean tryLock() {
+        try {
+            String sql = "INSERT INTO db_lock(id) VALUE(?)";
+            jdbcTemplate.update(sql, ID_NUM);//执行一条sql是一个原子性的操作
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    //解锁
+    public void unlock() {
+        String sql = " DELETE FROM db_lock WHERE id = ?";
+        jdbcTemplate.update(sql, ID_NUM);
+    }
+
+    @Override
+    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+        return false;
+    }
+
+    @Override
+    public void lockInterruptibly() throws InterruptedException {
+
+    }
+
+    @Override
+    public Condition newCondition() {
+        return null;
+    }
+
+}
+
+```
+
+lockApp.java
 
 
 

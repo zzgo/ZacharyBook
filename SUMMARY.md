@@ -54,4 +54,5 @@
       * [分布式事物和锁](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
   * [面试题](chapter1/mian-shi-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
+    * [一般试题](chapter1/mian-shi-ti/yi-ban-shi-ti.md)
 
