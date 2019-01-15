@@ -55,5 +55,5 @@
       * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
   * [面试题](chapter1/mian-shi-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
-    * [一般试题](chapter1/mian-shi-ti/yi-ban-shi-ti.md)
+    * [一般面试题2](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
 
