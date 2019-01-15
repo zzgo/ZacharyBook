@@ -524,5 +524,117 @@ MySql作为这个公证人，实现锁---可以作为锁的，他本身的操作
 
 利用redis对的setnx是一个原子性的操作
 
+RedisLock.java
+
+```
+package com.zachary.lock;
+
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+
+import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+
+/**
+ * @Title:
+ * @Author:Zachary
+ * @Desc:
+ * @Date:2019/1/15
+ **/
+@Service
+public class RedisLock implements Lock {
+    private final String KEY = "LOCK_KEY";
+    @Resource
+    private JedisConnectionFactory factory;
+
+    private ThreadLocal<String> local = new ThreadLocal<>();
+
+
+    @Override
+    public void lock() {
+//        尝试获取锁
+        if (tryLock()) {
+            return;
+        }
+//        获取锁失败，暂停10ms
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        重新获取这把锁
+        lock();
+    }
+
+    @Override
+    public boolean tryLock() {
+        String uuid = UUID.randomUUID().toString();
+        Jedis jedis = (Jedis) factory.getConnection().getNativeConnection();
+        /**
+         * key:我们使用key来当锁
+         * uuid:唯一标识，这个锁是我加的，属于我
+         * NX：设入模式【SET_IF_NOT_EXIST】--仅当key不存在时，本语句的值才设入
+         * PX：给key加有效期
+         * 1000：有效时间为 1 秒
+         */
+        String ret = jedis.set(KEY, uuid, "NX" , "PX" , 1000);
+        if ("OK".equals(ret)) {
+            local.set(uuid);
+            return true;
+        }
+        return false;
+    }
+    //错误的解锁姿势
+    public void unlockWrong() {
+        Jedis jedis = (Jedis) factory.getConnection().getNativeConnection();
+        String uuid = jedis.get(KEY);
+        // 由于设置了过期时间，--为什么要设置过期时间呢？---防止造成死锁。---使用了过期时间会出现了什么问题呢？
+        // 删除键的时候，key过期了。这个时候你删除的键其实是先一个线程获取到的键。你的操作造成了误删除。
+        //根本原因是因为你引入了过期时间这个操作。造成了删除键不是原子性的操作。
+        //所以我们使用lua脚本来执行
+        if (null != uuid && uuid.equals(local.get())) {
+            //失效了
+            //删除键
+            jedis.del(KEY);
+        }
+    }
+
+    @Override
+    public void unlock() {
+        Jedis jedis = (Jedis) factory.getConnection().getNativeConnection();
+        String uuid = jedis.get(KEY);
+        String script = "if redis.call(\"get\",KEYS[1]) == ARGV[1] then \n" +
+                "    return redis.call(\"del\",KEYS[1]) \n" +
+                "else \n" +
+                "    return 0 \n" +
+                "end";
+        jedis.eval(script, Arrays.asList(KEY), Arrays.asList(local.get()));
+    }
+
+    @Override
+    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+        return false;
+    }
+
+
+    @Override
+    public void lockInterruptibly() throws InterruptedException {
+
+    }
+
+
+    @Override
+    public Condition newCondition() {
+        return null;
+    }
+}
+
+```
+
 
 
