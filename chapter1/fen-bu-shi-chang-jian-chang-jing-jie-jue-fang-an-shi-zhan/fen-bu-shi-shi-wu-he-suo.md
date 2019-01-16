@@ -633,8 +633,31 @@ public class RedisLock implements Lock {
         return null;
     }
 }
-
 ```
+
+注意：
+
+**lua 脚本为什么是原子性的**
+
+ redis是单线程执行指令的，因此内部不存在线程竞争
+
+![](file:///C:\Users\Administrator\AppData\Roaming\Tencent\Users\815609229\TIM\WinTemp\RichOle\JYJCTPSREE[MXWLEX`I{J3E.png)
+
+（1）服务器A依次发送了ab指令到redis
+
+（2）服务器B依次发送了cd指令到redis
+
+（3）两台机器同向redis发送的四条指令，最终在指令队列里顺序是：acbd
+
+（4）可以看到，服务器A发送的ab两条指令，中间穿插了c指令，破坏了其完整性，因此，ab两条指令不是原子的
+
+（5）lua脚本，被放进队列时，ab指令是放在一起的，因为ab会顺序一起被执行，成为了原子性动作
+
+
+
+
+
+
 
 
 
