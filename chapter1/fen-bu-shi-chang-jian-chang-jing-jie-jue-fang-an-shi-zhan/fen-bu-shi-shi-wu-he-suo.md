@@ -639,7 +639,7 @@ public class RedisLock implements Lock {
 
 注意：
 
-**lua 脚本为什么是原子性的  
+**lua 脚本为什么是原子性的    
 **
 
 redis是单线程执行指令的，因此内部不存在线程竞争
@@ -692,9 +692,19 @@ redis是单线程执行指令的，因此内部不存在线程竞争
 
 定义了三个标准的接口：启事务（启副本）、副本转正，副本丢弃
 
+（百度事务的一些概念，隔离级别，脏读，幻读...）
 
+**分布式事务**
 
+多台数据库额执行sql，也想要到达一致性的标准，多台一起要么commit，要么rollback
 
+参照单机事务的模型，在分布式事务中进行思路沿袭，也想通过三个标准接口的模式来完成（启事务/commit/rollback）
+
+按照这个思路，有人就做了这个事情，X/Open组织提出了分布式事务规范---XA
+
+XA的核心，便是全局事务，再利用xa的二阶段提交协议，与各分布式数据库进交互，分准备和提交两个阶段
+
+![](file:///C:\Users\Administrator\AppData\Roaming\Tencent\Users\815609229\TIM\WinTemp\RichOle\$M1FK6F@X7SD@FW{U4ORM2J.png)
 
 
 
