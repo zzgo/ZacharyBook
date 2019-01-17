@@ -639,12 +639,12 @@ public class RedisLock implements Lock {
 
 注意：
 
-**lua 脚本为什么是原子性的      
+**lua 脚本为什么是原子性的          
 **
 
 redis是单线程执行指令的，因此内部不存在线程竞争
 
-![](file:///C:\Users\Administrator\AppData\Roaming\Tencent\Users\815609229\TIM\WinTemp\RichOle\JYJCTPSREE[MXWLEX`I{J3E.png)
+![](/assets/5tg.png)
 
 （1）服务器A依次发送了ab指令到redis
 
@@ -704,7 +704,7 @@ redis是单线程执行指令的，因此内部不存在线程竞争
 
 XA的核心，便是全局事务，再利用xa的二阶段提交协议，与各分布式数据库进交互，分准备和提交两个阶段
 
-![](file:///C:\Users\Administrator\AppData\Roaming\Tencent\Users\815609229\TIM\WinTemp\RichOle\$M1FK6F@X7SD@FW{U4ORM2J.png)
+![](/assets/h66.png)
 
 实战操练
 
