@@ -639,7 +639,7 @@ public class RedisLock implements Lock {
 
 注意：
 
-**lua 脚本为什么是原子性的          
+**lua 脚本为什么是原子性的            
 **
 
 redis是单线程执行指令的，因此内部不存在线程竞争

@@ -51,7 +51,8 @@
       * 9.2 Java内存模型（JVM）
   * [高性能架构专题](chapter1/gao-xing-neng-jia-gou-zhuan-ti.md)
     * [分布式常见场景解决方案实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan.md)
-      * [分布式事物和锁](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
+      * [分布式锁和事务](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
+      * [分布式事务实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-shi-zhan.md)
       * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
   * [面试题](chapter1/mian-shi-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
