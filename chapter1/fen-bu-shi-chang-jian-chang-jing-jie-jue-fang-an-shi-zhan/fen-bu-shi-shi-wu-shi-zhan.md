@@ -79,7 +79,6 @@ public class TransController {
 
 
 }
-
 ```
 
 补充
@@ -459,7 +458,7 @@ public class OrderService {
 
 
     @Transactional
-    public String doOrder(String busId, String idcard) throws Exception {
+    public String doOrder(String busId, String idcard){
         System.out.println("begin.....");
 
         String sql = "UPDATE tcc_fly_order SET bus_id=?,STATUS = 1,idcard=?,remark=? WHERE STATUS = 0 LIMIT 1";
@@ -483,7 +482,6 @@ public class OrderService {
         return "success";
     }
 }
-
 ```
 
 App.java
