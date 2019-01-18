@@ -58,4 +58,5 @@
   * [面试题](chapter1/mian-shi-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
     * [一般面试题2](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
+  * [基础](chapter1/ji-chu.md)
 
