@@ -1,3 +1,87 @@
+单机下的分布式事务
+
+TransController.java
+
+```
+package com.zachary.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @Title:
+ * @Author:Zachary
+ * @Desc:
+ * @Date:2019/1/18
+ **/
+@Api("事务机制")
+@RestController
+public class TransController {
+    //jdbc模板
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    // 事务管理器，事务管理器模板
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private DataSourceTransactionManager transactionManager;
+
+    @GetMapping("spring/trans/{id}")
+    @ApiOperation(value = "spring编程式事务")
+    public Long springTrans(@RequestParam("id") int id) {
+        String sql = "insert into db_lock(id) value(?)";
+        //        执行我们的execute方法
+        //       构造内部类TransactionCallbackWithoutResult
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                int i = id;
+                jdbcTemplate.update(sql, i++);
+                jdbcTemplate.update(sql, i++);
+                jdbcTemplate.update(sql, i++);
+            }
+        });
+        return 1L;
+    }
+
+    @GetMapping("trans/{id}")
+    @ApiOperation(value = "JAVA事务")
+    public Long javaTrans(@RequestParam("id") int id) {
+        String sql = "insert into db_lock(id) value(?)";
+        int i = id;
+        //拿到transactionStatus
+        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            jdbcTemplate.update(sql, i++);
+            jdbcTemplate.update(sql, i++);
+            jdbcTemplate.update(sql, i++);
+        } catch (DataAccessException ex) {
+            //副本丢弃
+            transactionManager.rollback(status);
+            throw ex;
+        }
+        //副本转正
+        transactionManager.commit(status);
+        return 1L;
+    }
+
+
+}
+
+```
+
 补充
 
 事务执行的中间态说明
@@ -173,10 +257,10 @@ spring:
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
         # 合并多个DruidDataSource的监控数据
         useGlobalDataSourceStat: true 
-      
+
       nhDB:
         name: nhDB
-        
+
         url: jdbc:mysql://localhost:3306/enjoy2?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: zhangqi
@@ -204,12 +288,11 @@ spring:
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
         # 合并多个DruidDataSource的监控数据
         useGlobalDataSourceStat: true 
-      
+
   #jta相关参数配置   
   jta:
     log-dir: classpath:tx-logs
     transaction-manager-id: txManager
-  
 ```
 
 项目结构
@@ -313,7 +396,6 @@ public class DataSourceConfig {
     }
 
 }
-
 ```
 
 OrderController.java
@@ -350,7 +432,6 @@ public class OrderController {
         return orderService.doOrder(busId, idCard);
     }
 }
-
 ```
 
 OrderService.java
@@ -378,7 +459,7 @@ public class OrderService {
 
 
     @Transactional
-    public String doOrder(String busId, String idcard) {
+    public String doOrder(String busId, String idcard) throws Exception {
         System.out.println("begin.....");
 
         String sql = "UPDATE tcc_fly_order SET bus_id=?,STATUS = 1,idcard=?,remark=? WHERE STATUS = 0 LIMIT 1";
@@ -387,12 +468,16 @@ public class OrderService {
         int ret = ghJdbcTemplate.update(sql, busId, idcard, "国航");
         if (ret != 1) {
             throw new RuntimeException("国航下单失败，无票可订");
+//            使用Exception 抛异常是不会回滚的 ，默认是RuntimeException
+//            throw new Exception();
         }
 
         //锁定订单
         ret = nhJdbcTemplate.update(sql, busId, idcard, "南航");
         if (ret != 1) {
             throw new RuntimeException("南航下单失败，无票可订");
+            //            使用Exception 抛异常是不会回滚的,默认是RuntimeException
+//            throw new Exception();
         }
         System.out.println("end.....");
         return "success";
@@ -428,7 +513,6 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 }
-
 ```
 
 Swagger2.java
@@ -469,10 +553,7 @@ public class Swagger2 {
                 .build();
     }
 }
-
 ```
-
-
 
 TCC\(try-confirm-cancel\)
 

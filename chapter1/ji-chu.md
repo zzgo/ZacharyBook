@@ -15,8 +15,7 @@ List<?> list = new ArrayList<?>();
 List<? extends E> list = new ArrayList<? extends E>();
 List<? super E> list = new ArrayList<? super E>();
 //相对更加复杂一点的
-<T extends Comparable<? super T>> 
-
+<T extends Comparable<? super T>>
 ```
 
 
