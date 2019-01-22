@@ -196,9 +196,9 @@ public @interface ComponentScan {
 
 > @ComponentScan\(value="com.enjoy.cap2扫描的包文件",
 >
-> includeFilters={		
+> includeFilters={
 >
-> @Filter\(type=FilterType.ANNOTATION,classes={Controller.class}\),		@Filter\(type=FilterType.ASSIGNABLE\_TYPE,classes={BookService.class}\)
+> @Filter\(type=FilterType.ANNOTATION,classes={Controller.class}\),        @Filter\(type=FilterType.ASSIGNABLE\_TYPE,classes={BookService.class}\)
 >
 > },
 >
@@ -226,7 +226,7 @@ public @interface ComponentScan {
 >
 > //FilterType.CUSTOM：使用自定义规则，自已写类，实现TypeFilter接口
 
-配置类
+配置类，自定义扫描规则
 
 ```
 @Configurable
@@ -259,10 +259,10 @@ import org.springframework.core.type.filter.TypeFilter;
 public class CustomFilter implements TypeFilter {
     private ClassMetadata classMetadata;
 
-	/*
+    /*
      * MetadataReader:读取到当前正在扫描类的信息
-	 * MetadataReaderFactory:可以获取到其他任何类信息
-	 */
+     * MetadataReaderFactory:可以获取到其他任何类信息
+     */
 
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
@@ -283,7 +283,6 @@ public class CustomFilter implements TypeFilter {
     }
 
 }
-
 ```
 
 
