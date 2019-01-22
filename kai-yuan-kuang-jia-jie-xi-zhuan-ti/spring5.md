@@ -71,7 +71,7 @@ pom.xml导入spring-context
         <property name="name" value="admin"/>
         <property name="age" value="100"/>
     </bean>
-    
+
 </beans>
 ```
 
@@ -98,7 +98,6 @@ public class MainConfig {
         return new Person("admin", 10);
     }
 }
-
 ```
 
 二者区别
@@ -133,6 +132,159 @@ for (String beanName : beanNames) {
 @Configurable解释
 
 > 被@Configurable注解修饰的类，会告诉spring这是一个配置类
+
+@ComponentScan 扫描规则认识
+
+> @interface ComponentScan 类
+
+```
+package org.springframework.context.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.beans.factory.support.BeanNameGenerator;
+import org.springframework.core.annotation.AliasFor;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+@Documented
+@Repeatable(ComponentScans.class)
+public @interface ComponentScan {
+    @AliasFor("basePackages")
+    String[] value() default {}; //扫描的包路径
+
+    @AliasFor("value")
+    String[] basePackages() default {};
+
+    Class<?>[] basePackageClasses() default {};
+
+    Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
+
+    Class<? extends ScopeMetadataResolver> scopeResolver() default AnnotationScopeMetadataResolver.class;
+
+    ScopedProxyMode scopedProxy() default ScopedProxyMode.DEFAULT;
+
+    String resourcePattern() default "**/*.class";
+
+    boolean useDefaultFilters() default true;//扫描范围，默认扫描value()包下面的全部
+
+    ComponentScan.Filter[] includeFilters() default {};//包含的类
+
+    ComponentScan.Filter[] excludeFilters() default {};//不包含的类
+
+    boolean lazyInit() default false;
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({})
+    public @interface Filter {
+        FilterType type() default FilterType.ANNOTATION;//扫描规则
+
+        @AliasFor("classes")
+        Class<?>[] value() default {};
+
+        @AliasFor("value")
+        Class<?>[] classes() default {};
+
+        String[] pattern() default {};
+    }
+}
+```
+
+> @ComponentScan\(value="com.enjoy.cap2扫描的包文件",
+>
+> includeFilters={		
+>
+> @Filter\(type=FilterType.ANNOTATION,classes={Controller.class}\),		@Filter\(type=FilterType.ASSIGNABLE\_TYPE,classes={BookService.class}\)
+>
+> },
+>
+> useDefaultFilters=false\) //默认是true,扫描所有组件，要改成false,使用自定义扫描范围
+>
+> \*/
+>
+> //@ComponentScan value:指定要扫描的包
+>
+> //excludeFilters = Filter\[\] 指定扫描的时候按照什么规则排除那些组件
+>
+> //includeFilters = Filter\[\] 指定扫描的时候只需要包含哪些组件
+>
+> //useDefaultFilters = false 默认是true,扫描所有组件，要改成false
+>
+> //－－－－扫描规则如下
+>
+> //FilterType.ANNOTATION：按照注解
+>
+> //FilterType.ASSIGNABLE\_TYPE：按照给定的类型；比如按BookService类型
+>
+> //FilterType.ASPECTJ：使用ASPECTJ表达式
+>
+> //FilterType.REGEX：使用正则指定
+>
+> //FilterType.CUSTOM：使用自定义规则，自已写类，实现TypeFilter接口
+
+配置类
+
+```
+@Configurable
+//自定义类来过滤规则
+@ComponentScan(value = "com.zachary.springanno.cap2",
+        includeFilters = {
+                @Filter(type = FilterType.CUSTOM, classes = {CustomFilter.class})
+        },
+        useDefaultFilters= false)
+public class Cap2MainConfig {
+    @Bean
+    public Person person01() {
+        return new Person("admin", 18);
+    }
+}
+```
+
+FilterType.CUSTOM
+
+```
+import java.io.IOException;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.core.type.ClassMetadata;
+import org.springframework.core.type.classreading.MetadataReader;
+import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.core.type.filter.TypeFilter;
+
+public class CustomFilter implements TypeFilter {
+    private ClassMetadata classMetadata;
+
+	/*
+     * MetadataReader:读取到当前正在扫描类的信息
+	 * MetadataReaderFactory:可以获取到其他任何类信息
+	 */
+
+    @Override
+    public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
+            throws IOException {
+        //获取当前类注解的信息
+        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        //获取当前正在扫描的类信息
+        classMetadata = metadataReader.getClassMetadata();
+        //获取当前类资源(类的路径)
+        Resource resource = metadataReader.getResource();
+
+        String className = classMetadata.getClassName();
+        System.out.println("----->" + className);
+        if (className.contains("cap2")) {//当类包含[ regx ]字符, 则匹配成功,返回true
+            return true;//返回true 表示接在spring ioc 容器中
+        }
+        return false;//不加入
+    }
+
+}
+
+```
 
 
 
