@@ -60,7 +60,7 @@
       * [分布式事务实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-shi-zhan.md)
       * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
       * [分布式任务调度](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-ren-wu-diao-du.md)
-  * Demo
+  * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
     * [算法题](chapter1/mian-shi-ti/suan-fa-ti.md)

@@ -4,7 +4,7 @@
 
 缺点：
 
-1. 代码能力不够，没有怎么写过业务代码，对边界没什么考虑，对异常情况没有考虑，对系统稳定性没有考虑，对基础的jdk方法没有本质理解。http://alibole.alibaba-inc.com/static/alibole-manage/src/p/detail/index.html?codeId=31330
+1. 代码能力不够，没有怎么写过业务代码，对边界没什么考虑，对异常情况没有考虑，对系统稳定性没有考虑，对基础的jdk方法没有本质理解。[http://alibole.alibaba-inc.com/static/alibole-manage/src/p/detail/index.html?codeId=31330](http://alibole.alibaba-inc.com/static/alibole-manage/src/p/detail/index.html?codeId=31330)
 
 2. 对分布式架构没有多少了解，仅知道一个zookeeper来做服务注册和发现
 
@@ -17,8 +17,6 @@
 6. 如何实现自定义spring注解：不知道
 
 7. http协议格式了解的不太清晰
-
-
 
 优点：
 
