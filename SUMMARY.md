@@ -66,5 +66,6 @@
     * [算法题](chapter1/mian-shi-ti/suan-fa-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
     * [一般面试题](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
+    * [经验之谈](chapter1/mian-shi-ti/jing-yan-zhi-tan.md)
   * [杂谈基础](chapter1/ji-chu.md)
 
