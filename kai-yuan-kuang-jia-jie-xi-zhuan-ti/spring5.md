@@ -841,13 +841,15 @@ public class Cap6MainConfig {
 
 > @Bean\(initMethod="init",destroyMethod = "destroy"\)
 >
-> 也可以在xml上配置 
+> 也可以在xml上配置
 >
 > &lt;bean id="person" class="com.zachary.springanno.cap1.Person" init-method="init" destroy-method="destroy"&gt;
 >
->         &lt;property name="name" value="admin"/&gt;
+> ```
+>     &lt;property name="name" value="admin"/&gt;
 >
->         &lt;property name="age" value="100"/&gt;
+>     &lt;property name="age" value="100"/&gt;
+> ```
 >
 > &lt;/bean&gt;
 
@@ -948,7 +950,6 @@ public class Jeep {
         System.out.println("jeep destroy ...");
     }
 }
-
 ```
 
 4、实现 implements BeanProcessor
@@ -994,6 +995,39 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
         System.out.println(beanName + "CustomBeanPostProcessor 2");
         return bean;
     }
+}
+```
+
+实现了implements ApplicationContextAware 可以获取到上下文 ApplicationContext对象
+
+```
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+@Component
+public class Plane implements ApplicationContextAware{
+	private ApplicationContext applicationContext;
+	public Plane(){
+		System.out.println("Plane.....constructor........");
+	}
+	@PostConstruct
+	public void init(){
+		System.out.println("Plane.....@PostConstruct........");
+	}
+	
+	@PreDestroy
+	public void destory(){
+		System.out.println("Plane.....@PreDestroy......");
+	}
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		//将applicationContext传进来,可以拿到
+		this.applicationContext = applicationContext;
+	}
 }
 ```
 

@@ -51,9 +51,10 @@
         * 9.1 现代计算机物理上的内存模型
         * 9.2 Java内存模型（JVM）
   * [开源框架解析专题](kai-yuan-kuang-jia-jie-xi-zhuan-ti.md)
-    * [Spring5](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
-    * [SpringMVC](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc.md)
+    * Spring
+      * [ioc容器](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
     * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
+    * [SpringMVC](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc.md)
   * [高性能架构专题](chapter1/gao-xing-neng-jia-gou-zhuan-ti.md)
     * [分布式常见场景解决方案实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan.md)
       * [分布式锁和事务](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
