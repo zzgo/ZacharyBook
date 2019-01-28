@@ -5,10 +5,8 @@
   * [架构师筑基专题](chapter1.md)
     * [并发编程进阶](chapter1/bing-fa-bian-cheng-jin-jie.md)
       * [一、线程基础、线程之间的共享和协作](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo.md)
-        * [1.1 基础概念](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/ji-chu-gai-nian.md)
-        * [1.2 启动和终止线程](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/qi-dong-he-zhong-zhi-xian-cheng.md)
-        * [1.3 线程再认识](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/xian-cheng-zai-ren-shi.md)
-        * [1.4 线程间的共享](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/xian-cheng-jian-de-gong-xiang.md)
+        * [1.1 基础概念，启动和终止线程，线程再认识](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/ji-chu-gai-nian.md)
+        * [1.2线程间的共享](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/xian-cheng-jian-de-gong-xiang.md)
         * [1.5 线程间协作](chapter1/bing-fa-bian-cheng-jin-jie/xian-cheng-ji-chu-3001-xian-cheng-zhi-jian-de-gong-xiang-he-xie-zuo/xian-cheng-jian-xie-zuo.md)
       * [二、线程的并发工具类](chapter1/bing-fa-bian-cheng-jin-jie/er-3001-xian-cheng-de-bing-fa-gong-ju-lei.md)
         * 2.1 Fork/Join

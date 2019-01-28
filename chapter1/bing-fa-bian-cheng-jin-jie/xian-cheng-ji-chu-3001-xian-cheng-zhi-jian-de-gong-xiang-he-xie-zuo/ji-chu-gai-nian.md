@@ -216,8 +216,8 @@ public class MyInterruptExistInterruptException extends Thread {
  thread is run and flag is false
  thread is run and flag is false
 java.lang.InterruptedException: sleep interrupted
-	at java.lang.Thread.sleep(Native Method)
-	at com.zachary.ch1.interrupt.MyInterruptExistInterruptException.run(MyInterruptExistInterruptException.java:15)
+    at java.lang.Thread.sleep(Native Method)
+    at com.zachary.ch1.interrupt.MyInterruptExistInterruptException.run(MyInterruptExistInterruptException.java:15)
  thread throw interrupt and flag is false
  thread throw interrupt ，handle use interrupt and  flag is true
  thread is interrupt and flag is true
@@ -243,7 +243,51 @@ java.lang.InterruptedException: sleep interrupted
 >
 > new Thread\(\).start\(\) 才会去创建一个线程，由cpu决定什么执行run方法
 
+yield方法
 
+> 线程从运行到可运行状态
+>
+> 使用了yield方法后，该线程让出cpu使用权，并且参与下一次争夺cpu使用，有可能会再次获取到cpu使用权
+
+线程优先级
+
+> 通过thread.setPriority\(\) 设置优先级，从1到10，默认是5
+>
+> 注意：
+>
+> 不要假定高优先级的线程一定先于低优先级的线程执行，不要有逻辑依赖于线程优先级，否则可能产生意外结果
+
+守护线程
+
+> 守护线程依赖于主线程，主线程结束后，守护线程就死亡了
+>
+> 通过thread.setDeamon\(true\) 设置问主线程
+>
+> 注意守护线程里面的 finally{ } 块 不一定能执行
+
+MyDeamon.java
+
+```
+public class MyDeamon extends Thread {
+    @Override
+    public void run() {
+        try {
+
+        } finally {
+            System.out.println(" deamon thread exec finally ?");
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyDeamon deamon = new MyDeamon();
+        deamon.setDaemon(true);
+        deamon.start();
+        //注释与注释区别
+        // 如果主线程执行的很快，守护线程都还进入运行状态，就直接死亡了
+        Thread.sleep(100);
+    }
+}
+```
 
 
 
