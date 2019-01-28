@@ -128,6 +128,8 @@ public class UseCallable implements Callable<String> {
 >
 > 结束
 
+
+
 > 注意一个问题：
 >
 > 如果在run里面跑出了InterruptException异常，这时候线程的中断标志位会被重置为false
