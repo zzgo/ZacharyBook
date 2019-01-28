@@ -127,14 +127,123 @@ public class UseCallable implements Callable<String> {
 > }
 >
 > 结束
-
-
-
+>
 > 注意一个问题：
 >
 > 如果在run里面跑出了InterruptException异常，这时候线程的中断标志位会被重置为false
 >
 > 如果还需要中断该线程的话，需要手动的调用interrupt\(\)方法
+
+MyInterruptInThread.java
+
+```
+public class MyInterruptInThread extends Thread {
+    @Override
+    public void run() {
+        //判断是否被打断了
+        while (!isInterrupted()) {
+            //逻辑
+            System.out.println(" thread is run and flag is " + isInterrupted());
+        }
+        System.out.println(" thread is interrupt and flag is " + isInterrupted());
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyInterruptInThread inThread = new MyInterruptInThread();
+        inThread.start();
+        Thread.sleep(500);
+        inThread.interrupt();
+    }
+}
+```
+
+MyInterruptInRunnable.java
+
+```
+public class MyInterruptInRunnable implements Runnable {
+    @Override
+    public void run() {
+        Thread thread = Thread.currentThread();
+        while (!thread.isInterrupted()) {
+            //逻辑
+            System.out.println(" thread is run and flag is " + thread.isInterrupted());
+        }
+        System.out.println(" thread is interrupt and flag is " + thread.isInterrupted());
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyInterruptInRunnable runnable = new MyInterruptInRunnable();
+        Thread thread = new Thread(runnable);
+        thread.start();
+        Thread.sleep(100);
+        thread.interrupt();
+    }
+}
+```
+
+a
+
+MyInterruptExistInterruptException.java
+
+```
+public class MyInterruptExistInterruptException extends Thread {
+    @Override
+    public void run() {
+        while (!isInterrupted()) {
+            try {
+                System.out.println(" thread is run and flag is " + isInterrupted());
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                System.out.println(" thread throw interrupt and flag is " + isInterrupted());
+                interrupt();
+                System.out.println(" thread throw interrupt ，handle use interrupt and  flag is " + isInterrupted());
+                e.printStackTrace();
+            }
+        }
+        System.out.println(" thread is interrupt and flag is " + isInterrupted());
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyInterruptExistInterruptException exception = new MyInterruptExistInterruptException();
+        exception.start();
+        Thread.sleep(100);
+        exception.interrupt();
+    }
+}
+```
+
+```
+ thread is run and flag is false
+ thread is run and flag is false
+java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at com.zachary.ch1.interrupt.MyInterruptExistInterruptException.run(MyInterruptExistInterruptException.java:15)
+ thread throw interrupt and flag is false
+ thread throw interrupt ，handle use interrupt and  flag is true
+ thread is interrupt and flag is true
+```
+
+线程的状态
+
+![](/assets/skak73287.png)
+
+> 新建：通过new 关键字新建一个线程，该线程不会运行，只是new 了一个对象对象出来
+>
+> 就绪：当线程调用start\(\)方法时，处于就绪状态，但仍然不能够运行
+>
+> 运行：只有当cpu调度到了该线程后，该线程处于可运行状态
+>
+> 阻塞：使用sleep\(\) wait\(\)
+>
+> 死亡，销毁：执行完后run，stop，setDeamon\(true\) 随着主线程一起销毁
+
+深入理解run和start
+
+> 直接new Thread\(\).run\(\) 本质就是一个对象调用了自己的方法，是在主线程中执行的，不会创建线程去执行
+>
+> new Thread\(\).start\(\) 才会去创建一个线程，由cpu决定什么执行run方法
+
+
 
 
 
