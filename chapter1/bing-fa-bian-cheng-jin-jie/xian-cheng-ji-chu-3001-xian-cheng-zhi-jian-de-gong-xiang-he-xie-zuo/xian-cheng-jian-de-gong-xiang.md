@@ -86,7 +86,15 @@ public class MyInnerLock {
 }
 ```
 
-volilate关键字，轻量级的锁
+volalite关键字，最轻量级的同步机制
+
+> 读取和写入没有进行synchronized机制，声明了该volatile关键字的变量，会告诉虚拟机，每次要用该变量时，总是要在主内存中读取
+>
+> volatile不是线程安全的，只能保证可见性，不能保证原子性，如 i++操作
+
+ThreadLocal 使用
+
+> 本地线程，可以确保每个线程只使用自己那一部分的东西。例如一个变量使用ThreadLocal包装的话，那么每个线程都是使用自己的那一份变量的拷贝。可以理解为Map&lt;Thread,Value&gt;
 
 
 
