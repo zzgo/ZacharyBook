@@ -92,9 +92,55 @@ volalite关键字，最轻量级的同步机制
 >
 > volatile不是线程安全的，只能保证可见性，不能保证原子性，如 i++操作
 
+```
+private volatile int a = 10;
+```
+
 ThreadLocal 使用
 
 > 本地线程，可以确保每个线程只使用自己那一部分的东西。例如一个变量使用ThreadLocal包装的话，那么每个线程都是使用自己的那一份变量的拷贝。可以理解为Map&lt;Thread,Value&gt;
+
+```
+/**
+ * @Title:
+ * @Author:Zachary
+ * @Desc: 使用本地线程，本质是 Map 实现 每个线程只能获取到自己的那一份数据
+ * @Date:2019/1/29
+ **/
+public class UseThreadLocal {
+    private ThreadLocal<Integer> local = new ThreadLocal() {
+        @Override
+        protected Object initialValue() {
+            return 1;
+        }
+    };
+
+
+    static class MyThread extends Thread {
+        private UseThreadLocal local;
+
+        public MyThread(UseThreadLocal local) {
+            this.local = local;
+        }
+
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getId() + " thread is run ");
+            System.out.println(Thread.currentThread().getId() + " current local value is  " + local.local.get());
+            local.local.set(local.local.get() + 1);
+            System.out.println(Thread.currentThread().getId() + " change local value is  " + local.local.get());
+            System.out.println(Thread.currentThread().getId() + " thread is end ");
+        }
+    }
+
+    public static void main(String[] args) {
+        UseThreadLocal local = new UseThreadLocal();
+        new MyThread(local).start();
+        new MyThread(local).start();
+    }
+
+}
+```
 
 
 
