@@ -102,17 +102,57 @@
 
 ### hkeys
 
-> 获取所有的field：hkeys user:2 返回 name age sex
+> 获取所有的field：hkeys user:2 返回 name age sex 三个field
 
 ### hvals
 
-> 获取某个key所有的value：hvals user:2 返回name age sex 三个field
+> 获取某个key所有的value：hvals user:2 返回 test 18 boy
 
 ### hgetall
 
+> 获取某个key的所有field和value：hgetall user:2 返回 name test age 18 sex boy
+
 ### hincrby
 
+> 增加1 hinctby user:2 age 1 age+1
+
 ### hincrbyfloat
+
+> hincrbyfloat user:2 age 2 浮点型加2
+
+# 常用命令 - Hash（应用场景）
+
+![](/assets/213fsadas.png)
+
+![](/assets/gfggwe32.png)
+
+> 将表结构转化为hash存储的实现
+>
+> Hash 类型是稀疏，每个键都可有不同的field，若用redis模拟作关系复杂查询开发困难，维护成本高
+
+## 比对三种方案实现存储用户信息的优缺点
+
+> 原生，使用set：set user:1:name test; set user:1:age 18;set user:1:sex boy
+>
+> 优点：简单直观，每个键对应一个值
+>
+> 缺点：键数过多，占用内存多，用户信息过于分散，不利于生成环境
+
+> 将对象序列化存入redis
+>
+> set user:1 serialize\(user\) 
+>
+> 优点：编程简单，若使用序列化合理内存使用率高
+>
+> 缺点：序列化与反序列有一定开销，更新属性时需要把user全部取出来进行反序列化，更新后再序列化到redis
+
+> 使用hash类型
+>
+> hmset user:1 name test age 18 sex boy
+>
+> 优点：简单直观，使用合理可减少内存空间消耗
+>
+> 缺点：要控制ziplist与hashtable两种编码转换，且hashtable会消耗更多的内存serialize\(user\);
 
 
 
