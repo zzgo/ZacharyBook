@@ -50,11 +50,11 @@
 
 # 常用命令 - 字符串（追加）
 
-### append 
+### append
 
 > 追加：set name hello ; append name world ; get name 为 helloworld
 
-### strlen 
+### strlen
 
 > 字符串长度：set hello "世界" ； strlen hello 结果为 6 每个中文沾3个字节
 
@@ -66,9 +66,9 @@
 
 > 哈希hash是一个string 类型的field和value的映射表，hash特别适合用于存储对象
 
-### hset 
+### hset
 
-> 设值：hset key field value 
+> 设值：hset key field value
 >
 > hset user:1 name test 成功返回1失败返回0
 
@@ -76,11 +76,11 @@
 
 > 取值：hget user:1 name 返回 test
 
-### hdel 
+### hdel
 
 > 删除值：hdel user:1 name
 
-### hlen 
+### hlen
 
 > 计算个数：hlen
 >
@@ -88,27 +88,31 @@
 >
 > hlen user:1 返回2 user:1 有两个属性name gae
 
-### hmset 
+### hmset
 
 > 批量设值：hmset user:2 name test age 18 sex boy 返回ok
 
-
-
-### hmget 
+### hmget
 
 > 批量取值：hmget user:2 name age sex 返回三行，test 18 boy
 
-### hexists 
+### hexists
 
-### hkeys 
+> 判断field是否存在：hexists user:2 name 若存在返回1，不存在返回0
 
-### hvals 
+### hkeys
 
-### hgetall 
+> 获取所有的field：hkeys user:2 返回 name age sex
+
+### hvals
+
+> 获取某个key所有的value：hvals user:2 返回name age sex 三个field
+
+### hgetall
 
 ### hincrby
 
-###  hincrbyfloat
+### hincrbyfloat
 
 
 
