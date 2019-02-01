@@ -153,7 +153,7 @@
 > 优点：简单直观，使用合理可减少内存空间消耗
 >
 > 缺点：要控制ziplist与hashtable两种编码转换，且hashtable会消耗更多的内存serialize\(user\);
-
+>
 > 总结：
 >
 > 对于更新不多的情况下，可以使用序列化，对于value不大于64字节，可以使用hash类型
@@ -165,6 +165,54 @@
 ![](/assets/kasklsa901.png)
 
 > 因为有序，可以通过索引下标获取元素或某个范围内的元素列表，列表元素可以重复
+
+### rpush 
+
+> 插入值 
+>
+> rpush strs c b a 从右向左有插入c b a 返回值3
+
+### lrange 
+
+> 获取值 ， 索引下标特点：从左到右为0到N-1
+>
+> lrange strs 0 -1 从左到右获取列表所有元素 返回 c b a
+
+### lpush 
+
+> 插入值
+>
+> lpush strs c b a 从左向右插入 c b a
+
+### linsert 
+
+> 插入值
+>
+> 之前是：lrange strs 0 -1   c b a
+>
+> linsert strs before b d 在b之前插入d ，after 为之后
+>
+> 使用lrange strs 0 -1 查看 c d b a
+
+### lindex 
+
+> lindex strs -1 返回最右末尾a  -2 返回 b
+
+### llen 
+
+> llen strs 返回当前列表长度
+
+### lpop 
+
+> 把最左边的第一个元素c删除
+>
+> lpop strs
+
+### rpop 
+
+> 把最右边的元素a删除
+>
+> rpop strs
 
 
 
