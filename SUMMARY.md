@@ -59,7 +59,7 @@
       * [分布式事务实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-shi-zhan.md)
       * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
       * [分布式任务调度](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-ren-wu-diao-du.md)
-    * 缓存和NoSql
+    * [缓存和NoSql](chapter1/huancun-he-nosql.md)
       * [Redis](chapter1/redis.md)
       * [MongoDB](chapter1/mongodb.md)
   * [Demo](demo.md)

@@ -11,9 +11,7 @@ redis是什么
 > redis基于键值对（key-value）数据库，其中的value可以是string，hash，list，set，zset等多种数据库结构
 >
 > 提供键过期，发布订阅，事务，流水线等附加功能
-
-
-
+>
 > 速度快，数据放在内存中，官方给出的读写性能是10万/s，数据放在内存中是速度块的主要原因，C语言实现，与操作系统距离近，使用了单线程，预防多线程可能产生的竞争问题
 >
 > 键值对的数据结构服务器
@@ -53,6 +51,26 @@ redis安装后需要知道的几个文件
 | redis-check-dump | RDB持久化文件检测和修复工具 |
 | redis-sentinel | 启动哨兵 |
 | redis-trib | cluster集群构建工具 |
+
+redis-server
+
+> 启动redis命令，linux下：./redis-server redis.conf &
+>
+> 解释 ./redis-server 启动， redis.conf 启动加载的配置文件 & 后台运行
+
+redis-cli
+
+> 命令：./redis-cli -h {host} -p {port} -a {password}
+>
+> ./redis -h 192.168.1.1 -p 6379 -a 12345678 
+>
+> -h 接ip地址  -p 接端口号 -a 设置的密码
+>
+> 停止redis 服务
+>
+> ./redis-cli shutdown 
+>
+> 注意：关闭时，断开连接，持久化文件生成，相对安全，还可以关闭用kill，此方式不会持久化，还会造成缓冲区非法关闭，可能会造成AOF和丢失数据
 
 版本
 
