@@ -62,13 +62,13 @@ redis-cli
 
 > 命令：./redis-cli -h {host} -p {port} -a {password}
 >
-> ./redis -h 192.168.1.1 -p 6379 -a 12345678 
+> ./redis -h 192.168.1.1 -p 6379 -a 12345678
 >
 > -h 接ip地址  -p 接端口号 -a 设置的密码
 >
 > 停止redis 服务
 >
-> ./redis-cli shutdown 
+> ./redis-cli shutdown
 >
 > 注意：关闭时，断开连接，持久化文件生成，相对安全，还可以关闭用kill，此方式不会持久化，还会造成缓冲区非法关闭，可能会造成AOF和丢失数据
 
@@ -84,7 +84,7 @@ redis-cli
 >
 > 单线程块的原因，纯内存访问，单线程避免线程切换和竞争产生资源消耗，RESP协议简单
 >
-> 描述RESP协议，发送报文格式
+> 描述RESP协议（https://redis.io/topics/protocol），发送报文格式
 
 
 

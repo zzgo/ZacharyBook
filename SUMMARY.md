@@ -60,7 +60,9 @@
       * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
       * [分布式任务调度](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-ren-wu-diao-du.md)
     * [缓存和NoSql](chapter1/huancun-he-nosql.md)
-      * [Redis](chapter1/redis.md)
+      * Redis
+        * [基本认识](chapter1/redis.md)
+        * [命令操作](chapter1/ming-ling-cao-zuo.md)
       * [MongoDB](chapter1/mongodb.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
