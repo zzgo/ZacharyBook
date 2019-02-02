@@ -232,17 +232,17 @@
 
 > exists user 坚持user键是否存在
 
-### sadd 
+### sadd
 
 > sadd user a b c 向user插入3个元素 返回3
 >
 > sadd user a b 若插入相同的元素，则重复无效返回0
 
-### smembers 
+### smembers
 
 > smembers user 获取user的所有元素，返回结果无序
 
-### srem 
+### srem
 
 > srem user a  返回1，删除a元素
 
@@ -292,7 +292,7 @@
 
 ### 命令
 
-### zadd 
+### zadd
 
 > zadd key score member \[score member...\]
 >
@@ -306,15 +306,15 @@
 >
 > zadd test:1 xx ch incr -299 james 返回操作结果1 300-299=1
 
-### zrange 
+### zrange
 
 > zrange test:1 0 -1 withscores 查看点赞数与成员名 返回 james 100
 
-### zcard 
+### zcard
 
 > 计算成员个数，返回1 zcard test:1 返回1
 
-### zrank 
+### zrank
 
 > 返回名次 从0开始算
 >
@@ -324,23 +324,23 @@
 >
 > zrange user:3 james 返回名次 第3名返回2 ，从0开始到2 ，共3名
 
-### zrevrank 
+### zrevrank
 
 > 反排序
 >
 > zrevrank user:3 james 返回0，反排序，点赞数越高，排名越前
 
-### zincrby 
+### zincrby
 
 > zadd user:1:20180106 3 mike mike获取3个赞
 >
 > zincrby user:1:20180106 1 mike 在3的基础上加1
 
-### zrem 
+### zrem
 
 > zrem user:120180106 mike 删除mike
 
-### zrevrangebyrank 
+### zrevrangebyrank
 
 > 展示赞数最多的5个用户
 >
@@ -353,6 +353,48 @@
 > zscore user:120180106 mike 查看分数
 >
 > zrank user:1:20180106 mike 查看排名，在这个有序集合的位置
+
+# 全局命令
+
+### keys 
+
+> 查看所有键 
+>
+> keys \* 返回所有键
+
+### dbsize 
+
+> 键总数 **如果存在大量键，线上禁止使用此命令**
+
+### exists 
+
+> 查看键是否存在
+>
+> exists key 存在返回1，不存在返回0
+
+### del 
+
+> 删除键
+>
+> del key 返回删除的键个数，删除不存在的键返回0
+
+### expire 
+
+> 键过期
+>
+> expire key seconds 设置键过期的时间
+
+### ttl 
+
+> 查看剩余的过期时间
+>
+> ttl key
+
+### type
+
+> type key 键的数据结构类型
+>
+> type hello 返回string ，键不存在返回none
 
 
 
