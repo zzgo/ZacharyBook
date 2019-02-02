@@ -356,35 +356,35 @@
 
 # 全局命令
 
-### keys 
+### keys
 
-> 查看所有键 
+> 查看所有键
 >
 > keys \* 返回所有键
 
-### dbsize 
+### dbsize
 
 > 键总数 **如果存在大量键，线上禁止使用此命令**
 
-### exists 
+### exists
 
 > 查看键是否存在
 >
 > exists key 存在返回1，不存在返回0
 
-### del 
+### del
 
 > 删除键
 >
 > del key 返回删除的键个数，删除不存在的键返回0
 
-### expire 
+### expire
 
 > 键过期
 >
 > expire key seconds 设置键过期的时间
 
-### ttl 
+### ttl
 
 > 查看剩余的过期时间
 >
@@ -395,6 +395,15 @@
 > type key 键的数据结构类型
 >
 > type hello 返回string ，键不存在返回none
+
+# 数据库管理
+
+| redis数据库管理方式 | 作用 |
+| :--- | :--- |
+| select 0 | redis一般有16个数据库，select index index=\[0 16\),切换数据库 |
+| flushdb | 清空当前数据库index的所有数据，线上禁止使用 |
+| flushall | 清空所有的数据库（0-15）的所有数据，线上禁止使用 |
+| dbsize | 计算所有的键的个数，键个数太多，线上进行使用 |
 
 
 
