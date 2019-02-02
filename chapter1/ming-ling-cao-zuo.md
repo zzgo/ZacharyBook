@@ -132,30 +132,32 @@
 
 ## 比对三种方案实现存储用户信息的优缺点
 
-> 原生，使用set：set user:1:name test; set user:1:age 18;set user:1:sex boy
+1.原生
+
+> 使用set：set user:1:name test; set user:1:age 18;set user:1:sex boy
 >
 > 优点：简单直观，每个键对应一个值
 >
 > 缺点：键数过多，占用内存多，用户信息过于分散，不利于生成环境
->
-> 将对象序列化存入redis
->
+
+2.将对象序列化存入redis
+
 > set user:1 serialize\(user\)
 >
 > 优点：编程简单，若使用序列化合理内存使用率高
 >
 > 缺点：序列化与反序列有一定开销，更新属性时需要把user全部取出来进行反序列化，更新后再序列化到redis
->
-> 使用hash类型
->
+
+3.使用hash类型
+
 > hmset user:1 name test age 18 sex boy
 >
 > 优点：简单直观，使用合理可减少内存空间消耗
 >
 > 缺点：要控制ziplist与hashtable两种编码转换，且hashtable会消耗更多的内存serialize\(user\);
->
-> 总结：
->
+
+总结
+
 > 对于更新不多的情况下，可以使用序列化，对于value不大于64字节，可以使用hash类型
 
 # 数据结构 - 列表 （List）
@@ -166,25 +168,25 @@
 
 > 因为有序，可以通过索引下标获取元素或某个范围内的元素列表，列表元素可以重复
 
-### rpush 
+### rpush
 
-> 插入值 
+> 插入值
 >
 > rpush strs c b a 从右向左有插入c b a 返回值3
 
-### lrange 
+### lrange
 
 > 获取值 ， 索引下标特点：从左到右为0到N-1
 >
 > lrange strs 0 -1 从左到右获取列表所有元素 返回 c b a
 
-### lpush 
+### lpush
 
 > 插入值
 >
 > lpush strs c b a 从左向右插入 c b a
 
-### linsert 
+### linsert
 
 > 插入值
 >
@@ -194,25 +196,163 @@
 >
 > 使用lrange strs 0 -1 查看 c d b a
 
-### lindex 
+### lindex
 
 > lindex strs -1 返回最右末尾a  -2 返回 b
 
-### llen 
+### llen
 
 > llen strs 返回当前列表长度
 
-### lpop 
+### lpop
 
 > 把最左边的第一个元素c删除
 >
 > lpop strs
 
-### rpop 
+### rpop
 
 > 把最右边的元素a删除
 >
 > rpop strs
+
+# 数据结构 - 集合（Set）
+
+## 作用
+
+> 保存多个元素，与列表不一样的是不允许有重复的元素，且集合是无序的，一个集合最多有可存2的32次方减1个元素，除了支持增删改查，还支持集合交集，并集，差集
+
+## 场景
+
+> 用户标签，社交，查询有共同兴趣爱好的人，智能推荐
+
+## 命令
+
+### exists
+
+> exists user 坚持user键是否存在
+
+### sadd 
+
+> sadd user a b c 向user插入3个元素 返回3
+>
+> sadd user a b 若插入相同的元素，则重复无效返回0
+
+### smembers 
+
+> smembers user 获取user的所有元素，返回结果无序
+
+### srem 
+
+> srem user a  返回1，删除a元素
+
+# scard
+
+> scard user 返回2，计算元素个数
+
+### sinter
+
+> 计算两个键的交集
+>
+> sinter user:1:fav user:2:fav
+
+### 使用场景
+
+> 标签，社交，查询有共同爱好兴趣的人，智能推荐
+>
+> 给用户添加标签
+>
+> sadd user:1:fav basball fball pq ; sadd user:2:fav basball fball
+>
+> 或者标签添加用户
+>
+> sadd basball:users user:1 user:2
+>
+> sadd fball.users user:1 user:2 user:3
+>
+> 计算出共同感兴趣的人
+>
+> sinter user:1:fav user:2:fav
+
+# 数据结构-有序集合（ZSet）
+
+场景
+
+> 常用于排行榜，如视频网站需要对用户视频做排行榜，或点赞数与集合有联系，不能重复的成员
+
+![](/assets/jjjf5.png)
+
+### 有序集合与集合及队列区别
+
+| 数据结构 | 是否允许元素重复 | 是否有序 | 有序实现方式 | 应用场景 |
+| :--- | :--- | :--- | :--- | :--- |
+| 列表 | 是 | 是 | 索引下标 | 时间轴，消息队列 |
+| 集合 | 否 | 否 | 无 | 标签，社交 |
+| 有序集合 | 否 | 是 | 分值 | 排行榜，点赞数 |
+
+### 命令
+
+### zadd 
+
+> zadd key score member \[score member...\]
+>
+> zadd user:zan 200 james james的点赞数，返回操作成功的条数1
+>
+> zadd user:zan 200 james 120 mike 100 lee 返回3
+>
+> zadd test:1 nx 100 james 键test:1必须不存在，主要用于添加
+>
+> zadd test:1 xx incr 200 james 键test:1必须存在，主要用于修改，此时为300
+>
+> zadd test:1 xx ch incr -299 james 返回操作结果1 300-299=1
+
+### zrange 
+
+> zrange test:1 0 -1 withscores 查看点赞数与成员名 返回 james 100
+
+### zcard 
+
+> 计算成员个数，返回1 zcard test:1 返回1
+
+### zrank 
+
+> 返回名次 从0开始算
+>
+> zadd user:3 200 james 120 mike 100 lee 插入数据
+>
+> zrange user:3 0 -1 withscores 查看分数与成员
+>
+> zrange user:3 james 返回名次 第3名返回2 ，从0开始到2 ，共3名
+
+### zrevrank 
+
+> 反排序
+>
+> zrevrank user:3 james 返回0，反排序，点赞数越高，排名越前
+
+### zincrby 
+
+> zadd user:1:20180106 3 mike mike获取3个赞
+>
+> zincrby user:1:20180106 1 mike 在3的基础上加1
+
+### zrem 
+
+> zrem user:120180106 mike 删除mike
+
+### zrevrangebyrank 
+
+> 展示赞数最多的5个用户
+>
+> zrevrangebyrank user:1:20180106 0 4
+
+### zscore
+
+> 查看用户赞数与排名
+>
+> zscore user:120180106 mike 查看分数
+>
+> zrank user:1:20180106 mike 查看排名，在这个有序集合的位置
 
 
 
