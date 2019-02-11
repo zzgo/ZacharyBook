@@ -41,7 +41,7 @@ $all -> [] 数组，每一项都包括
 
 ![](/assets/sajka322.png)
 
-> **注意使用**：./mongo localhost:port 链接到数据库内，如：./mongo localhost:27022
+> **注意使用**：./mongo localhost:port 连接到数据库内，如：./mongo localhost:27022
 >
 > 使用 show dbs 查看所有数据库
 >
