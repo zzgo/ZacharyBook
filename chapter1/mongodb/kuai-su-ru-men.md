@@ -67,5 +67,3 @@ db.users.find({"$and":[{"username":{"$regex":".*s.*"}},{"$or":[{"country":"Engli
 
 
 
-
-
