@@ -64,6 +64,7 @@
         * [基本认识](chapter1/redis.md)
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
       * [MongoDB](chapter1/mongodb.md)
+        * [入门](chapter1/mongodb/ru-men.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
