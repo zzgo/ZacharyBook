@@ -65,5 +65,66 @@ db.users.find({"$and":[{"username":{"$regex":".*s.*"}},{"$or":[{"country":"Engli
 >
 > 3、$regex正则表达式
 
+把lison的年龄修改为6岁
+
+```
+sql语句
+
+update users set age=6 where username=lison
+
+mongodb语句
+
+db.users.updateMany({"username":"lison"},{"$set":{"age":6}},true)
+```
+
+![](/assets/sahj2348.png)
+
+> 使用db.users.updateMany 来修改数据
+
+```
+db.collection.update(
+   <query>,
+   <update>,
+   {
+     upsert: <boolean>,
+     multi: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+参数说明：
+
+query : update的查询条件，类似sql update查询内where后面的。
+update : update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的
+upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。
+multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。
+writeConcern :可选，抛出异常的级别。
+```
+
+> $set设置需要改变的值 :
+>
+> 格式：{ $set: { &lt;field1&gt;: &lt;value1&gt;, ... } }
+>
+> 比如：db.users.updateMany\({"username":"lison"},{"$set":{"age":6,"lenght":1.8}},true\)
+
+喜欢的城市包含东莞的人，给他喜欢的电影加入“小电影2”“小电影3”
+
+```
+sql语句
+
+update users set favorites.movies add “小电影2”,“小电影3” where favorites。cites has “东莞”
+
+mongodb 语句
+
+db.users.updateMany({"favorites.cites":"东莞"},{"$addToSet":{"favorites.movies":{"$each":["小电影2","小电影3"]}}})
+
+```
+
+![](/assets/saasas65665.png)
+
+> $addToset和$each连用，满足条件将每一项添加到movies这个数组中
+>
+> 与set有很大的区别
+
 
 
