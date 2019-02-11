@@ -117,14 +117,13 @@ update users set favorites.movies add “小电影2”,“小电影3” where fa
 mongodb 语句
 
 db.users.updateMany({"favorites.cites":"东莞"},{"$addToSet":{"favorites.movies":{"$each":["小电影2","小电影3"]}}})
-
 ```
 
 ![](/assets/saasas65665.png)
 
 > $addToset和$each连用，满足条件将每一项添加到movies这个数组中
 >
-> 与set有很大的区别
+> 与$set有的区别，注意区分开来
 
 
 
