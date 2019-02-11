@@ -1,16 +1,18 @@
 ### 安装
 
-> 官网下载安装介质：https://www.mongodb.com/download-center，选择适当的版本，这里以linux版本mongodb-linux-x86\_64-3.4.18为例；
+> 官网下载安装介质：[https://www.mongodb.com/download-center，选择适当的版本，这里以linux版本mongodb-linux-x86\_64-3.4.18为例；](https://www.mongodb.com/download-center，选择适当的版本，这里以linux版本mongodb-linux-x86_64-3.4.18为例；)
 >
 > 解压到系统某路径， tar -xvzf mongodb-linux-x86\_64-3.4.18.tgz
 >
->      并在安装目录创建data目录，以及logs目录和logs/mongodb.log文件
+> 并在安装目录创建data目录，以及logs目录和logs/mongodb.log文件
 >
 > 使用vim在mongodb的bin目录创建mongodb的配置文件，如：vim bin/mongodb.conf，mongodb.conf内容请见下一页课件；
 >
 > 编写shell脚本，命名为start-mongodb.sh，脚本内容如下：
 >
->      nohup ./mongod -f mongodb.conf &
+> ```
+>  nohup ./mongod -f mongodb.conf &
+> ```
 >
 > 使用start-mongodb.sh启动mongodb实例，如：./start-mongodb
 >
@@ -20,25 +22,25 @@ mongodb.conf
 
 > storage:
 >
->    dbPath: "/usr/local/apache/mongoDB/mongodb-linux-x86\_64-rhel70-3.4.10/data"
+> dbPath: "/usr/local/apache/mongoDB/mongodb-linux-x86\_64-rhel70-3.4.10/data"
 >
 > systemLog:
 >
->    destination: file
+> destination: file
 >
->    path: "/usr/local/apache//mongoDB/mongodb-linux-x86\_64-rhel70-3.4.10/logs/mongodb.log"
+> path: "/usr/local/apache//mongoDB/mongodb-linux-x86\_64-rhel70-3.4.10/logs/mongodb.log"
 >
 > net:
 >
->    port: 27022
+> port: 27022
 >
->    http:
+> http:
 >
->       RESTInterfaceEnabled: true
+>        RESTInterfaceEnabled: true
 >
 > processManagement:
 >
->    fork: false
+> fork: false
 
 说明
 
