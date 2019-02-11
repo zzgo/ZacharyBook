@@ -67,6 +67,7 @@
         * [了解](chapter1/mongodb/ru-men.md)
         * [安装](chapter1/mongodb/an-zhuang.md)
         * [快速入门](chapter1/mongodb/kuai-su-ru-men.md)
+        * [原生mongodb-java-client开发](chapter1/mongodb/yuan-sheng-mongodb-java-client-kai-fa.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
