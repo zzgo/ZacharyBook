@@ -19,6 +19,10 @@
 }
 ```
 
+新增
+
+> db.users.insert\(json格式\);
+
 查询喜欢的城市包含东莞和东京的user
 
 ```
@@ -124,6 +128,52 @@ db.users.updateMany({"favorites.cites":"东莞"},{"$addToSet":{"favorites.movies
 > $addToset和$each连用，满足条件将每一项添加到movies这个数组中
 >
 > 与$set有的区别，注意区分开来
+
+删除名字为lison的user
+
+```
+sql语句
+delete from users where username = "lison"
+
+mongodb语句
+db.users.deleteMany({"username":"lison"})
+```
+
+![](/assets/ashjas93239.png)
+
+> 使用db.collection.deleteMany\(\)
+
+```
+db.collection.remove(
+   <query>,
+   {
+     justOne: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+参数说明：
+
+query :（可选）删除的文档的条件。
+justOne : （可选）如果设为 true 或 1，则只删除一个文档，如果不设置该参数，或使用默认值 false，则删除所有匹配条件的文档。
+writeConcern :（可选）抛出异常的级别。
+```
+
+删除年龄大于8小于25的user
+
+```
+sql语句
+delete users where age > 8 and age < 25
+
+mongodb语句
+db.users.deleteMany({"$and":["age":{"$gt":8},{"age":{"$lt":25}}]})
+```
+
+![](/assets/djfka8223.png)
+
+> $gt 大于
+>
+> $lt 小于
 
 
 
