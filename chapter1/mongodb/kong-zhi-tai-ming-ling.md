@@ -155,8 +155,6 @@ db.users.find({"favorites.movies":{"$all":["蜘蛛侠", "钢铁侠"]}},{"favorit
 db.users.find({"favorites.movies":{"$in":["蜘蛛侠", "钢铁侠"]}},{"favorites.movies":1})
 
 查询数组包含["蜘蛛侠", "钢铁侠"]中任意一个的文档，跟顺序无关，跟数量无关
-
-
 ```
 
 索引查询
@@ -181,11 +179,10 @@ $slice可以取两个元素数组,分别表示跳过和限制的条数；
 执行：db.users.find({},{"favorites":1})
 ```
 
- ![](/assets/shdkas21793.png)
+![](/assets/shdkas21793.png)
 
 ```
 执行：db.users.find({},{"favorites.movies":{"$slice":[1,2]},"favorites":1})
-
 ```
 
 ![](/assets/34289dsjfkj.png)
@@ -204,7 +201,6 @@ $slice:[1,2] 表示的在数组 movies中跳过第一个，限制2个，选择�
 db.users.find({"comments":{"author":"lison6","content":"lison评论6","commentTime":ISODate("2017-06-06T00:00:00Z")}})
 
 注意：对象数组精确查找，缺省一个字段，都将不能找到
-
 ```
 
 查找lison1或者lison12评论过的user（$in查找符）
@@ -212,7 +208,6 @@ db.users.find({"comments":{"author":"lison6","content":"lison评论6","commentTi
 ```
 db.users.find({"comments.author":{"$in":["lison1","lison12"]}}).pretty()
 备注：跟数量无关，跟顺序无关；
-
 ```
 
 查找lison1和lison12评论过的user
@@ -222,7 +217,7 @@ db.users.find({"comments.author":{"$all":["lison12","lison1"]}}).pretty()
 备注：跟数量有关，跟顺序无关；
 ```
 
-查找lison5评语为包含“苍老师”关键字的user（$elemMatch查找符） 
+查找lison5评语为包含“苍老师”关键字的user（$elemMatch查找符）
 
 ```
 db.users.find({"comments":{"$elemMatch":{"author":"lison5","content":{"$regex":".*苍老师.*"}}}}).pretty()
