@@ -8,6 +8,11 @@ pom.xml
     <artifactId>mongo-java-driver</artifactId>
     <version>3.5.0</version>
 </dependency>
+
+tips:
+3.5.0最新版本加入了对pojo的支持；
+3.5.0最新版本增强对json的支持；
+mongodb原生客户端支持两种document和pojo模式的开发；
 ```
 
 获取
