@@ -72,6 +72,8 @@
         * [spring-data-mongodb开发](chapter1/mongodb/spring-data-mongodbkai-fa.md)
         * [版本选择与MongoDB数据类型](chapter1/mongodb/ban-ben-xuan-ze-yu-mongodb-shu-ju-lei-xing.md)
         * [控制台命令](chapter1/mongodb/kong-zhi-tai-ming-ling.md)
+        * [回顾java客户端与mongodb](chapter1/mongodb/hui-gu-java-ke-hu-duan-yu-mongodb.md)
+        * [mongodbg高级](chapter1/mongodb/mongodbggao-ji.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
