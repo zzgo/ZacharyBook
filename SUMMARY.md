@@ -70,6 +70,8 @@
         * [原生mongodb-java-client开发](chapter1/mongodb/yuan-sheng-mongodb-java-client-kai-fa.md)
         * [原生java驱动 Pojo的操作方式](chapter1/mongodb/yuan-sheng-java-qu-dong-pojo-de-cao-zuo-fang-shi.md)
         * [spring-data-mongodb开发](chapter1/mongodb/spring-data-mongodbkai-fa.md)
+        * [版本选择与MongoDB数据类型](chapter1/mongodb/ban-ben-xuan-ze-yu-mongodb-shu-ju-lei-xing.md)
+        * [控制台命令](chapter1/mongodb/kong-zhi-tai-ming-ling.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
