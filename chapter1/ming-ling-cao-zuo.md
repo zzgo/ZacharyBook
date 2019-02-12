@@ -403,7 +403,7 @@
 | select 0 | redis一般有16个数据库，select index index=\[0 16\),切换数据库 |
 | flushdb | 清空当前数据库index的所有数据，线上禁止使用 |
 | flushall | 清空所有的数据库（0-15）的所有数据，线上禁止使用 |
-| dbsize | 统计当前数据库index下键的个数，键个数太多，线上进行使用 |
+| dbsize | 统计当前数据库index下键的个数，键个数太多，线上禁止使用 |
 
 
 
