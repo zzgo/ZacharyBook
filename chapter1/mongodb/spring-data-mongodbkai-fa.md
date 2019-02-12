@@ -283,5 +283,25 @@ public class QuickStartSpringPojoTest {
 }
 ```
 
+说明
+
+```
+WriteResult updateMulti(Query query, Update update, Class<?> class);
+query:筛选条件
+update：更新键值对
+class：实体类
+WriteResult remove(Query query, Class<?> class);
+query:筛选条件
+class：实体类
+<T> List<T> find(Query query, Class<T> class);
+query:查询条件
+class：实体类
+
+重要的包：
+import static org.springframework.data.mongodb.core.query.Criteria.*;//查询
+import static org.springframework.data.mongodb.core.query.Query.*;//查询
+import static org.springframework.data.mongodb.core.query.Update.*;//更新
+```
+
 
 
