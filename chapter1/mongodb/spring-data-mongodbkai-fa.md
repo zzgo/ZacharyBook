@@ -8,27 +8,27 @@
 </dependency>
 
 <dependency>
-	<groupId>org.springframework</groupId>
-	<artifactId>spring-test</artifactId>
-	<version>4.3.2.RELEASE</version>
-	<scope>test</scope>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>4.3.2.RELEASE</version>
+    <scope>test</scope>
 </dependency>
 
 <!-- 日志相关依赖 -->
 <dependency>
-	<groupId>org.slf4j</groupId>
-	<artifactId>slf4j-api</artifactId>
-	<version>1.7.10</version>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.10</version>
 </dependency>
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>1.1.2</version>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.2</version>
 </dependency>
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-core</artifactId>
-	<version>1.1.2</version>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-core</artifactId>
+    <version>1.1.2</version>
 </dependency>
 
 
@@ -43,51 +43,50 @@ spring-data-mongodb一般使用pojo的方式开发；
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-	<!-- <context:property-placeholder location="classpath:/com/myapp/mongodb/config/mongo.properties" 
-		/> -->
-	<!-- mongodb连接池配置 -->
-	<mongo:mongo-client host="192.168.111.128" port="27022">
-		<mongo:client-options 
-		     write-concern="ACKNOWLEDGED"
-		      connections-per-host="100"
-		      threads-allowed-to-block-for-connection-multiplier="5"
-		      max-wait-time="120000"
-			  connect-timeout="10000"/> 
-	</mongo:mongo-client>
-	
-	<!-- mongodb数据库工厂配置 -->
-	<mongo:db-factory dbname="lison" mongo-ref="mongo" />
-	
-  	<mongo:mapping-converter base-package="com.zachary.entity">
-	  <mongo:custom-converters>
-	      <mongo:converter>
-	        <bean class="com.zachary.convert.BigDecimalToDecimal128Converter"/>
-	      </mongo:converter>
-	      <mongo:converter>
-	        <bean class="com.zachary.convert.Decimal128ToBigDecimalConverter"/>
-	      </mongo:converter>
+    <!-- <context:property-placeholder location="classpath:/com/myapp/mongodb/config/mongo.properties" 
+        /> -->
+    <!-- mongodb连接池配置 -->
+    <mongo:mongo-client host="192.168.111.128" port="27022">
+        <mongo:client-options 
+             write-concern="ACKNOWLEDGED"
+              connections-per-host="100"
+              threads-allowed-to-block-for-connection-multiplier="5"
+              max-wait-time="120000"
+              connect-timeout="10000"/> 
+    </mongo:mongo-client>
+
+    <!-- mongodb数据库工厂配置 -->
+    <mongo:db-factory dbname="lison" mongo-ref="mongo" />
+
+      <mongo:mapping-converter base-package="com.zachary.entity">
+      <mongo:custom-converters>
+          <mongo:converter>
+            <bean class="com.zachary.convert.BigDecimalToDecimal128Converter"/>
+          </mongo:converter>
+          <mongo:converter>
+            <bean class="com.zachary.convert.Decimal128ToBigDecimalConverter"/>
+          </mongo:converter>
     </mongo:custom-converters>
-	
-	</mongo:mapping-converter>
+
+    </mongo:mapping-converter>
 
     <!-- mongodb模板配置 -->
-	<bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
- 		<constructor-arg name="mongoConverter" ref="mappingConverter"/>
-		<property name="writeResultChecking" value="EXCEPTION"></property>
-	</bean>
+    <bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+         <constructor-arg name="mongoConverter" ref="mappingConverter"/>
+        <property name="writeResultChecking" value="EXCEPTION"></property>
+    </bean>
 
 
 
 </beans>
-
 ```
 
 logback.xml
@@ -167,16 +166,16 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     root与logger是父子关系，没有特别定义则默认为root，任何一个类只会和一个logger对应，
     要么是定义的logger，要么是root，判断的关键在于找到这个logger，然后判断这个logger的appender和level。 
     -->
-    
+
     <logger name="org.springframework.beans.factory.support" level="info" additivity="true">
-        
+
     </logger>
-    
+
     <root level="debug">
         <appender-ref ref="stdout" />
         <appender-ref ref="appLogAppender" />
     </root>
-</configuration> 
+</configuration>
 ```
 
 代码示例
