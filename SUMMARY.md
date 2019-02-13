@@ -64,6 +64,7 @@
         * [基本认识](chapter1/redis.md)
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
       * [MongoDB](chapter1/mongodb.md)
+        * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
         * [安装](chapter1/mongodb/an-zhuang.md)
         * [快速入门](chapter1/mongodb/kuai-su-ru-men.md)
