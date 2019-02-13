@@ -216,6 +216,12 @@
 >
 > rpop strs
 
+### lset
+
+> lset key index value
+>
+> 修改：lset user:1 0 name 修改key为user:1的第一个元素的值为name
+
 # 数据结构 - 集合（Set）
 
 ## 作用
@@ -246,7 +252,7 @@
 
 > srem user a  返回1，删除a元素
 
-# scard
+### scard
 
 > scard user 返回2，计算元素个数
 
