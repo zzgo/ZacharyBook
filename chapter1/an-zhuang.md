@@ -59,7 +59,21 @@ sentinel auth-pass mymaster 12345678     //连接主节点时的密码
 打开sentinel_26379.conf等三个配置，sentinel monitor mymaster 127.0.0.1 6380 2
 外部应用连接sentinel时， sentinel.conf的protected-mode no改成no
 ./redis-cli -p 26380 shutdown //关闭
+```
 
+单节点配置
+
+```
+1,在redis.conf第89行，将protected-mode no
+2,在redis.conf第71行修改下bind 192.168.42.111  (ip为你linux的ip);
+3,在redis.conf第502行，加上 requirepass "12345678"， 登录密码
+
+测试：
+1，启动redis:  ./redis-server redis.conf &
+2, 连接redis:  ./redis-cli -h 192.168.42.111 -p 6379 -a 12345678
+
+
+&：表示后台运行
 ```
 
 
