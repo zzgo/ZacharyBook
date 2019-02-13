@@ -76,6 +76,7 @@
         * [控制台命令](chapter1/mongodb/kong-zhi-tai-ming-ling.md)
         * [回顾java客户端与mongodb](chapter1/mongodb/hui-gu-java-ke-hu-duan-yu-mongodb.md)
         * [mongodbg高级](chapter1/mongodb/mongodbggao-ji.md)
+        * [聚合操作日期分组](chapter1/mongodb/ju-he-cao-zuo-ri-qi-fen-zu.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
