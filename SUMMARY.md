@@ -64,6 +64,7 @@
         * [安装](chapter1/an-zhuang.md)
         * [基本认识](chapter1/redis.md)
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
+        * [java客户端实战](chapter1/javake-hu-duan-shi-zhan.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
@@ -85,4 +86,5 @@
     * [一般面试题](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
     * [经验之谈](chapter1/mian-shi-ti/jing-yan-zhi-tan.md)
   * [杂谈基础](chapter1/ji-chu.md)
+* [门萨测试题](men-sa-ce-shi-ti.md)
 
