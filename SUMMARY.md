@@ -66,6 +66,8 @@
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
         * [java-redis实战文章点赞](chapter1/javake-hu-duan-shi-zhan.md)
         * [java-redis实战抢红包](chapter1/java-redisshi-zhan-qiang-hong-bao.md)
+        * [Lua学习](chapter1/luaxue-xi.md)
+          * [Lua基础](chapter1/luayu-yan-xue-xi.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
