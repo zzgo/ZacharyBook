@@ -64,7 +64,7 @@
         * [安装](chapter1/an-zhuang.md)
         * [基本认识](chapter1/redis.md)
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
-        * [java客户端实战](chapter1/javake-hu-duan-shi-zhan.md)
+        * [java实战-文章点赞网站设计](chapter1/javake-hu-duan-shi-zhan.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
