@@ -274,5 +274,13 @@ testFun(tab,
 );
 ```
 
+执行结果
+
+```
+$ lua function_test2.lua
+k2=v2
+k1=v1
+```
+
 
 
