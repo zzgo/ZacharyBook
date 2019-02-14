@@ -69,6 +69,7 @@
         * [Lua学习](chapter1/luaxue-xi.md)
           * [Lua基础](chapter1/luayu-yan-xue-xi.md)
           * [Lua数据类型](chapter1/luashu-ju-lei-xing.md)
+          * [Lua变量](chapter1/luabian-liang.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
