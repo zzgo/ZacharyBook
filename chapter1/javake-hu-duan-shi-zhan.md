@@ -248,7 +248,7 @@ public class RedisArticleServiceImpl implements RedisArticleService {
         }
         //加入点赞表
         if (jedisService.sadd("voted:" + articleId, userId) == 1) {
-            jedisService.zincrby("score.info", Constants.VOTE_SCORE, articleKey);
+            jedisService.zincrby("score:info", Constants.VOTE_SCORE, articleKey);
             jedisService.hincrby(articleKey, "votes", 1L);
         }
     }
