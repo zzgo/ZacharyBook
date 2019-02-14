@@ -9,7 +9,9 @@
 
 #### 抢红包实战预热
 
-List队列：将N个红包放到List队列中，用来初始化红包池子
+##### List队列：将N个红包放到List队列中，用来初始化红包池子
 
-![](/assets/loijhg3333.png)
+##### ![](/assets/loijhg3333.png)List类型：记录用户抢了多少钱
+
+![](/assets/489891jdaskpiop.png)
 
