@@ -66,6 +66,7 @@
         * [命令操作](chapter1/ming-ling-cao-zuo.md)
         * [java-redis实战文章点赞](chapter1/javake-hu-duan-shi-zhan.md)
         * [java-redis实战抢红包](chapter1/java-redisshi-zhan-qiang-hong-bao.md)
+        * [Redis实现购物车核心功能](chapter1/redisshi-xian-gou-wu-che-he-xin-gong-neng.md)
         * [Lua学习](chapter1/luaxue-xi.md)
           * [Lua基础](chapter1/luayu-yan-xue-xi.md)
           * [Lua数据类型](chapter1/luashu-ju-lei-xing.md)

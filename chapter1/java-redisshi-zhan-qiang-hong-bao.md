@@ -109,16 +109,16 @@ public class Basic {
     public static String userIdRecordKey = "userIdRecordKey";//Hash类型，记录了那些用户抢了红包，防止重复抢红包
 
 
-	/*
+    /*
      * KEYS[1]:hongBaoPoolKey：                   //键hongBaoPool为List类型，模拟红包池子，用来从红包池抢红包
-	 * KEYS[2]:hongBaoDetailListKey：//键hongBaoDetailList为List类型，记录所有用户抢红包的详情
-	 * KEYS[3]:userIdRecordKey：           //键userIdRecord为Hash类型，记录所有已经抢过红包的用户ID
-	 * KEYS[4]:userid ：                              //模拟抢红包的用户ID
-	 *
-	 *
-	 * jedis.eval(  Basic.getHongBaoScript,   4,    Basic.hongBaoPoolKey,  Basic.hongBaoDetailListKey,	Basic.userIdRecordKey,  userid);
-	 *                      Lua脚本                                参数个数                  key[1]                     key[2]                       key[3]      key[4]
-	*/
+     * KEYS[2]:hongBaoDetailListKey：//键hongBaoDetailList为List类型，记录所有用户抢红包的详情
+     * KEYS[3]:userIdRecordKey：           //键userIdRecord为Hash类型，记录所有已经抢过红包的用户ID
+     * KEYS[4]:userid ：                              //模拟抢红包的用户ID
+     *
+     *
+     * jedis.eval(  Basic.getHongBaoScript,   4,    Basic.hongBaoPoolKey,  Basic.hongBaoDetailListKey,    Basic.userIdRecordKey,  userid);
+     *                      Lua脚本                                参数个数                  key[1]                     key[2]                       key[3]      key[4]
+    */
 
     public static String hongBaoLuaScript =
             //使用 redis.call()来执行redis 命令
