@@ -113,7 +113,6 @@ print(html);
     <a href="http://www.baidu.com">百度</a>
 <body>
 </html>
-
 ```
 
 在对一个数字字符串进行算术操作时，_**Lua会尝试将这个数字字符串转换成一个数字**_
@@ -130,10 +129,9 @@ print(html);
 > print("error" + 1)
 stdin:1: attempt to perform arithmetic on a string value
 stack traceback:
-	stdin:1: in main chunk
-	[C]: in ?
+    stdin:1: in main chunk
+    [C]: in ?
 >
-
 ```
 
 以上代码中”error“ + 1执行报错了，字符串连接使用的是 _**".."**_，如：
@@ -189,6 +187,74 @@ end
 $ lua table_test.lua
 key : value
 10 : 33
+```
+
+不同于其他语言的数组把0作为数组的初始索引，在Lua里表的默认初始索引一般以1开始
+
+```
+-- table_test2.lua 脚本文件
+local tab = {"a","b","c","d"}
+for key,val in pairs(tab) do
+    print("key",key)
+end
+
+```
+
+脚本执行结果
+
+```
+$ lua table_test2.lua
+key 1
+key 2
+key 3
+key 4
+```
+
+table不会固定长度大小，有新数据添加时table长度会自动增长，没初始的table都是nil
+
+```
+-- table_test3.lua 脚本文件
+a = {}
+for i = 1,10 do
+    a[i] = i
+end
+a["key"] = "val"
+print(a["key"])
+print(a["none"])
+```
+
+脚本执行结果是：
+
+```
+$ lua table_test3.lua 
+val
+nil
+```
+
+#### function（函数）
+
+在Lua中，函数是被看做是“第一类值（First-Class Value）”，函数可以存在变量
+
+```
+-- function_test.lua 脚本文件
+function factorial(n)
+    if n == 0 then
+        return 1
+    else
+        return n * factorial(n - 1)
+    end
+end
+print(factorial(5))
+f2 = factorial
+print(f2(5))
+```
+
+执行结果：
+
+```
+$ lua function_test.lua
+120
+120
 ```
 
 
