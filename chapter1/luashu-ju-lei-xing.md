@@ -197,7 +197,6 @@ local tab = {"a","b","c","d"}
 for key,val in pairs(tab) do
     print("key",key)
 end
-
 ```
 
 脚本执行结果
@@ -255,6 +254,24 @@ print(f2(5))
 $ lua function_test.lua
 120
 120
+```
+
+function函数可以以匿名函数（anonymous function）的方式通过参数传递
+
+```
+-- function_test2.lua 脚本文件
+function testFun(tab,fun)
+    for k,v in pairs(tab) do
+        print(fun(k,v))
+    end
+end
+
+tab = {k1="v1",k2="v2"};
+testFun(tab,
+    function(k,v)
+        return k .. "=" .. v;
+    end
+);
 ```
 
 
