@@ -13,5 +13,7 @@
 
 ##### ![](/assets/loijhg3333.png)List类型：记录用户抢了多少钱
 
-![](/assets/489891jdaskpiop.png)
+##### ![](/assets/489891jdaskpiop.png)Hash类型：记录那些用户已抢过红包，防止重复抢
+
+![](/assets/sssggg666.png)
 
