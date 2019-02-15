@@ -74,6 +74,7 @@
         * [性能实战和工具测试](chapter1/xing-neng-shi-zhan-he-gong-ju-ce-shi.md)
         * [手写Jedis客户端](chapter1/shou-xie-jedis-ke-hu-duan.md)
         * [Pipeline详解](chapter1/pipelinexiang-jie.md)
+        * [redis事务](chapter1/redisshi-wu.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
