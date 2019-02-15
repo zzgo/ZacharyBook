@@ -1,6 +1,6 @@
 ### 建立伪的Redis服务端
 
-redis 服务端
+伪redis服务端
 
 ```
 import java.io.IOException;
@@ -23,6 +23,8 @@ public class SocketRedisServer {
     }
 }
 ```
+
+### 手写客户端
 
 java redis 客户端
 
@@ -89,6 +91,18 @@ public class JamesJedis {
     }
 
 }
+```
+
+启动服务端，然后启动客户端，服务端可以接收到信息
+
+```
+*3
+$3
+set
+$11
+lisonHeight
+$3
+183
 ```
 
 
