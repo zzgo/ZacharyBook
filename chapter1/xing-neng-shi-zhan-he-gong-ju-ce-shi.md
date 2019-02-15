@@ -83,7 +83,7 @@ OK
 返回pong表示127.0.0.1:6379能通，正常，-r 3 重复执行3次，-a zhangqi 指定密码zhangqi，ping 看能不能ping通
 
 ```
-> ./redis-cli -r 3 -a zhangqi ping
+$ ./redis-cli -r 3 -a zhangqi ping
 PONG
 PONG
 PONG
@@ -92,13 +92,13 @@ PONG
 每秒输出内存使用量，输出10次，-r 10 重复执行10次，-i 1 每秒执行 info \| grep used\_\_memory\_\_human 内存使用量
 
 ```
-> ./redis-cli -r 10 -i 1 info |grep used_memory_human
+& ./redis-cli -r 10 -i 1 info |grep used_memory_human
 ```
 
 关闭redis服务（安全关闭redis服务）
 
 ```
-> ./redis-cli shutdown
+& ./redis-cli shutdown
 ```
 
 ./redis.cli --help 命令
@@ -225,13 +225,13 @@ PONG
 指定配置文件启动 redis.conf 配置文件路径启动服务，& 后台运行
 
 ```
-> ./redis-server redis.conf &
+$ ./redis-server redis.conf &
 ```
 
 检测操作系统能否1G内存给redis，常用于测试，想快速沾满机器内存做极端条件测试，可使用这个指令，--test-memory 1024 内存测试 1G
 
 ```
-> ./redis-server --test-memory 1024
+$ ./redis-server --test-memory 1024
 ```
 
 redis-server --help
@@ -254,5 +254,38 @@ Sentinel mode:
        ./redis-server /etc/sentinel.conf --sentinel
 ```
 
-redis-benchmark详解
+### redis-benchmark详解
+
+100个并发连接，100000个请求，检测host为localhost端口为6379的redis服务性能，-c 100 100并发，-n 100000 10万请求
+
+```
+$ ./redis-benchmark -h 192.168.111.128 -p 6379 -c 100 -n 100000
+====== PING_INLINE ======
+  100000 requests completed in 1.94 seconds
+  100 parallel clients
+  3 bytes payload
+  keep alive: 1
+
+30.72% <= 1 milliseconds
+91.65% <= 2 milliseconds
+98.73% <= 3 milliseconds
+99.94% <= 4 milliseconds
+100.00% <= 4 milliseconds
+51493.30 requests per second # 可以看到每秒请求
+...
+====== SET ======
+  100000 requests completed in 2.06 seconds
+  100 parallel clients
+  3 bytes payload
+  keep alive: 1
+
+26.17% <= 1 milliseconds
+90.48% <= 2 milliseconds
+98.24% <= 3 milliseconds
+99.94% <= 4 milliseconds
+100.00% <= 4 milliseconds
+48638.13 requests per second
+```
+
+
 
