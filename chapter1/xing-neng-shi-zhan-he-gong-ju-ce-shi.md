@@ -214,5 +214,19 @@ PONG
     redis-cli -scan -pattern '*:12345*'
 ```
 
+### redis-server详解
+
+指定配置文件启动 redis.conf 配置文件路径启动服务，& 后台运行
+
+```
+> ./redis-server redis.conf &
+```
+
+检测操作系统能否1G内存给redis，常用于测试，想快速沾满机器内存做极端条件测试，可使用这个指令，--test-memory 1024 内存测试 1G
+
+```
+> ./redis-server --test-memory 1024
+```
+
 
 
