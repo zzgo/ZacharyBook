@@ -314,5 +314,12 @@ SET: 52137.64 requests per second
 LPUSH: 50838.84 requests per second
 ```
 
+只测试某些数值存取的性能，-n 100000 10万次请求，-q 只显示秒值，script 脚本，load 加载 脚本值，set foo bar 命令
+
+```
+$ ./redis-benchmark -n 100000 -q script load "redis.call('set','foo','bar')"
+script load redis.call('set','foo','bar'): 53163.21 requests per second
+```
+
 
 
