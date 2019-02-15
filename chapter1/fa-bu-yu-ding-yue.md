@@ -57,6 +57,68 @@ Reading messages... (press Ctrl-C to quit)
 1) "punsubscribe"
 2) "ch*"
 3) (integer) 0
+```
+
+#### 应用场景
+
+* 今日头条订阅号、微信订阅公众号、新浪微博关注、邮件订阅系统
+* 即使通信系统
+* 群聊部落系统（微信群）
+
+##### 测试实践：微信班级群class：20190101
+
+学生C订阅一个主题叫：class:20190101
+
+```
+127.0.0.1:6379> SUBSCRIBE class:20190101
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "class:20190101"
+3) (integer) 1
+```
+
+学生A针对class:20190101主体发送消息，那么所有订阅该主题的用户都能收到该数据
+
+```
+127.0.0.1:6379> publish class:20190101 "hello world! I am A"
+(integer) 1
+
+```
+
+C学生的界面
+
+```
+127.0.0.1:6379> SUBSCRIBE class:20190101
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "class:20190101"
+3) (integer) 1
+1) "message"
+2) "class:20190101"
+3) "hello world! I am A"
+```
+
+学生B针对class:20190101主体发送消息，那么所有订阅该主题的用户都能收到该数据
+
+```
+127.0.0.1:6379> publish class:20190101 "hello world! I am B"
+(integer) 1
+```
+
+C学生的界面
+
+```
+127.0.0.1:6379> SUBSCRIBE class:20190101
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "class:20190101"
+3) (integer) 1
+1) "message"
+2) "class:20190101"
+3) "hello world! I am A"
+1) "message"
+2) "class:20190101"
+3) "hello world! I am B"
 
 ```
 
