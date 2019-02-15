@@ -89,5 +89,130 @@ PONG
 PONG
 ```
 
+每秒输出内存使用量，输出10次，-r 10 重复执行10次，-i 1 每秒执行 info \| grep used\__memory\__human 内存使用量
+
+```
+> ./redis-cli -r 10 -i 1 info |grep used_memory_human
+```
+
+./redis.cli --help 命令
+
+```
+用法:redis-cli [OPTIONS] [cmd [arg [arg…]]
+
+    -h <主机名>服务器主机名(默认:127.0.0.1)
+    
+    -p <端口>服务器端口(默认:6379)
+    
+    -s Server socket(覆盖主机名和端口)
+    
+    -连接到服务器时使用的密码>。
+    
+    -u 服务器uri。
+    
+    -r Execute specified command N times.重复执行指定命令N次。
+    
+    -r使用时，每个命令等待<间隔>秒。
+    
+    可以指定亚秒时间，比如-i 0.1。
+    
+    -n 数据库号。
+    
+    -x读取STDIN的最后一个参数。
+    
+    -d <分隔符>多块分隔符用于原始格式(默认:\n)。
+    
+    启用集群模式(遵循-ASK和-MOVED重定向)。
+    
+    ——原始回复使用原始格式(默认为STDOUT)
+    
+    不是tty)。
+    
+    ——即使STDOUT不是tty，也没有原始强制格式化输出。
+    
+    ——csv格式输出。
+    
+    输出关于服务器的滚动统计信息:mem, client，…
+    
+    -延迟进入一种特殊模式，持续采样延迟。
+    
+    如果您在交互式会话中使用此模式，它将运行
+    
+    永远显示实时状态。否则，如果
+    
+    ——csv被指定，或者如果您将输出重定向到non
+    
+    TTY，它对延迟进行了1秒的采样(可以使用)
+    
+    -改变间隔)，然后产生一个输出
+    
+    并退出。
+    
+    类似延迟历史的延迟，但跟踪延迟随时间的变化。
+    
+    默认的时间间隔是15秒。
+    
+    -延迟区显示延迟作为一个频谱，需要xterm 256颜色。
+    
+    默认时间间隔是1秒。使用-i更改它。
+    
+    ——lru-test 使用80-20分布模拟缓存工作负载。
+    
+    -slave模拟一个显示从主机接收到的命令的slave。
+    
+    ——rdb 将rdb转储文件从远程服务器传输到本地文件。
+    
+    ——管道将原始Redis协议从stdin传输到服务器。
+    
+    ——管道-timeout 在——管道模式下，如果发送完所有数据，则中止，并出现错误。
+    
+    在秒内没有收到回复。
+    
+    默认超时时间:30。用0永远等待。
+    
+    ——bigkeys示例Redis keys正在寻找大键。
+    
+    ——热键示例Redis键寻找热键。
+    
+    只有在最大内存策略为*lfu时才有效。
+    
+    ——使用scan命令列出所有键。
+    
+    ——pattern used with——scan指定扫描模式。
+    
+    ——内部延迟运行测试来测量内部系统延迟。
+    
+    测试将运行指定的秒数。
+    
+    ——eval 使用上的Lua脚本发送一个eval命令。
+    
+    ——ldb with——eval启用Redis Lua调试器。
+    
+    -ldb-sync-mode Like -ldb，但使用的是同步Lua调试器
+    
+    此模式将阻塞服务器并更改脚本
+    
+    没有从服务器内存回滚。
+    
+    ——help输出此帮助并退出。
+    
+    ——版本输出版本并退出。
+
+
+例子:
+
+    cat /etc/passwd | redis-cli -x set mypasswd
+    
+    redis-cli get mypasswd
+    
+    redis-cli - r100 lpush mylist x
+    
+    redis-cli -r 100 - 1 info | grep used_memory_human:
+    
+    redis-cli - eval myscript.lua key1 key2, arg1 arg2 arg3
+    
+    redis-cli -scan -pattern '*:12345*'
+```
+
 
 
