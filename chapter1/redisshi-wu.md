@@ -68,11 +68,11 @@ QUEUED
 ```
 127.0.0.1:6379> multi
 OK
-127.0.0.1:6379> set t 1    #设置key=t，值时整形
+127.0.0.1:6379> set t 1    #设置key=t，1位字符串类型操作 OK
 QUEUED
-127.0.0.1:6379> sadd t 1
+127.0.0.1:6379> sadd t 1   #设置sadd key=t，1为set类型操作，由于前面属于String类型，会失败
 QUEUED
-127.0.0.1:6379> set t 2
+127.0.0.1:6379> set t 2    #设置set key=t，2位字符串类型操作 OK
 QUEUED
 127.0.0.1:6379> exec
 1) OK
@@ -80,6 +80,37 @@ QUEUED
 3) OK
 127.0.0.1:6379> get t
 "2"
+```
+
+**可以看到redis不支持事务回滚**
+
+##### watch命令
+
+监控指定键，若被监控的键在以下事务执行前被修改，则包含对此键有操作动作的事务不执行，返回nil。
+
+客户端1执行命名
+
+```
+127.0.0.1:6379> set book java
+OK
+127.0.0.1:6379> watch book    #监控book这个键，这时候我们在客户端2输入append book c
+OK
+127.0.0.1:6379> multi         #在客户端2输入完后，执行下面的操作
+OK
+127.0.0.1:6379> append book redis
+QUEUED
+127.0.0.1:6379> exec          #watch监控到了key的改变，所以事务失效，返回nil
+(nil)
+127.0.0.1:6379> get book      #获取到的是javac
+"javac"
+
+```
+
+客户端2执行命令
+
+```
+127.0.0.1:6379> append book c
+(integer) 5
 ```
 
 
