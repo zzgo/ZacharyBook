@@ -31,7 +31,7 @@ java redis 客户端
 public class JamesJedis {
 
     //set key value
-    /*
+    /* resp协议
      *  *3   # *3 -> *开头表示有3组
 
         $3   # $表示指令 3 表示长度
