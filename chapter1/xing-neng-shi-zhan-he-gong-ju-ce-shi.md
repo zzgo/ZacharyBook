@@ -306,10 +306,12 @@ SPOP: 50175.61 requests per second
 LPUSH (needed to benchmark LRANGE): 49701.79 requests per second
 ```
 
-只测试set，lpush操作的性能，-t  set lpush  指定指令，   -n 100000 10万次请求，-q 只显示秒值
+只测试set，lpush操作的性能，-t  set,lpush  指定指令，   -n 100000 10万次请求，-q 只显示秒值
 
 ```
-$ ./redis-benchmark -t set lpush -n 100000 -q
+$ ./redis-benchmark -t set,lpush -n 100000 -q
+SET: 52137.64 requests per second
+LPUSH: 50838.84 requests per second
 ```
 
 
