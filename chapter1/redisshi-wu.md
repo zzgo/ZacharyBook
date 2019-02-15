@@ -61,10 +61,26 @@ QUEUED
 (error) EXECABORT Transaction discarded because of previous errors.
 127.0.0.1:6379> get aa               #查不到数据
 (nil)
-
 ```
 
+##### 运行错误，语法正确，但类型错误，事务可以正常结束
 
+```
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379> set t 1    #设置key=t，值时整形
+QUEUED
+127.0.0.1:6379> sadd t 1
+QUEUED
+127.0.0.1:6379> set t 2
+QUEUED
+127.0.0.1:6379> exec
+1) OK
+2) (error) WRONGTYPE Operation against a key holding the wrong kind of value
+3) OK
+127.0.0.1:6379> get t
+"2"
+```
 
 
 
