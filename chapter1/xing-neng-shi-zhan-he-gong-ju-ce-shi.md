@@ -287,5 +287,24 @@ $ ./redis-benchmark -h 192.168.111.128 -p 6379 -c 100 -n 100000
 48638.13 requests per second
 ```
 
+测试存取大小为100字节的数据包的性能 -q 只显示查询秒值，-d 字节大小100
+
+```
+$ ./redis-benchmark -h 192.168.111.128 -p 6379 -q -d 100
+PING_INLINE: 51679.59 requests per second #结果中只显示了秒值，其他信息不会显示
+PING_BULK: 52631.58 requests per second
+SET: 50301.81 requests per second
+GET: 50125.31 requests per second
+INCR: 50251.26 requests per second
+LPUSH: 49529.47 requests per second
+RPUSH: 49382.71 requests per second
+LPOP: 50276.52 requests per second
+RPOP: 50125.31 requests per second
+SADD: 49875.31 requests per second
+HSET: 49140.05 requests per second
+SPOP: 50175.61 requests per second
+LPUSH (needed to benchmark LRANGE): 49701.79 requests per second
+```
+
 
 
