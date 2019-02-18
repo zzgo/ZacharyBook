@@ -249,5 +249,115 @@ OK
 (error) NOTBUSY No scripts in execution right now.
 ```
 
+#### 实战演练
+
+IP限流控制
+
+编写ipcount.lua脚本
+
+```lua
+local is_exist = redis.call('exists',KEYS[1])
+if is_exist == 1  then
+  local afterCount = redis.call('incr',KEYS[1])
+  if afterCount > tonumber(ARGV[1]) then
+     return 0
+  else
+     return 1
+  end
+else
+   redis.call('set',KEYS[1],1)
+   redis.call('expire',KEYS[1],ARGV[2])
+   return 1
+end
+```
+
+生成sha值
+
+```
+[root@localhost src]# ./redis-cli -a zhangqi script load "$(cat ../works/ipcount.lua)"
+"693de244e76774f79066a4598702f8227979523a"
+```
+
+执行结果
+
+```lua
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 1
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 1
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 1
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 1
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 1
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
+(integer) 0
+
+```
+
+抢红包，实战改写用sha值实现
+
+脚本加入到redis中去
+
+```lua
+if redis.call('hexists',KEYS[3],KEYS[4]) ~= 0 then
+   return nil
+else
+   local hongbao = redis.call('rpop',KEYS[1])
+   if hongbao then
+      local x = cjson.decode(hongbao)
+      x['userId'] = KEYS[4]
+      local re = cjson.encode(x)
+      redis.call('hset',KEYS[3],KEY[4],'1')
+      redis.call('lpush',KEYS[2],re)
+      return re
+   end
+end
+return nil
+```
+
+生成sha值
+
+```
+[root@localhost src]# ./redis-cli -a zhangqi script load "$(cat ../works/hongbao.lua)"
+"66ad62496cc639672db4ca2852addcdb18c8b495"
+```
+
+Java客户端来调用
+
+```java
+public static String hongBaoLuaSha = "c871de8ba0e647a99df19054276dba9cc1814248";
+
+Object object = jedis.evalsha(Basic.hongBaoLuaSha, 4, Basic.hongBaoPoolKey, 
+                                Basic.hongBaoDetailListKey, Basic.userIdRecordKey, userId);
+                                                               
+public Object evalsha(String sha, int count, String... args) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.evalsha(sha, count, args);
+        } catch (Exception e) {
+            pool.returnBrokenResource(jedis);
+            e.printStackTrace();
+        } finally {
+            returnResource(pool, jedis);
+        }
+        return null;
+}
+```
+
 
 
