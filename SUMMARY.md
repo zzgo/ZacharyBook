@@ -78,6 +78,7 @@
         * [redis事务](chapter1/redisshi-wu.md)
         * [发布与订阅](chapter1/fa-bu-yu-ding-yue.md)
         * [LUA语言和Redis](chapter1/luayu-yan-he-redis.md)
+        * [持久化原理剖析](chapter1/chi-jiu-hua-yuan-li-pou-xi.md)
       * [MongoDB](chapter1/mongodb.md)
         * [测试数据](chapter1/mongodb/ce-shi-shu-ju.md)
         * [了解](chapter1/mongodb/ru-men.md)
