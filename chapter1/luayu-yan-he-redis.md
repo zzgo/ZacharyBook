@@ -305,7 +305,6 @@ end
 (integer) 0
 127.0.0.1:6379> evalsha 693de244e76774f79066a4598702f8227979523a 1 192.168.111.128 5 5
 (integer) 0
-
 ```
 
 抢红包，实战改写用sha值实现
@@ -333,7 +332,7 @@ return nil
 
 ```
 [root@localhost src]# ./redis-cli -a zhangqi script load "$(cat ../works/hongbao.lua)"
-"66ad62496cc639672db4ca2852addcdb18c8b495"
+"c871de8ba0e647a99df19054276dba9cc1814248"
 ```
 
 Java客户端来调用
@@ -343,7 +342,7 @@ public static String hongBaoLuaSha = "c871de8ba0e647a99df19054276dba9cc1814248";
 
 Object object = jedis.evalsha(Basic.hongBaoLuaSha, 4, Basic.hongBaoPoolKey, 
                                 Basic.hongBaoDetailListKey, Basic.userIdRecordKey, userId);
-                                                               
+
 public Object evalsha(String sha, int count, String... args) {
         Jedis jedis = null;
         try {
