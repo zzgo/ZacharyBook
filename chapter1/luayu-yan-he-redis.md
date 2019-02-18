@@ -31,11 +31,11 @@ OK
 
 local lua的关键字，声明一个变量，
 
-while 条件 do 
+while 条件 do
 
-      执行内容
+  执行内容
 
-end  
+end
 
 结束
 
@@ -50,7 +50,6 @@ while i < 100 do
     i = i + 1
 end
 print(sum)
-
 ```
 
 ##### 案列2：
@@ -59,25 +58,23 @@ tables 声明一个表，类似于数组形式
 
 for i = start,end do   索引start-end次
 
-      执行逻辑
+  执行逻辑
 
 end
 
-\#myArray 计算长度 
+\#myArray 计算长度
 
 if 条件 then
 
-     执行逻辑
+ 执行逻辑
 
-else 
+else
 
-    执行逻辑
+执行逻辑
 
 end
 
 这里的end是一种标准，标志着结束
-
-
 
 ```
 local tables myArray = {"james","java",false,34} 
