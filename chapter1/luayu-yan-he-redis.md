@@ -33,7 +33,7 @@ local lua的关键字，声明一个变量，
 
 while 条件 do
 
-  执行内容
+执行内容
 
 end
 
@@ -58,7 +58,7 @@ tables 声明一个表，类似于数组形式
 
 for i = start,end do   索引start-end次
 
-  执行逻辑
+执行逻辑
 
 end
 
@@ -66,7 +66,7 @@ end
 
 if 条件 then
 
- 执行逻辑
+执行逻辑
 
 else
 
@@ -76,7 +76,7 @@ end
 
 这里的end是一种标准，标志着结束
 
-```
+```lua
 local tables myArray = {"james","java",false,34} 
 local int sum = 0
 print(myArray[3])//返回false
@@ -101,7 +101,7 @@ end
 
 java客户端操作redis代码如下：
 
-```
+```java
 public class IpLimit {
     private static JedisUtil jedis = new JedisUtil("192.168.111.128", 6379, "zhangqi");
 
@@ -153,7 +153,7 @@ public class IpLimit {
 
 使用Lua脚本来处理，保证了原子性
 
-```
+```lua
 local key = KEYS[1]
 local limit = tonnumber(ARGV[1])
 local exppire_time = ARGV[2]
