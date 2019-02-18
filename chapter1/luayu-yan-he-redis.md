@@ -320,7 +320,7 @@ else
       local x = cjson.decode(hongbao)
       x['userId'] = KEYS[4]
       local re = cjson.encode(x)
-      redis.call('hset',KEYS[3],KEY[4],'1')
+      redis.call('hset',KEYS[3],KEYS[4],'1')
       redis.call('lpush',KEYS[2],re)
       return re
    end
