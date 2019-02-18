@@ -171,5 +171,84 @@ else
 end
 ```
 
+##### LUA执行逻辑
+
+![](/assets/3489jhfjask.png)
+
+语法格式 EVAL script numkeys key \[key ...\] arg \[arg ...\]
+
+                  &lt;1&gt; script：     你的lua脚本
+
+                  &lt;2&gt; numkeys:  key的个数
+
+                  &lt;3&gt; key:         redis中各种数据结构的替代符号
+
+                  &lt;4&gt; arg:         你的自定义参数
+
+比如：KEYS表示key 下标从1开始，ARGV为参数，下标也为1开始。
+
+```
+127.0.0.1:6379> eval " return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]} " 2 k1 k2 v1 v2
+1) "k1"
+2) "k2"
+3) "v1"
+4) "v2"
+```
+
+eval "return {KEYS\[1\],KEYS\[2\],ARGV\[1\],ARGV\[2\]}" 2 key1 key2 james 20
+
+
+
+##### Redis对Lua脚本的管理
+
+将Lua脚本加入到redis中
+
+脚本random.lua
+
+```lua
+for i=1,ARGV[1] do
+    redis.call("lpush",KEYS[1],math.random())
+end
+return true
+```
+
+加入到redis中 $\(cat ../works/random.lua\) cat 打开脚本，load 加载脚本
+
+```
+[root@localhost src]# ./redis-cli -a zhangqi script load "$(cat ../works/random.lua)"
+"a7260ba6baef0c2f78d64b2fa777647741feeb60"
+```
+
+测试 evalsha 测试
+
+```
+127.0.0.1:6379> evalsha a7260ba6baef0c2f78d64b2fa777647741feeb60 1 testlua 1
+(integer) 1
+127.0.0.1:6379> lindex testlua 0
+"0.1708280361121651"
+
+```
+
+检查脚本是否加载成功 script exists 查看是否存在
+
+```
+127.0.0.1:6379> script exists a7260ba6baef0c2f78d64b2fa777647741feeb60
+1) (integer) 1
+```
+
+清空lua脚本内容 script flush
+
+```
+127.0.0.1:6379> script flush
+OK
+```
+
+杀掉正在执行的lua脚本 script kill
+
+```
+127.0.0.1:6379> script kill
+(error) NOTBUSY No scripts in execution right now.
+```
+
 
 

@@ -47,7 +47,7 @@ Pipeline正确使用方式
 
 ### pipeline实战
 
-批量删除key实现 
+批量删除key实现
 
 ```
     /**
@@ -132,8 +132,6 @@ Pipeline正确使用方式
 
 * pipeline.sync\(\) 提交，没有返回值
 * pipeline.syncAndReturnAll\(\) 返回List&lt;Object&gt; 操作后的结果信息\[OK,1,1,OK\]
-
-
 
 
 

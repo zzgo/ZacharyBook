@@ -103,7 +103,6 @@ QUEUED
 (nil)
 127.0.0.1:6379> get book      #获取到的是javac
 "javac"
-
 ```
 
 客户端2执行命令
