@@ -155,7 +155,7 @@ public class IpLimit {
 
 ```lua
 local key = KEYS[1]
-local limit = tonnumber(ARGV[1])
+local limit = tonumber(ARGV[1])
 local exppire_time = ARGV[2]
 local is_exists = redis.call("EXISTS",key)
 if is_exists == 1 then
@@ -177,13 +177,15 @@ end
 
 语法格式 EVAL script numkeys key \[key ...\] arg \[arg ...\]
 
-                  &lt;1&gt; script：     你的lua脚本
+```
+              &lt;1&gt; script：     你的lua脚本
 
-                  &lt;2&gt; numkeys:  key的个数
+              &lt;2&gt; numkeys:  key的个数
 
-                  &lt;3&gt; key:         redis中各种数据结构的替代符号
+              &lt;3&gt; key:         redis中各种数据结构的替代符号
 
-                  &lt;4&gt; arg:         你的自定义参数
+              &lt;4&gt; arg:         你的自定义参数
+```
 
 比如：KEYS表示key 下标从1开始，ARGV为参数，下标也为1开始。
 
@@ -196,8 +198,6 @@ end
 ```
 
 eval "return {KEYS\[1\],KEYS\[2\],ARGV\[1\],ARGV\[2\]}" 2 key1 key2 james 20
-
-
 
 ##### Redis对Lua脚本的管理
 
@@ -226,7 +226,6 @@ return true
 (integer) 1
 127.0.0.1:6379> lindex testlua 0
 "0.1708280361121651"
-
 ```
 
 检查脚本是否加载成功 script exists 查看是否存在
