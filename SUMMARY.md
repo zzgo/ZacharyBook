@@ -49,7 +49,9 @@
         * 9.1 现代计算机物理上的内存模型
         * 9.2 Java内存模型（JVM）
     * [MySQL深度优化](chapter1/mysqlshen-du-you-hua.md)
-      * [常见50句SQL联系](chapter1/mysqlshen-du-you-hua/chang-jian-50-ju-sql-lian-xi.md)
+    * [Netty IO](chapter1/netty-io.md)
+      * [网络编程基础](chapter1/netty-io/wang-luo-bian-cheng-ji-chu.md)
+    * [常见50句SQL联系](chapter1/mysqlshen-du-you-hua/chang-jian-50-ju-sql-lian-xi.md)
   * [开源框架解析专题](kai-yuan-kuang-jia-jie-xi-zhuan-ti.md)
     * [Spring](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring.md)
       * [ioc容器](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
