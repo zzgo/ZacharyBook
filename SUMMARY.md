@@ -99,6 +99,8 @@
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
     * [一般面试题](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
     * [经验之谈](chapter1/mian-shi-ti/jing-yan-zhi-tan.md)
+    * [线程问题](chapter1/mian-shi-ti/xian-cheng-wen-ti.md)
+    * [问题记录](chapter1/mian-shi-ti/wen-ti-ji-lu.md)
   * [杂谈基础](chapter1/ji-chu.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
 
