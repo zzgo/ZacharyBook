@@ -48,6 +48,8 @@
       * [九、JVM和底层实现原理](chapter1/bing-fa-bian-cheng-jin-jie/jiu-3001-jvm-he-di-ceng-shi-xian-yuan-li.md)
         * 9.1 现代计算机物理上的内存模型
         * 9.2 Java内存模型（JVM）
+    * [MySQL深度优化](chapter1/mysqlshen-du-you-hua.md)
+      * [常见50句SQL联系](chapter1/mysqlshen-du-you-hua/chang-jian-50-ju-sql-lian-xi.md)
   * [开源框架解析专题](kai-yuan-kuang-jia-jie-xi-zhuan-ti.md)
     * [Spring](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring.md)
       * [ioc容器](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
