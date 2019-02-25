@@ -21,7 +21,7 @@ java AIO为TCP通信提供的异步Channel，AsynchronousServerSocketChannel创�
 public interface CompletionHandler<V,A> {
 
     void completed(V result, A attachment);
-   
+
     void failed(Throwable exc, A attachment);
 }
 ```
@@ -39,8 +39,6 @@ read\(\)、write\(\)：完成读写
 ![](/assets/89sajk262ko.png)
 
 ### 实战演练
-
-
 
 
 
