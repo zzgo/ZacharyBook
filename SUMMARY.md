@@ -29,13 +29,13 @@
         * 5.2 其他并发容器
         * 5.3 阻塞队列
       * [六、线程池](chapter1/bing-fa-bian-cheng-jin-jie/liu-3001-xian-cheng-chi.md)
-        * 6.1 什么是线程池？为什么要用线程池？
-        * 6.2 实现一个我们自己的线程池
+        * [6.1 什么是线程池？为什么要用线程池？](chapter1/bing-fa-bian-cheng-jin-jie/liu-3001-xian-cheng-chi/61-shi-yao-shi-xian-cheng-chi-ff1f-wei-shi-yao-yao-yong-xian-cheng-chi-ff1f.md)
+        * [6.2 实现一个我们自己的线程池](chapter1/bing-fa-bian-cheng-jin-jie/liu-3001-xian-cheng-chi/62-shi-xian-yi-ge-wo-men-zi-ji-de-xian-cheng-chi.md)
         * 6.3 JDK中的线程池
         * 6.4 线程池工作机制
         * 6.5 合理的配置线程池
         * 6.6 系统为我们预定义的线程池
-        * 6.7 Executor框架
+        * [6.7 Executor框架](chapter1/bing-fa-bian-cheng-jin-jie/liu-3001-xian-cheng-chi/67-executorkuang-jia.md)
         * 6.8 CompletionService
       * [七、并发安全](chapter1/bing-fa-bian-cheng-jin-jie/qi-3001-bing-fa-an-quan.md)
         * 7.1 类的线程安全
