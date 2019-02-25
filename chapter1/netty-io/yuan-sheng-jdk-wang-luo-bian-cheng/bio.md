@@ -16,9 +16,155 @@
 
 为了改进这种连接-线程的模型，我们可以使用线程池来管理这些线程，实现1个或多个线程处理N个客户端的模型，（但是其底层还是使用的同步阻塞I/O），通常被称为“伪异步I/O模型‘，我们知道，如果使用CachedThreadPool线程池，其实除了能自动帮我们管理线程（复用），看起来也就像是1:1客户端：线程数模型，而是用FixedThreadPool我们就有效的控制了线程的最大数量，保证了系统有限的资源的控制，实现了N:M的伪异步I/O模型，但是正因为限制了线程数量，如果发生读取数据较慢时（比如数据量大，网络传输慢等），大并发量的情况下，其他接入的信息，只能一直等待，这就是最大的弊端。
 
+### 流程图
+
+![](/assets/2190asjdkas.png)![](/assets/123478ashdjah.png)
+
+![](/assets/21390udkfajd.png)
+
 ### 实战演练
 
+BioServer.java
 
+```java
+public class BioServer {
+    //开启一个线程池设置5个可用线程去处理这个socket连接，进行通信
+    private static ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+    public static void main(String[] args) {
+        start();
+    }
+
+    public static void start() {
+        //声明一个ServerSocket
+        ServerSocket server = null;
+        try {
+            server = new ServerSocket(DEFAULT_PORT);
+            System.out.println("服务端已启动，默认端口：" + DEFAULT_PORT);
+            while (true) {
+                //等待客户端连接
+                Socket socket = server.accept();
+                System.out.println("有客户端连接了");
+                //有客户端连接后，用线程池的一个线程去处理socket通信
+                executorService.execute(new BioServerHandler(socket));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (server != null) {
+                try {
+                    server.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+```
+
+BioServerHandler.java
+
+```java
+public class BioServerHandler implements Runnable {
+    private Socket socket;
+
+    public BioServerHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+
+    @Override
+    public void run() {
+        //输入输出流处理
+        try (
+                //读取从客户端传来的信息
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                //向客户端推送响应的消息
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            String message, result;
+            while ((message = in.readLine()) != null) {
+                System.out.println("Server accept message ：" + message);
+                result = response(message);
+                //推送信息
+                out.println(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+
+    private void close() {
+        if (socket != null) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            socket = null;
+        }
+    }
+}
+```
+
+BioClient.java
+
+```java
+public class BioClient {
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket(DEFAULT_SERVER, DEFAULT_PORT);
+            System.out.println("请输入内容：");
+            new ReadMsg(socket).start();
+            PrintWriter pw = null;
+            while (true) {
+                //向服务发送消息OutputStream
+                pw = new PrintWriter(socket.getOutputStream());
+                pw.println(new Scanner(System.in).next());
+                pw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static class ReadMsg extends Thread {
+        Socket socket;
+
+        public ReadMsg(Socket socket) {
+            this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            try (
+                    //读取从服务端发来的信息
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            ) {
+                String line = null;
+                while ((line = buffer.readLine()) != null) {
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("断开连接");
+                e.printStackTrace();
+            } finally {
+                if (socket != null) {
+                    try {
+                        socket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+    }
+}
+```
 
 
 
