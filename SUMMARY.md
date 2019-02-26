@@ -114,6 +114,7 @@
     * [线程问题](chapter1/mian-shi-ti/xian-cheng-wen-ti.md)
     * [问题记录](chapter1/mian-shi-ti/wen-ti-ji-lu.md)
     * [享学之面试题](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti.md)
+      * [HashMap底层执行原理](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/hashmapdi-ceng-zhi-xing-yuan-li.md)
   * [杂谈基础](chapter1/ji-chu.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
 
