@@ -18,7 +18,7 @@
 
 hash值的计算
 
-\(hashCode\) ^ \(hashCode&gt;&gt;&gt;16\)：异或运算，hashCode向右移16位
+\(hashCode\) ^ \(hashCode&gt;&gt;&gt;16\)：异或运算，hashCode向右移16位，足够的随机和分散
 
 #### 数组下标
 
@@ -51,8 +51,4 @@ hash值的计算
 #### 触发条件
 
 链表长度&gt;8时，触发，&lt;6，红黑树变成链表，隔着7不会经常的进行转换
-
-
-
-
 
