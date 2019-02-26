@@ -40,5 +40,311 @@ read\(\)、write\(\)：完成读写
 
 ### 实战演练
 
+#### server端
+
+AioServerHandler.java
+
+```java
+public class AioServerHandler implements Runnable {
+    public CountDownLatch count;
+    public AsynchronousServerSocketChannel channel;
+
+    public AioServerHandler(int port) {
+        try {
+            channel = AsynchronousServerSocketChannel.open();
+            //注册监听事件
+            channel.bind(new InetSocketAddress(port));
+            System.out.println("server is start，port ：" + port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public  void run() {
+        count = new CountDownLatch(1);
+        channel.accept(this, new AioAcceptHandler());
+        try {
+            //使线程阻塞在这里，不会结束
+            count.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+AioAcceptHandler.java
+
+```go
+public class AioAcceptHandler implements CompletionHandler<AsynchronousSocketChannel, AioServerHandler> {
+    @Override
+    public void completed(AsynchronousSocketChannel channel, AioServerHandler serverHandler) {
+        serverHandler.channel.accept(serverHandler, this);
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        channel.read(buffer,buffer,new AioReadHandler(channel));
+    }
+
+    @Override
+    public void failed(Throwable exc, AioServerHandler serverHandler) {
+        exc.printStackTrace();
+        serverHandler.count.countDown();
+    }
+}
+```
+
+AioReadHandler.java
+
+```java
+public class AioReadHandler implements CompletionHandler<Integer, ByteBuffer> {
+    AsynchronousSocketChannel channel;
+
+    public AioReadHandler(AsynchronousSocketChannel channel) {
+        this.channel = channel;
+    }
+
+    @Override
+    public void completed(Integer result, ByteBuffer byteBuffer) {
+        if (result == -1) {
+            try {
+                channel.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        byteBuffer.flip();
+        byte[] b = new byte[byteBuffer.remaining()];
+        byteBuffer.get(b);
+        System.out.println(result);
+        try {
+            String msg = new String(b, "UTF-8");
+            System.out.println(msg);
+            String res = response(msg);
+            doWrite(res);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void doWrite(String res) {
+        byte[] b = res.getBytes();
+        final ByteBuffer buffer = ByteBuffer.allocate(b.length);
+        buffer.put(b);
+        buffer.flip();
+        channel.write(buffer, buffer, new CompletionHandler<Integer, ByteBuffer>() {
+            @Override
+            public void completed(Integer result, ByteBuffer attachment) {
+                if (attachment.hasRemaining()) {
+                    channel.write(attachment, attachment, this);
+                } else {
+                    //读取客户端传回的数据
+                    ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                    //异步读数据
+                    channel.read(readBuffer, readBuffer, new AioReadHandler(channel));
+                }
+            }
+
+            @Override
+            public void failed(Throwable exc, ByteBuffer attachment) {
+                try {
+                    channel.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void failed(Throwable exc, ByteBuffer byteBuffer) {
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+测试AioServer.java
+
+```java
+public class AioServer {
+    public static void main(String[] args) {
+        new Thread(new AioServerHandler(DEFAULT_PORT)).start();
+    }
+}
+```
+
+#### Client端
+
+AioClientHandler.java
+
+```java
+public class AioClientHandler implements CompletionHandler<Void, AioClientHandler>, Runnable {
+    public CountDownLatch count;
+    public AsynchronousSocketChannel channel;
+    private String ip;
+    private int port;
+
+    public AioClientHandler(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
+        try {
+            channel = AsynchronousSocketChannel.open();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void run() {
+        count = new CountDownLatch(1);
+        channel.connect(new InetSocketAddress(ip, port), null, this);
+
+        try {
+            count.await();
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void completed(Void result, AioClientHandler attachment) {
+        System.out.println("连接成功...");
+    }
+
+    @Override
+    public void failed(Throwable exc, AioClientHandler attachment) {
+        System.out.println("链接失败...");
+        exc.printStackTrace();
+        count.countDown();
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage(String msg) {
+        byte[] b = msg.getBytes();
+        ByteBuffer buffer = ByteBuffer.allocate(b.length);
+        buffer.put(b);
+        buffer.flip();//整理一下开始start-end
+        channel.write(buffer, buffer, new AioClientWriteHandler(channel, count));
+    }
+
+}
+```
+
+AioClientWriteHandler.java
+
+```java
+public class AioClientWriteHandler implements CompletionHandler<Integer, ByteBuffer> {
+    AsynchronousSocketChannel channel;
+    CountDownLatch count;
+
+    public AioClientWriteHandler(AsynchronousSocketChannel channel, CountDownLatch count) {
+        this.channel = channel;
+        this.count = count;
+    }
+
+    @Override
+    public void completed(Integer result, ByteBuffer attachment) {
+        if (attachment.hasRemaining()) {
+            channel.write(attachment, attachment, this);
+        } else {
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            channel.read(buffer, buffer, new AioClientReadHandler(channel, count));
+        }
+
+    }
+
+    @Override
+    public void failed(Throwable exc, ByteBuffer attachment) {
+        exc.printStackTrace();
+        count.countDown();
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+AioClientReadHandler.java
+
+```java
+public class AioClientReadHandler implements CompletionHandler<Integer, ByteBuffer> {
+    AsynchronousSocketChannel channel;
+    CountDownLatch count;
+
+    public AioClientReadHandler(AsynchronousSocketChannel channel, CountDownLatch count) {
+        this.channel = channel;
+        this.count = count;
+    }
+
+    @Override
+    public void completed(Integer result, ByteBuffer attachment) {
+        attachment.flip();
+        byte[] bytes = new byte[attachment.remaining()];
+        attachment.get(bytes);
+        String msg;
+        try {
+            msg = new String(bytes, "UTF-8");
+            System.out.println(msg);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void failed(Throwable exc, ByteBuffer attachment) {
+        exc.printStackTrace();
+        try {
+            channel.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        count.countDown();
+    }
+}
+```
+
+测试AioClient.java
+
+```java
+public class AioClient {
+    static AioClientHandler clientHandler;
+
+    public static void start() {
+        clientHandler = new AioClientHandler(DEFAULT_SERVER, DEFAULT_PORT);
+        new Thread(clientHandler).start();
+    }
+
+    public static boolean sendMsg(String msg) {
+        clientHandler.sendMessage(msg);
+        return true;
+    }
+
+    public static void main(String[] args) {
+        AioClient.start();
+        System.out.println("请输入内容：");
+        Scanner scanner = new Scanner(System.in);
+        while (AioClient.sendMsg(scanner.nextLine())) ;
+    }
+}
+```
+
 
 
