@@ -38,7 +38,7 @@ public synchronized V get(Object key) {
 
 #### ConcurrentHashMap是如何实现线程安全的呢？
 
-JDK1.7之前，**分段锁**的实现
+JDK1.7之前，**分段锁**的实现，
 
-
+采用了16段，16个锁，首先根据hashcode%16来获取到拿那一把锁，然后在去拿数据
 
