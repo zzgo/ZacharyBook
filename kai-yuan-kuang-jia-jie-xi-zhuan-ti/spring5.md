@@ -902,7 +902,7 @@ public class Train implements InitializingBean, DisposableBean {
 
 3、JDK自带的，可以使用JSR250规则定义的\(java规范\)两个注解来实现
 
-```
+```java
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -954,7 +954,7 @@ public class Jeep {
 
 4、实现 implements BeanProcessor
 
-```
+```java
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.lang.Nullable;
@@ -1000,7 +1000,7 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 
 实现了implements ApplicationContextAware 可以获取到上下文 ApplicationContext对象
 
-```
+```java
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
