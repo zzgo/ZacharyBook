@@ -46,11 +46,14 @@ AioServerHandler.java
 
 ```java
 public class AioServerHandler implements Runnable {
+    //阻塞服务
     public CountDownLatch count;
+    //服务端ServerSocket 通信
     public AsynchronousServerSocketChannel channel;
 
     public AioServerHandler(int port) {
         try {
+            //获取服务端管道通信
             channel = AsynchronousServerSocketChannel.open();
             //注册监听事件
             channel.bind(new InetSocketAddress(port));
@@ -63,6 +66,7 @@ public class AioServerHandler implements Runnable {
     @Override
     public  void run() {
         count = new CountDownLatch(1);
+        //接收来自客户端请求
         channel.accept(this, new AioAcceptHandler());
         try {
             //使线程阻塞在这里，不会结束
@@ -80,8 +84,10 @@ AioAcceptHandler.java
 public class AioAcceptHandler implements CompletionHandler<AsynchronousSocketChannel, AioServerHandler> {
     @Override
     public void completed(AsynchronousSocketChannel channel, AioServerHandler serverHandler) {
+        //重新监听客户端传来的信息，异步
         serverHandler.channel.accept(serverHandler, this);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
+        //读操作，
         channel.read(buffer,buffer,new AioReadHandler(channel));
     }
 
@@ -133,6 +139,7 @@ public class AioReadHandler implements CompletionHandler<Integer, ByteBuffer> {
         byte[] b = res.getBytes();
         final ByteBuffer buffer = ByteBuffer.allocate(b.length);
         buffer.put(b);
+        //整理 start-end区域的数据
         buffer.flip();
         channel.write(buffer, buffer, new CompletionHandler<Integer, ByteBuffer>() {
             @Override
@@ -168,7 +175,6 @@ public class AioReadHandler implements CompletionHandler<Integer, ByteBuffer> {
         }
     }
 }
-
 ```
 
 测试AioServer.java
@@ -296,6 +302,7 @@ public class AioClientReadHandler implements CompletionHandler<Integer, ByteBuff
 
     @Override
     public void completed(Integer result, ByteBuffer attachment) {
+        //整理，计算出读取数据的 开始位置和结束位置，确保数据可读的真实性
         attachment.flip();
         byte[] bytes = new byte[attachment.remaining()];
         attachment.get(bytes);
