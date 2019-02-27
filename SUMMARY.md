@@ -60,6 +60,7 @@
   * [开源框架解析专题](kai-yuan-kuang-jia-jie-xi-zhuan-ti.md)
     * [Spring](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring.md)
       * [ioc容器](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
+      * [Spring组件和AOP基本操作](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-he-aop-ji-ben-cao-zuo.md)
     * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
     * [SpringMVC](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc.md)
     * [spring 相关链接](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-xiang-guan-lian-jie.md)
