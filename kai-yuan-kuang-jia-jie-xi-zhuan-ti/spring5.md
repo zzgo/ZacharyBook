@@ -281,5 +281,83 @@ Monkey monkey = (Monkey) app.getBean("factoryBean");
 System.out.println(monkey.getName());
 ```
 
+#### @Value使用
+
+##### 1、使用xml进行赋值
+
+```java
+<bean id="person" class="com.zachary.springanno.cap1.Person" init-method="init" destroy-method="destroy">
+        //属性初始化赋值
+        <property name="name" value="admin"/>
+        <property name="age" value="100"/>
+ </bean>
+```
+
+##### 2、使用@Value表达式赋值，基本字符赋值, Spring表达式赋值, 获取运行环境变量的值
+
+**创建Bird.java**
+
+```java
+public class Bird {
+    //字符串赋值
+    @Value("admin")
+    private String name;
+    //表达式赋值
+    @Value("#{20-2}")
+    private Integer age;
+    //丛配置文件中获取到属性进行赋值
+    @Value("${bird.color}")
+    private String color;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "Bird{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", color='" + color + '\'' +
+                '}';
+    }
+}
+```
+
+##### 3、@Value从\*.properties中取值
+
+**config.properties**
+
+```lua
+bird.color=red
+```
+
+在属性上使用 ${bird.color}进行赋值
+
+配置信息会被加载到我们spring的环境中，也就是**Environment **类中管理，使用getProperty\("name"\) 获取值
+
+
+
 
 
