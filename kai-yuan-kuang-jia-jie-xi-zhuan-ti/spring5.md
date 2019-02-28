@@ -115,15 +115,15 @@ for (String beanName : beanNames) {
 }
 ```
 
-@Configurable解释
+**@Configurable解释**
 
-> 被@Configurable注解修饰的类，会告诉spring这是一个配置类
+* 被@Configurable注解修饰的类，会告诉spring这是一个配置类
 
-@ComponentScan 扫描规则认识
+**@ComponentScan 扫描规则认识**
 
-> @interface ComponentScan 类
+* @interface ComponentScan 类
 
-```
+```java
 package org.springframework.context.annotation;
 
 import java.lang.annotation.Documented;
@@ -180,41 +180,28 @@ public @interface ComponentScan {
 }
 ```
 
-> @ComponentScan\(value="com.enjoy.cap2扫描的包文件",
->
-> includeFilters={
->
-> @Filter\(type=FilterType.ANNOTATION,classes={Controller.class}\),        @Filter\(type=FilterType.ASSIGNABLE\_TYPE,classes={BookService.class}\)
->
-> },
->
-> useDefaultFilters=false\) //默认是true,扫描所有组件，要改成false,使用自定义扫描范围
->
-> \*/
->
-> //@ComponentScan value:指定要扫描的包
->
-> //excludeFilters = Filter\[\] 指定扫描的时候按照什么规则排除那些组件
->
-> //includeFilters = Filter\[\] 指定扫描的时候只需要包含哪些组件
->
-> //useDefaultFilters = false 默认是true,扫描所有组件，要改成false
->
-> //－－－－扫描规则如下
->
-> //FilterType.ANNOTATION：按照注解
->
-> //FilterType.ASSIGNABLE\_TYPE：按照给定的类型；比如按BookService类型
->
-> //FilterType.ASPECTJ：使用ASPECTJ表达式
->
-> //FilterType.REGEX：使用正则指定
->
-> //FilterType.CUSTOM：使用自定义规则，自已写类，实现TypeFilter接口
-
-配置类，自定义扫描规则
-
+```java
+@ComponentScan(value="com.enjoy.cap2扫描的包文件",
+    includeFilters={
+    @Filter(type=FilterType.ANNOTATION,classes={Controller.class}),
+    @Filter(type=FilterType.ASSIGNABLE_TYPE,classes={BookService.class})
+},
+useDefaultFilters=false) //默认是true,扫描所有组件，要改成false,使用自定义扫描范围
+//@ComponentScan value:指定要扫描的包
+//excludeFilters = Filter[] 指定扫描的时候按照什么规则排除那些组件
+//includeFilters = Filter[] 指定扫描的时候只需要包含哪些组件
+//useDefaultFilters = false 默认是true,扫描所有组件，要改成false
+//－－－－扫描规则如下
+//FilterType.ANNOTATION：按照注解
+//FilterType.ASSIGNABLE_TYPE：按照给定的类型；比如按BookService类型
+//FilterType.ASPECTJ：使用ASPECTJ表达式
+//FilterType.REGEX：使用正则指定
+//FilterType.CUSTOM：使用自定义规则，自已写类，实现TypeFilter接口
 ```
+
+**配置类，自定义扫描规则**
+
+```java
 @Configurable
 //自定义类来过滤规则
 @ComponentScan(value = "com.zachary.springanno.cap2",
@@ -230,9 +217,9 @@ public class Cap2MainConfig {
 }
 ```
 
-FilterType.CUSTOM
+**FilterType.CUSTOM**
 
-```
+```java
 import java.io.IOException;
 
 import org.springframework.core.io.Resource;
@@ -244,12 +231,10 @@ import org.springframework.core.type.filter.TypeFilter;
 
 public class CustomFilter implements TypeFilter {
     private ClassMetadata classMetadata;
-
     /*
      * MetadataReader:读取到当前正在扫描类的信息
      * MetadataReaderFactory:可以获取到其他任何类信息
      */
-
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
             throws IOException {
@@ -259,7 +244,6 @@ public class CustomFilter implements TypeFilter {
         classMetadata = metadataReader.getClassMetadata();
         //获取当前类资源(类的路径)
         Resource resource = metadataReader.getResource();
-
         String className = classMetadata.getClassName();
         System.out.println("----->" + className);
         if (className.contains("cap2")) {//当类包含cap2字符, 则匹配成功,返回true
@@ -271,31 +255,25 @@ public class CustomFilter implements TypeFilter {
 }
 ```
 
-@Scope注解
+**@Scope注解**
 
-> //给容器中注册一个bean, 类型为返回值的类型, 默认是单实例
->
-> ```
-> /\*
->
->  \* prototype:多实例: IOC容器启动的时候,IOC容器启动并不会去调用方法创建对象, 而是每次获取的时候才会调用方法创建对象
->
->  \* singleton:单实例\(默认\):IOC容器启动的时候会调用方法创建对象并放到IOC容器中,
->  以后每次获取的就是直接从容器中拿\(大Map.get\)的同一个bean
->
->  \* request: 主要针对web应用, 递交一次请求创建一个实例
->
->  \* session:同一个session创建一个实例
->
->  \*/
-> ```
-
+```java
+//给容器中注册一个bean, 类型为返回值的类型, 默认是单实例
+/*
+* prototype:多实例: IOC容器启动的时候,IOC容器启动并不会去调用方法创建对象, 而是每次获取的时候才会调用方法创建对象
+* singleton:单实例(默认):IOC容器启动的时候会调用方法创建对象并放到IOC容器中,
+*以后每次获取的就是直接从容器中拿\(大Map.get\)的同一个bean
+* request: 主要针对web应用, 递交一次请求创建一个实例
+* session:同一个session创建一个实例
+*/
 ```
-    @Scope("prototype") //默认是单例模式，在Scope指明 prototype 则表示多例模式 
-    @Bean
-    public Person person() {
-        return new Person("admin", 18);
-    }
+
+```java
+@Scope("prototype") //默认是单例模式，在Scope指明 prototype 则表示多例模式 
+@Bean
+public Person person() {
+    return new Person("admin", 18);
+}
 ```
 
 @Lazy注解
