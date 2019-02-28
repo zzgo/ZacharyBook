@@ -1,8 +1,6 @@
-## 
+#### @Import注解
 
-@Import注解
-
-```
+```java
 import com.zachary.springanno.cap1.Person;
 import com.zachary.springanno.cap6.entity.Cat;
 import com.zachary.springanno.cap6.entity.Dog;
@@ -53,11 +51,11 @@ public class Cap6MainConfig {
 
 使用方法
 
-> 在Class上面使用注解@Import
+* 在Class上面使用注解@Import
 
-Import.java
+**Import.java**
 
-```
+```java
 package org.springframework.context.annotation;
 
 import java.lang.annotation.Documented;
@@ -74,21 +72,16 @@ public @interface Import {
 }
 ```
 
-> @Import\({A.class,B.class,CustomImportSelector.class,CustomImportBeanDefinitionRegistrar}\)
->
-> A.class,B.class 手动导入的bean ，与使用@Bean 一样
->
-> CustomImportSelector.class
->
-> 自定义逻辑返回需要的组件 需要 implements ImportSelector
->
-> CustomImportBeanDefinitionRegistrar.class
->
-> 自定义注册类，通过自己的逻辑进行注册bean
+* @Import\({A.class,B.class,CustomImportSelector.class,CustomImportBeanDefinitionRegistrar}\)
+* A.class,B.class 手动导入的bean ，与使用@Bean 一样
+* CustomImportSelector.class
+* 自定义逻辑返回需要的组件 需要 implements ImportSelector
+* CustomImportBeanDefinitionRegistrar.class
+* 自定义注册类，通过自己的逻辑进行注册bean
 
-CustomImportSelector.java
+**CustomImportSelector.java**
 
-```
+```java
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -113,9 +106,9 @@ public class CustomImportSelector implements ImportSelector {
 }
 ```
 
-CustomImportBeanDefinitionRegistrar.java
+**CustomImportBeanDefinitionRegistrar.java**
 
-```
+```java
 import com.zachary.springanno.cap6.entity.Tiger;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -154,21 +147,18 @@ public class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinition
 
 大致@Import里面就可以放这些Class，知道区别
 
-> 1、直接注册bean，id为全类名，如A.class，B.class
->
-> 2、implements ImportSelector  String\[\] selectImports\(AnnotationMetadata annotationMetadata\)
->
-> 返回数组形式的注册bean，每个字符串是全类名。返回批量，该方法可以包含第一种。id问全类名
->
-> 3、implements ImportBeanDefinitionRegistrar 自定义注册bean，还可以带有逻辑判断，自定义id
+* 直接注册bean，id为全类名，如A.class，B.class
+* implements ImportSelector  String\[\] selectImports\(AnnotationMetadata annotationMetadata\)
+* 返回数组形式的注册bean，每个字符串是全类名。返回批量，该方法可以包含第一种。id问全类名
+* implements ImportBeanDefinitionRegistrar 自定义注册bean，还可以带有逻辑判断，自定义id
 
-除了上面方式外，还有一种是通过implements FactoryBean&lt;T&gt; 实现的
+除了上面方式外，还有一种是通过**implements FactoryBean&lt;T&gt;** 实现的
 
-> 首先我们自定义一个类CsutomFactoryBean implements FactoryBean&lt;T&gt; 这里的T就是 我们要注册的bean对象
+* 首先我们自定义一个类CsutomFactoryBean implements FactoryBean&lt;T&gt; 这里的T就是 我们要注册的bean对象
 
-CustomFactoryBean.java
+**CustomFactoryBean.java**
 
-```
+```java
 import com.zachary.springanno.cap6.entity.Monkey;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.lang.Nullable;
@@ -191,7 +181,6 @@ import org.springframework.lang.Nullable;
         *       a,默认获取到的是工厂bean调用getObject创建的对象
         *       b,要获取工厂Bean本身,需要在id前加个  &factoryBean 
 */
-
 
 public class CustomFactoryBean implements FactoryBean<Monkey> {
     //    返回一个Monkey对象，这个对象会添加到容器中
@@ -216,16 +205,15 @@ public class CustomFactoryBean implements FactoryBean<Monkey> {
         return true;
     }
 
-
     public String getName() {
         return "factoryBean";
     }
 }
 ```
 
-> 将我们自定义的CustomFactoryBean注册到spring ioc 中
+* 将我们自定义的CustomFactoryBean注册到spring ioc 中
 
-```
+```java
 import com.zachary.springanno.cap1.Person;
 import com.zachary.springanno.cap6.entity.Cat;
 import com.zachary.springanno.cap6.entity.Dog;
@@ -243,7 +231,6 @@ import org.springframework.context.annotation.Import;
 @Import({Dog.class, Cat.class, CustomImportSelector.class, CustomImportBeanDefinitionRegistrar.class})
 public class Cap6MainConfig {
 
-
     /*
      * 给容器中注册组件的方式
      * 1,@Bean: [导入第三方的类或包的组件],比如Person为第三方的类, 需要在我们的IOC容器中使用
@@ -259,12 +246,10 @@ public class Cap6MainConfig {
      *
      */
 
-
     @Bean
     public Person person() {
         return new Person("admin", 18);
     }
-
 
     //    这里注入我们的自定义的工厂bean
     @Bean
@@ -278,61 +263,44 @@ public class Cap6MainConfig {
 
 如果获取到的是我们注册的bean，那么请问怎么获取CsutomFactoryBean 本身呢？
 
-> 通过id获取这个对象，他最终会调用
->
-> @Nullable
->
-> ```
-> @Override
->
-> public Monkey getObject\(\) throws Exception {
->
->     return new Monkey\(\);
->
-> }
-> ```
->
-> getObject\(\)方法 ，那么说明 实例出来的是我们注册，需要的bean，
->
-> getBean\("factoryBean"\) &gt;&gt; Monkey
->
-> getBean\("&factoryBean"\) &gt;&gt; CsutomFactroyBean
->
-> 注意下区别
->
-> CustomFactoryBean factoryBean = \(CustomFactoryBean\) app.getBean\("&factoryBean"\);
->
-> System.out.println\(factoryBean.getName\(\)\);
->
-> Monkey monkey = \(Monkey\) app.getBean\("factoryBean"\);
->
-> System.out.println\(monkey.getName\(\)\);
+* 通过id获取这个对象，他最终会调用
 
-生命周期的思考
+```java
+@Nullable
+@Override
+public Monkey getObject() throws Exception {
+    return new Monkey();
+}
+getObject()方法 ，那么说明 实例出来的是我们注册，需要的bean，
+getBean("factoryBean") >> Monkey
+getBean("&factoryBean") >> CsutomFactroyBean
+//注意下区别
+CustomFactoryBean factoryBean = (CustomFactoryBean) app.getBean("&factoryBean");
+System.out.println(factoryBean.getName());
+Monkey monkey = (Monkey) app.getBean("factoryBean");
+System.out.println(monkey.getName());
+```
 
-> 所有这些方法调用依赖于spring 容器
+**生命周期的思考**
 
-实现方式
+* 所有这些方法调用依赖于spring 容器
 
-1、@Bean或者xml配置
+**实现方式**
 
-> @Bean\(initMethod="init",destroyMethod = "destroy"\)
->
-> 也可以在xml上配置
->
-> &lt;bean id="person" class="com.zachary.springanno.cap1.Person" init-method="init" destroy-method="destroy"&gt;
->
-> ```
->     &lt;property name="name" value="admin"/&gt;
->
->     &lt;property name="age" value="100"/&gt;
-> ```
->
-> &lt;/bean&gt;
+**1、@Bean或者xml配置**
+
+```java
+@Bean(initMethod="init",destroyMethod = "destroy")
+也可以在xml上配置
+<bean id="person" class="com.zachary.springanno.cap1.Person" init-method="init" destroy-method="destroy">
+    <property name="name" value="admin"/>;
+    <property name="age" value="100"/>;
+</bean>
+```
 
 这里的initMedthod里面的值 对应于bean对象里面的方法，destroyMethod 同理
 
-```
+```java
 public class Person {
     public void init() {
         System.out.println("init....");
@@ -344,9 +312,9 @@ public class Person {
 }
 ```
 
-2、实现implements InitializatingBean,DisposableBean
+**2、实现implements InitializatingBean,DisposableBean**
 
-```
+```java
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -377,7 +345,7 @@ public class Train implements InitializingBean, DisposableBean {
 }
 ```
 
-3、JDK自带的，可以使用JSR250规则定义的\(java规范\)两个注解来实现
+**3、JDK自带的，可以使用JSR250规则定义的\(java规范\)两个注解来实现**
 
 ```java
 import org.springframework.stereotype.Component;
@@ -429,7 +397,7 @@ public class Jeep {
 }
 ```
 
-4、实现 implements BeanProcessor
+**4、实现 implements BeanProcessor**
 
 ```java
 import org.springframework.beans.BeansException;
@@ -475,7 +443,7 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
 }
 ```
 
-实现了implements ApplicationContextAware 可以获取到上下文 ApplicationContext对象
+**实现了implements ApplicationContextAware 可以获取到上下文 ApplicationContext对象**
 
 ```java
 import javax.annotation.PostConstruct;
