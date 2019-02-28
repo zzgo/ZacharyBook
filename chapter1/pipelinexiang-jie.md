@@ -49,81 +49,81 @@ Pipeline正确使用方式
 
 批量删除key实现
 
-```
-    /**
-     * 批量删除key
-     *
-     * @param keys
-     */
-    public void pipelineDel(String... keys) {
-        Jedis jedis = null;
-        try {
-            jedis = pool.getResource();
-            //拿到管道
-            Pipeline pipeline = jedis.pipelined();
-            for (int i = 0; i < keys.length; i++) {
-                pipeline.del(keys[i]);
-            }
-            //真正提交命名
-            pipeline.sync();
-        } catch (Exception e) {
-            pool.returnBrokenResource(jedis);
-            e.printStackTrace();
-        } finally {
-            returnResource(pool, jedis);
+```java
+/**
+* 批量删除key
+*
+* @param keys
+*/
+public void pipelineDel(String... keys) {
+    Jedis jedis = null;
+    try {
+        jedis = pool.getResource();
+        //拿到管道
+        Pipeline pipeline = jedis.pipelined();
+        for (int i = 0; i < keys.length; i++) {
+            pipeline.del(keys[i]);
         }
+        //真正提交命名
+        pipeline.sync();
+    } catch (Exception e) {
+        pool.returnBrokenResource(jedis);
+        e.printStackTrace();
+    } finally {
+        returnResource(pool, jedis);
     }
+}
 ```
 
 原生的批量添加key value 使用
 
-```
-    /**
-     * 批量的设置key:value,可以一个 example: 
-     * jedis.mset(new String[]{"key2","value1","key2","value2"})
-     * 偶数索引为key，奇数索引为value。
-     * @param keysvalues
-     * @return 成功返回OK 失败 异常 返回 null
-     */
-    public String mset(String... keysvalues) {
-        Jedis jedis = null;
-        String res = null;
-        try {
-            jedis = pool.getResource();
-            res = jedis.mset(keysvalues);
-        } catch (Exception e) {
-            pool.returnBrokenResource(jedis);
-            e.printStackTrace();
-        } finally {
-            returnResource(pool, jedis);
-        }
-        return res;
+```java
+/**
+* 批量的设置key:value,可以一个 example:
+* jedis.mset(new String[]{"key2","value1","key2","value2"})
+* 偶数索引为key，奇数索引为value。
+* @param keysvalues
+* @return 成功返回OK 失败 异常 返回 null
+*/
+public String mset(String... keysvalues) {
+    Jedis jedis = null;
+    String res = null;
+    try {
+        jedis = pool.getResource();
+        res = jedis.mset(keysvalues);
+    } catch (Exception e) {
+        pool.returnBrokenResource(jedis);
+        e.printStackTrace();
+    } finally {
+        returnResource(pool, jedis);
     }
+    return res;
+}
 ```
 
 返回操作结果，并且有多个不同命名的pipeline操作
 
-```
-    public List<Object> pipeline() {
-        Jedis jedis = null;
-        try {
-            jedis = pool.getResource();
-            //拿到管道
-            Pipeline pipeline = jedis.pipelined();
-            //向管道中添加命令
-            pipeline.set("name", "admin");
-            pipeline.zadd("votes", 1.0, "article:001");
-            pipeline.hset("user:001", "name", "test");
-            //真正提交命令，并返回结果List<Object> 命令执行的结果[OK,1,1,OK]
-            return pipeline.syncAndReturnAll();
-        } catch (Exception e) {
-            pool.returnBrokenResource(jedis);
-            e.printStackTrace();
-        } finally {
-            returnResource(pool, jedis);
-        }
-        return null;
+```java
+public List<Object> pipeline() {
+    Jedis jedis = null;
+    try {
+        jedis = pool.getResource();
+        //拿到管道
+        Pipeline pipeline = jedis.pipelined();
+        //向管道中添加命令
+        pipeline.set("name", "admin");
+        pipeline.zadd("votes", 1.0, "article:001");
+        pipeline.hset("user:001", "name", "test");
+        //真正提交命令，并返回结果List<Object> 命令执行的结果[OK,1,1,OK]
+        return pipeline.syncAndReturnAll();
+    } catch (Exception e) {
+        pool.returnBrokenResource(jedis);
+        e.printStackTrace();
+    } finally {
+        returnResource(pool, jedis);
     }
+    return null;
+}
 ```
 
 ### 总结：
