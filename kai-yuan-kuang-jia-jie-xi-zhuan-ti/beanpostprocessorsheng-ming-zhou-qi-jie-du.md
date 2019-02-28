@@ -2,8 +2,10 @@
 
 ```java
 refresh() -> finishBeanFactoryInitialization(beanFactory) -> beanFactory.preInstantiateSingletons()
+
 -> getBean(beanName) -> doGetBean(name, (Class)null, (Object[])null, false) -> createBean(beanName, mbd, args)
--> doCreateBean(beanName, mbdToUse, args) -> 
+
+-> doCreateBean(beanName, mbdToUse, args) ->
 ```
 
 接下来就是这个方法详解
