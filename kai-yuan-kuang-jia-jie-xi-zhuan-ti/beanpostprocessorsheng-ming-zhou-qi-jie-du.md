@@ -1,4 +1,4 @@
-不管是XmlClassPathApplicationConext，还是ConfigurableApplicationContext加载方式，阅读源码过程都是从refresh\(\)开始。
+不管是ClassPathXmlApplicationConext，还是AnnotationConfigurableApplicationContext加载方式，阅读源码过程都是从refresh\(\)开始。
 
 ```java
 refresh() -> finishBeanFactoryInitialization(beanFactory) -> beanFactory.preInstantiateSingletons()
