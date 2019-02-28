@@ -111,7 +111,7 @@
     * [算法题](chapter1/mian-shi-ti/suan-fa-ti.md)
     * [逻辑题](chapter1/mian-shi-ti/luo-ji-ti.md)
     * [一般面试题](chapter1/mian-shi-ti/yi-ban-mian-shi-ti-2.md)
-    * [经验之谈](chapter1/mian-shi-ti/jing-yan-zhi-tan.md)
+    * [同学面试题目总结](chapter1/mian-shi-ti/jing-yan-zhi-tan.md)
     * [线程问题](chapter1/mian-shi-ti/xian-cheng-wen-ti.md)
     * [问题记录](chapter1/mian-shi-ti/wen-ti-ji-lu.md)
     * [享学之面试题](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti.md)
