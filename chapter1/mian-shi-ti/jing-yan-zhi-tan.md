@@ -136,9 +136,72 @@ null
 
 所以如果你的hashCode方法依赖于对象中易变的数据，因为在数据发生变化时，hashCode方法就会生成一个不同的散列码
 
+```java
+public class Person {
+    private String name;
+    private int age;
+
+    public Person() {
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (age != person.age) return false;
+        return name != null ? name.equals(person.name) : person.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + age;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person("admin", 20);
+        Map<Person, Integer> map = new HashMap<>();
+        map.put(person, 1);
+        person.setAge(10);//易变数据
+        System.out.println(map.get(person));
+    }
+}
+```
+
+执行结果
+
+```
+null
+```
+
+
+
 ### jvm的线程和操作系统的线程有什么区别？
-
-
 
 
 
