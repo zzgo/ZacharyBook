@@ -10,14 +10,14 @@ LUA脚本语言是C开发的，类似存储过程
 
 #### LUA基本语法
 
-```
+```lua
 127.0.0.1:6379> eval script numkeys key [key ...] arg [arg ...]  
 # script表示脚本，numkeys 后面有几个key，key[...] arg [arg ...] 跟的参数
 ```
 
 比如：
 
-```
+```lua
 127.0.0.1:6379> set name test
 OK
 127.0.0.1:6379> eval "return redis.call('get',KEYS[1])" 1 name test
@@ -41,7 +41,7 @@ end
 
 print\(\) 打印内容
 
-```
+```lua
 新建一个1.lua，内容
 local int sum = 0
 local int i = 0
