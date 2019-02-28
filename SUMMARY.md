@@ -63,7 +63,6 @@
       * [Spring组件使用1](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-shi-yong-1.md)
       * [Spring组件使用2](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring5.md)
       * [Spring Bean的生命周期](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-beande-sheng-ming-zhou-qi.md)
-      * [Spring基础及组件使用](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springji-chu-ji-zu-jian-shi-yong.md)
       * [Spring组件和AOP基本操作](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-he-aop-ji-ben-cao-zuo.md)
     * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
     * [SpringMVC](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc.md)
