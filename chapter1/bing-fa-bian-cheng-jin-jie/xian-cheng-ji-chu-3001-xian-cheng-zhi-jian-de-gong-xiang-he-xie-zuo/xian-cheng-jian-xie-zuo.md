@@ -1,4 +1,4 @@
-线程间的协作
+### 线程间的协作
 
 采用轮训的方式，去检测一个线程是否执行完，难以保证及时性，以及系统资源开销大
 
@@ -8,27 +8,22 @@ java提供了**等待/通知**机制来实现线程间的协作，即wait\(\)/no
 
 等待/通知范式
 
-> 等待方：
->
-> 获取对象的锁
->
-> 循环里判断条件是否满足，不满足调用wait方法
->
-> 条件满足执行业务逻辑
->
-> 通知方：
->
-> 获取对象锁
->
-> 改变条件
->
-> 通知所有等待在对象的线程
->
-> 注意 wait 、notify和notifyAll 必须作用在有锁的方法和锁代码块上，不然会抛异常
+**等待方：**
+
+* 获取对象的锁
+* 循环里判断条件是否满足，不满足调用wait方法
+* 条件满足执行业务逻辑
+
+**通知方：**
+
+* 获取对象锁
+* 改变条件
+* 通知所有等待在对象的线程
+* 注意 wait 、notify和notifyAll 必须作用在有锁的方法和锁代码块上，不然会抛异常
 
 Express.java
 
-```
+```java
 /**
  * @Title:
  * @Author:Zachary
@@ -104,7 +99,7 @@ public class Express {
 }
 ```
 
-```
+```java
 /**
  * @Title:
  * @Author:Zachary
@@ -145,7 +140,7 @@ public class UseWaitNotify {
 }
 ```
 
-```
+```java
 16 site thread  is notifed .
 15 site thread  is notifed .
 14 site thread  is notifed .
@@ -167,7 +162,7 @@ public class UseWaitNotify {
 
 ConnectionPool.java
 
-```
+```java
 import java.sql.Connection;
 import java.util.LinkedList;
 
@@ -232,7 +227,7 @@ public class ConnectionPool {
 
 SqlConnectionImpl.java
 
-```
+```java
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
@@ -526,11 +521,7 @@ public class SqlConnectionImpl implements Connection {
         return false;
     }
 }
-```
-
 ConnectionPoolClient.java
-
-```
 import java.sql.Connection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -616,13 +607,8 @@ public class ConnectionPoolClient {
     }
 
 }
-```
-
 Join 使用
-
-> 在A线程中使用B线程的join方法，则A线程会等到B线程执行完了才会执行。
-
-```
+在A线程中使用B线程的join方法，则A线程会等到B线程执行完了才会执行。
 public class UseJoin {
 
 
