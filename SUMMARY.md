@@ -111,6 +111,9 @@
     * [高可靠数据存储](chapter1/gao-ke-kao-shu-ju-cun-chu.md)
       * [MySql高性能存储](chapter1/gao-ke-kao-shu-ju-cun-chu/mysqlgao-xing-neng-cun-chu.md)
         * [linux下mysql命名大全](chapter1/gao-ke-kao-shu-ju-cun-chu/mysqlgao-xing-neng-cun-chu/linuxxia-mysql-ming-ming-da-quan.md)
+  * 微服务架构专题
+    * [Docker虚拟化技术](dockerxu-ni-hua-ji-zhu.md)
+      * [Docker背景](dockerxu-ni-hua-ji-zhu/dockerjian-dan-jie-shao.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
