@@ -39,7 +39,7 @@ image2 extends image1   Container c = new image2 -&gt; 此时，c容器中，有
 
 #### 容器、镜像的运行关系
 
-
+![](/assets/27812sdaha.png)
 
 
 
