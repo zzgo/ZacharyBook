@@ -5,7 +5,7 @@ docker \[ run \| start \| stop \| restart \| kill \| rm \| pause \| unpause \]
 * run/create \[镜像名\]：创建一个新的容器并运行一个命令
 * start/stop/restart\[容器名\]：启动/停止/重启一个容器
 * kill \[容器名\]：直接杀掉容器，不给进程响应时间
-* rm \[容器名\]：删除已经停止的容器
+* rm \[容器名\]：删除已经停止的容器 
 * pause/unpause\[容器名\]：暂停、恢复容器中的进程
 
 ```java
@@ -36,6 +36,21 @@ For more examples and ideas, visit:
 ```java
 [root@VM_0_6_centos ~]# docker create hello-world
 e7c4a834d114cc51150408e839e5870871ffe93e79f601f1197c9c05f8374b34
+```
+
+```java
+[root@VM_0_6_centos ~]# docker start tomcat
+tomcat
+```
+
+```java
+[root@VM_0_6_centos ~]# docker stop tomcat 
+tomcat
+```
+
+```java
+[root@VM_0_6_centos ~]# docker restart tomcat 
+tomcat
 ```
 
 
