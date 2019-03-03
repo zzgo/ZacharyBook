@@ -2,9 +2,9 @@
 
 采用轮训的方式，去检测一个线程是否执行完，难以保证及时性，以及系统资源开销大
 
-java提供了**等待/通知**机制来实现线程间的协作，即wait\(\)/notify\(\)\|notifyAll\(\)
+java提供了**等待/通知**机制来实现线程间的协作，即`wait()/notify()|notifyAll()`
 
-通常我们使用wait\(\)/notifyAll\(\)。notify\(\)容易丢失信号，因为只会唤醒其中的一个线程。
+通常我们使用`wait()/notifyAll()`。`notify()`容易丢失信号，因为只会唤醒其中的一个线程。
 
 等待/通知范式
 
@@ -19,9 +19,9 @@ java提供了**等待/通知**机制来实现线程间的协作，即wait\(\)/no
 * 获取对象锁
 * 改变条件
 * 通知所有等待在对象的线程
-* 注意 wait 、notify和notifyAll 必须作用在有锁的方法和锁代码块上，不然会抛异常
+* 注意 `wait `、`notify`和`notifyAll` 必须作用在有锁的方法和锁代码块上，不然会抛异常
 
-Express.java
+**Express.java**
 
 ```java
 /**
@@ -160,7 +160,7 @@ public class UseWaitNotify {
 
 等待超时模型完成一个连接池
 
-ConnectionPool.java
+**ConnectionPool.java**
 
 ```java
 import java.sql.Connection;
@@ -225,7 +225,7 @@ public class ConnectionPool {
 }
 ```
 
-SqlConnectionImpl.java
+**SqlConnectionImpl.java**
 
 ```java
 import java.sql.*;
