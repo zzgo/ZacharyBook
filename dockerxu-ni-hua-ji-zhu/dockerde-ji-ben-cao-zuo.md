@@ -89,19 +89,71 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 **docker \[ ps \| inspect \| exec \| logs \| export \| import \]**
 
-ps：查看容器列表（默认查看正在运行的容器，-a 查看所有容器）
+* ps：查看容器列表（默认查看正在运行的容器，-a 查看所有容器）
+* inspect \[容器名称/容器ID \]：查看容器配置元数据
+* exec -it \[容器名称/容器ID \] /bin/bash：进入容器环境中交互操作
+* logs --since=“2019-02-01” -f --tail=10 \[容器名称/容器ID\]：查看容器日志
+* cp path1 \[容器名称/容器ID\]：path 容器与主机间的数据拷贝
+* export -o test.tar \[容器名称/容器ID\] / docker export \[容器名称/容器ID\]&gt;test.tar ：文件系统作为一个tar归档文件
+* import test.tar \[镜像名:版本号\]：导入归档文件，成为一个镜像
 
-inspect \[容器名称/容器ID \]：查看容器配置元数据
+**docker ps \[-a\]  查看运行容器/所有容器**
 
-exec -it \[容器名称/容器ID \] /bin/bash：进入容器环境中交互操作
+```java
+[root@VM_0_6_centos ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+a31d0c5a5e89        tomcat:latest       "catalina.sh run"   21 hours ago        Up 21 hours         8080/tcp            tomcat
+[root@VM_0_6_centos ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+a31d0c5a5e89        tomcat:latest       "catalina.sh run"   21 hours ago        Up 21 hours         8080/tcp            tomcat
+```
 
-logs -since=“2019-02-01” -f --tail=10 \[容器名称/容器ID\]：查看容器日志
+**docker inspect  查看容器配置元数据**
 
-cp path1 \[容器名称/容器ID\]：path 容器与主机间的数据拷贝
+```java
+[root@VM_0_6_centos ~]# docker inspect tomcat
+[
+    {
+        "Id": "a31d0c5a5e89819fb240c076d8eabd4322a1b2cc8d34968cb9977d72c68345df",
+        "Created": "2019-03-02T15:15:29.497558021Z",
+        "Path": "catalina.sh",
+        "Args": [
+            "run"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5328,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2019-03-02T15:15:29.911895961Z",
+            
+......................................................
+]
+```
 
-export -o test.tar \[容器名称/容器ID\] / docker export \[容器名称/容器ID\]&gt;test.tar ：文件系统作为一个tar归档文件
+**doccker exec 进入容器环境中交互操作**
 
-import test.tar \[镜像名:版本号\]：导入归档文件，成为一个镜像
+```java
+[root@VM_0_6_centos ~]# docker exec -it tomcat /bin/bash
+root@a31d0c5a5e89:/usr/local/tomcat# 
+```
+
+进入到容器中，如果要退出容器的话，可以使用 `Ctrl + P + Q` 或者 `exit` 退出
+
+**docker logs 查看日志**
+
+
+
+
+
+
+
+### 镜像操作
 
 
 
