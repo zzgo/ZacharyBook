@@ -93,5 +93,15 @@ ps：查看容器列表（默认查看正在运行的容器，-a 查看所有容
 
 inspect \[容器名称/容器ID \]：查看容器配置元数据
 
-exec -it \[容器名称/容器ID \] /bin/bash：
+exec -it \[容器名称/容器ID \] /bin/bash：进入容器环境中交互操作
+
+logs -since=“2019-02-01” -f --tail=10 \[容器名称/容器ID\]：查看容器日志
+
+cp path1 \[容器名称/容器ID\]：path 容器与主机间的数据拷贝
+
+export -o test.tar \[容器名称/容器ID\] / docker export \[容器名称/容器ID\]&gt;test.tar ：文件系统作为一个tar归档文件
+
+import test.tar \[镜像名:版本号\]：导入归档文件，成为一个镜像
+
+
 
