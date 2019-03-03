@@ -131,7 +131,7 @@ a31d0c5a5e89        tomcat:latest       "catalina.sh run"   21 hours ago        
             "ExitCode": 0,
             "Error": "",
             "StartedAt": "2019-03-02T15:15:29.911895961Z",
-            
+
 ......................................................
 ]
 ```
@@ -140,12 +140,40 @@ a31d0c5a5e89        tomcat:latest       "catalina.sh run"   21 hours ago        
 
 ```java
 [root@VM_0_6_centos ~]# docker exec -it tomcat /bin/bash
-root@a31d0c5a5e89:/usr/local/tomcat# 
+root@a31d0c5a5e89:/usr/local/tomcat#
 ```
 
 进入到容器中，如果要退出容器的话，可以使用 `Ctrl + P + Q` 或者 `exit` 退出
 
 **docker logs 查看日志**
+
+查看从`2019-02-01 起`的日志，从`最后开始数10条`数据
+
+```java
+[root@VM_0_6_centos ~]# docker logs --since="2019-02-01" -f --tail=10 tomcat
+02-Mar-2019 15:17:39.274 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/usr/local/tomcat/webapps/manager] has finished in [50] ms
+02-Mar-2019 15:17:39.274 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/usr/local/tomcat/webapps/ROOT]
+02-Mar-2019 15:17:39.312 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/usr/local/tomcat/webapps/ROOT] has finished in [38] ms
+02-Mar-2019 15:17:39.312 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/usr/local/tomcat/webapps/docs]
+02-Mar-2019 15:17:39.340 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/usr/local/tomcat/webapps/docs] has finished in [28] ms
+02-Mar-2019 15:17:39.341 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/usr/local/tomcat/webapps/host-manager]
+02-Mar-2019 15:17:39.380 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/usr/local/tomcat/webapps/host-manager] has finished in [39] ms
+02-Mar-2019 15:17:39.388 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+02-Mar-2019 15:17:39.397 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+02-Mar-2019 15:17:39.406 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 128243 ms
+```
+
+查看容器名称为tomcat的88条日志信息（从最后开始算起，倒推88条数据）
+
+```java
+[root@VM_0_6_centos ~]# docker logs --tail 88 -f tomcat 
+```
+
+
+
+
+
+
 
 
 
