@@ -166,20 +166,8 @@ root@a31d0c5a5e89:/usr/local/tomcat#
 查看容器名称为tomcat的88条日志信息（从最后开始算起，倒推88条数据）
 
 ```java
-[root@VM_0_6_centos ~]# docker logs --tail 88 -f tomcat 
+[root@VM_0_6_centos ~]# docker logs --tail 88 -f tomcat
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### 镜像操作
 
