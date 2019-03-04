@@ -195,7 +195,6 @@ root@803a180e0562:/testcp/data# cd data/
 root@803a180e0562:/testcp/data/data# ls
 123.txt
 ### 容器最后带有”/“结果，是将主机的路径包含data复制到到容器data下
-
 ```
 
 总结一下以下区别
@@ -226,7 +225,21 @@ data
 ###它一样是将容器的文件夹，在宿主上创建一个，放在指定的宿主机路径下
 ```
 
+**docker export 系统文件作为一个tar归档文件**
 
+```java
+### 将镜像名称/镜像ID为tomcat导出为一个tomcat.tar文件
+[root@localhost testcp]# docker export -o tomcat.tar tomcat
+[root@localhost testcp]# ls
+tomcat.tar
+```
+
+**docker import  导入归档文件，成为一个镜像**
+
+```
+### 将tomcat.war 制作一个镜像
+
+```
 
 ### 镜像操作
 
