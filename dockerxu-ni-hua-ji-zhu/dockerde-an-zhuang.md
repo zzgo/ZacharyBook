@@ -45,8 +45,7 @@ $ sudo yum install docker  ## 安装的不是最新版本
 ```
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo 
-sudo yum install docker-ce 
-
+sudo yum install docker-ce
 ```
 
 ### 查看docker版本
@@ -178,7 +177,6 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
-
 ```
 
 

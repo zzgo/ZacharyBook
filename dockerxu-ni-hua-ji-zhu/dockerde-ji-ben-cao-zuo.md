@@ -169,6 +169,65 @@ root@a31d0c5a5e89:/usr/local/tomcat#
 [root@VM_0_6_centos ~]# docker logs --tail 88 -f tomcat
 ```
 
+**docker cp**
+
+将主机/testcp/data目录拷贝到容器803a180e0562:/testcp/data/下
+
+```java
+##宿主主机文件
+[root@localhost /]# cd testcp/data/
+[root@localhost data]# ls
+123.txt
+##拷贝到容器中，容器的路径必须是存在的
+root@803a180e0562:/# mkdir testcp
+root@803a180e0562:/# cd testcp/
+root@803a180e0562:/testcp# mkdir data
+root@803a180e0562:/testcp# ls
+data
+##进行拷贝
+[root@localhost data]# docker cp /testcp/data/ 803a180e0562:/testcp/data/ 
+##进入容器看一看结果，是否有123.txt文件
+[root@localhost data]# docker exec -it 803a180e0562 /bin/bash
+root@803a180e0562:/# cd testcp/data/
+root@803a180e0562:/testcp/data# ls
+data
+root@803a180e0562:/testcp/data# cd data/
+root@803a180e0562:/testcp/data/data# ls
+123.txt
+### 容器最后带有”/“结果，是将主机的路径包含data复制到到容器data下
+
+```
+
+总结一下以下区别
+
+```java
+1、 docker cp /testcp/data 803a180e0562:/testcp/data
+2、 docker cp /testcp/data 803a180e0562:/testcp/data/
+3、 docker cp /testcp/data/ 803a180e0562:/testcp/data
+4、 docker cp /testcp/data/ 803a180e0562:/testcp/data/
+这四种写法，在容器内的路径都会是这样的
+/testcp/data/data/123.txt
+会将文件data 放在 容器路径下
+5、docker cp /testcp/data/123.txt 803a180e0562:/testcp/data/
+/testcp/data/123.txt 直接将文件放在容器路径下
+```
+
+从容器内拷贝到宿主主机上
+
+```java
+[root@localhost /]# docker cp 803a180e0562:/testcp/data testdata/
+[root@localhost /]# cd testdata/
+[root@localhost testdata]# ls
+data
+[root@localhost testdata]# cd data/
+[root@localhost data]# ls
+123.txt
+
+###它一样是将容器的文件夹，在宿主上创建一个，放在指定的宿主机路径下
+```
+
+
+
 ### 镜像操作
 
 
