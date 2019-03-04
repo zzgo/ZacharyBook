@@ -58,14 +58,14 @@ tomcat
 
 **docker restart \[容器名称/容器ID\]**
 
-```
+```java
 [root@VM_0_6_centos ~]# docker restart tomcat 
 tomcat
 ```
 
 **docker kill \[容器名称/容器ID\]**
 
-```
+```java
 [root@VM_0_6_centos ~]# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 623122f311d4        tomcat:latest       "catalina.sh run"   5 hours ago         Up 5 hours          8080/tcp            tomcat
@@ -77,7 +77,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 **docker rm \[容器名称/容器ID\]**
 
-```
+```java
 [root@VM_0_6_centos ~]# docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                        PORTS               NAMES
 623122f311d4        tomcat:latest       "catalina.sh run"   6 hours ago         Exited (137) 58 seconds ago                       tomcat
