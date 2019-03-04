@@ -237,11 +237,15 @@ tomcat.tar
 **docker import  导入归档文件，成为一个镜像**
 
 ```
-### 将tomcat.war 制作一个镜像
-
+### 将tomcat.war 制作一个镜像 名称 my/tomcat:v2 版本v2
+[root@localhost testcp]# docker import tomcat.tar my/tomcat:v2
+sha256:25c509fe6cfdee8a1861168b9abcfd4ce3a8ca65aab9915af2addc9187c74cd5
+[root@localhost testcp]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+my/tomcat           v2                  25c509fe6cfd        43 seconds ago      453MB
+tomcat              latest              168588387c68        3 weeks ago         463MB
+### 说明我们的镜像导入成功
 ```
-
-### 镜像操作
 
 
 
