@@ -33,8 +33,44 @@ public class TestDao {
 public class TestService {
     @Autowired
     private TestDao testDao;
-    ....
+    
+    public void println() {
+        System.out.println("service testDao is " + testDao);
+    }
 }
+```
+
+**CapMainConfig.java 扫描指定包文件**
+
+```java
+@Configurable
+@ComponentScan({"com.zachary.springanno.cap10.dao", 
+                "com.zachary.springanno.cap10.service", 
+                "com.zachary.springanno.cap10.controller"})
+public class Cap10MainConfig {
+
+}
+```
+
+测试是否获取到同一个TestDao对象
+
+```
+ public static void main(String[] args) {
+        //加载配置类
+        AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(Cap10MainConfig.class);
+        TestService testService = anno.getBean(TestService.class);
+        testService.println();
+        TestDao testDao = anno.getBean(TestDao.class);
+        System.out.println("spring testDao bean  is " + testDao);
+        anno.close();
+    }
+```
+
+运行结果，表示为同一对象
+
+```java
+service testDao is com.zachary.springanno.cap10.dao.TestDao@16f7c8c1
+spring testDao bean  is com.zachary.springanno.cap10.dao.TestDao@16f7c8c1
 ```
 
 
