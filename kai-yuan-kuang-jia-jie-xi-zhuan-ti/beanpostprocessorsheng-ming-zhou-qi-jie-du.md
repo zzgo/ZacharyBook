@@ -139,20 +139,21 @@ wrappedBean = this.applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 跟进去看一下
 
 ```java
-	@Override
-	public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
-			throws BeansException {
+    @Override
+    public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
+            throws BeansException {
 
-		Object result = existingBean;
-		for (BeanPostProcessor beanProcessor : getBeanPostProcessors()) {
-			Object current = beanProcessor.postProcessBeforeInitialization(result, beanName);
-			if (current == null) {
-				return result;
-			}
-			result = current;
-		}
-		return result;
-	}
+        Object result = existingBean;
+        // 把们的spring所有的processor遍历，postProcessBeforeInitialization运行期执行才知道类的类型，交由具体类完成
+        for (BeanPostProcessor beanProcessor : getBeanPostProcessors()) {
+            Object current = beanProcessor.postProcessBeforeInitialization(result, beanName);
+            if (current == null) {
+                return result;
+            }
+            result = current;
+        }
+        return result;
+    }
 ```
 
 可以看到这里是
@@ -223,8 +224,4 @@ beanProcessor.postProcessBeforeInitialization(result, beanName); //处理器交�
 ApplicationContextAware bean 都是在这里进行set进入。其他类似原理
 
 所以实现了我们ApplicationContextAware 就能够获取到 我们的ApplicationContext对象
-
-
-
-
 
