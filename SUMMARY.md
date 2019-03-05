@@ -65,6 +65,7 @@
       * [Spring Bean的生命周期](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-beande-sheng-ming-zhou-qi.md)
       * [BeanPostProcessor生命周期解读](kai-yuan-kuang-jia-jie-xi-zhuan-ti/beanpostprocessorsheng-ming-zhou-qi-jie-du.md)
       * [Spring 其他类的源码分析](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-qi-ta-lei-de-yuan-ma-fen-xi.md)
+      * [Spring组件使用（注解）3](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-shi-yong-ff08-zhu-jie-ff09-3.md)
       * [常用注解区别](kai-yuan-kuang-jia-jie-xi-zhuan-ti/chang-yong-zhu-jie-qu-bie.md)
       * [Spring组件和AOP基本操作](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-he-aop-ji-ben-cao-zuo.md)
     * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
