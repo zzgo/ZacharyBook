@@ -13,10 +13,7 @@
 public class TestController {
     @Autowired
     private TestService testService;
-
-    public void println() {
-        System.out.println(testService);
-    }
+    ...
 }
 ```
 
@@ -35,7 +32,7 @@ public class TestDao {
 @Service
 public class TestService {
     @Autowired
-    private TestDao testDao2;
+    private TestDao testDao;
     ....
 }
 ```
