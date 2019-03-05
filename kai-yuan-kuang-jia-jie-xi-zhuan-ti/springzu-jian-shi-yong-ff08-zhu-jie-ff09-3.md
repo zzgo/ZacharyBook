@@ -6,7 +6,7 @@
 
 新建三个类，分别建立在指定的包内，可看步骤2，这些所有Java类的对象扫描后都是保存在IOC容器管理的
 
-**TestController.java**
+**TestController.java**
 
 ```java
 @Controller
@@ -20,7 +20,16 @@ public class TestController {
 }
 ```
 
-**TestDao.java**
+**TestDao.java**
+
+```java
+@Repository
+public class TestDao {
+
+}
+```
+
+**TestService.java**
 
 ```java
 @Service
@@ -30,16 +39,6 @@ public class TestService {
     ....
 }
 ```
-
-**TestService.java**
-
-```
-
-```
-
-
-
-
 
 
 
