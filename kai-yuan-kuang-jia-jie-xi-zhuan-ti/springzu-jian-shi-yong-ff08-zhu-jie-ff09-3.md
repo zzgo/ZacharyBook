@@ -33,7 +33,7 @@ public class TestDao {
 public class TestService {
     @Autowired
     private TestDao testDao;
-    
+
     public void println() {
         System.out.println("service testDao is " + testDao);
     }
