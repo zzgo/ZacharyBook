@@ -130,5 +130,101 @@ protected Object initializeBean(String beanName, Object bean, @Nullable RootBean
     }
 ```
 
+关注这里前置后置处理器
+
+```java
+wrappedBean = this.applyBeanPostProcessorsBeforeInitialization(bean, beanName);
+```
+
+跟进去看一下
+
+```java
+	@Override
+	public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
+			throws BeansException {
+
+		Object result = existingBean;
+		for (BeanPostProcessor beanProcessor : getBeanPostProcessors()) {
+			Object current = beanProcessor.postProcessBeforeInitialization(result, beanName);
+			if (current == null) {
+				return result;
+			}
+			result = current;
+		}
+		return result;
+	}
+```
+
+可以看到这里是
+
+```java
+BeanPostProcessor beanProcessor : getBeanPostProcessors()
+去遍历beanPostProcessors，所有后置处理器都将会去实现 public interface BeanPostProcessor
+beanProcessor.postProcessBeforeInitialization(result, beanName); //处理器交由实际的BeanPostPocessor处理
+```
+
+看一下这个ApplicationContextAwareProcessor 类
+
+```java
+     @Nullable
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        AccessControlContext acc = null;
+        if (System.getSecurityManager() != null && (
+            bean instanceof EnvironmentAware || 
+            bean instanceof EmbeddedValueResolverAware || 
+            bean instanceof ResourceLoaderAware || 
+            bean instanceof ApplicationEventPublisherAware || 
+            bean instanceof MessageSourceAware || 
+            bean instanceof ApplicationContextAware)) {
+            acc = this.applicationContext.getBeanFactory().getAccessControlContext();
+        }
+
+        if (acc != null) {
+            AccessController.doPrivileged(() -> {
+                this.invokeAwareInterfaces(bean);
+                return null;
+            }, acc);
+        } else {
+            this.invokeAwareInterfaces(bean);
+        }
+
+        return bean;
+    }
+    private void invokeAwareInterfaces(Object bean) {
+        if (bean instanceof Aware) {
+            if (bean instanceof EnvironmentAware) {
+                ((EnvironmentAware)bean).setEnvironment(this.applicationContext.getEnvironment());
+            }
+
+            if (bean instanceof EmbeddedValueResolverAware) {
+                ((EmbeddedValueResolverAware)bean).setEmbeddedValueResolver(this.embeddedValueResolver);
+            }
+
+            if (bean instanceof ResourceLoaderAware) {
+                ((ResourceLoaderAware)bean).setResourceLoader(this.applicationContext);
+            }
+
+            if (bean instanceof ApplicationEventPublisherAware) {
+                ((ApplicationEventPublisherAware)bean).setApplicationEventPublisher(this.applicationContext);
+            }
+
+            if (bean instanceof MessageSourceAware) {
+                ((MessageSourceAware)bean).setMessageSource(this.applicationContext);
+            }
+
+            if (bean instanceof ApplicationContextAware) {
+                ((ApplicationContextAware)bean).setApplicationContext(this.applicationContext);
+            }
+        }
+
+    }
+```
+
+ApplicationContextAware bean 都是在这里进行set进入。其他类似原理
+
+所以实现了我们ApplicationContextAware 就能够获取到 我们的ApplicationContext对象
+
+
+
 
 
