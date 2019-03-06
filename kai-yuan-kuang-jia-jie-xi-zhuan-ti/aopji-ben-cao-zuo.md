@@ -357,8 +357,14 @@ public class Cap12MainTest {
 
 运行结果
 
-```
-
+```java
+===========Spring ioc 容器管理方式===============
+@Around：执行目标方法之前...
+div，除法运行......参数列表是:{[Ljava.lang.Object;@2925bf5b}
+----div方法内开始执行----
+div，除法结束.....
+除法异常......异常信息是:{java.lang.ArithmeticException: / by zero}
+Exception in thread "main" java.lang.ArithmeticException: / by zero
 ```
 
 
