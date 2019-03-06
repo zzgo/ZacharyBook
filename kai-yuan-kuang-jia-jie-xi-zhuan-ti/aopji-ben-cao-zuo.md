@@ -326,8 +326,11 @@ div，除法结束.....
 
 那么如果是异常呢？定义
 
-```
-
+```java
+@AfterThrowing(value = "pointCut()", throwing = "exception")
+public void logException(Exception exception) {
+   System.out.println("除法异常......异常信息是:{" + exception + "}");
+}
 ```
 
 
