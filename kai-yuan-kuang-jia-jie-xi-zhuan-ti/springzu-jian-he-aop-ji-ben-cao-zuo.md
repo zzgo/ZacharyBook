@@ -167,7 +167,8 @@ implements ApplicationContextAware, BeanNameAware, EmbeddedValueResolverAware
 
 **实现 BeanNameAware获取设置bean name**
 
-**实现 EmbeddedValueResolverAware 解析器\(表达式及相关脚本解析\)**
+**实现 EmbeddedValueResolverAware 解析器\(表达式及相关脚本解析\)  
+**
 
 运行：
 
