@@ -367,5 +367,15 @@ div，除法结束.....
 Exception in thread "main" java.lang.ArithmeticException: / by zero
 ```
 
+### 总结：
+
+AOP看起来很麻烦，只要3步就可以了
+
+将业务逻辑组件和切面类都加入到容器中，告诉spring那个是切面类，@Aspect
+
+在切面类上的每个通知方法上标注通知注解，告诉Spring何时运行（写好切入点表达式，参照官方文档）
+
+开启基于注解的AOP模式，@EableXXX
+
 
 
