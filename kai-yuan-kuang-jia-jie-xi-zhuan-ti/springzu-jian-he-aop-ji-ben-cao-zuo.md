@@ -22,20 +22,20 @@
 
 ```java
 @Target(
-	{ElementType.CONSTRUCTOR, 
-	ElementType.METHOD, 
-	ElementType.PARAMETER, 
-	ElementType.FIELD,
-	 ElementType.ANNOTATION_TYPE})
+    {ElementType.CONSTRUCTOR, 
+    ElementType.METHOD, 
+    ElementType.PARAMETER, 
+    ElementType.FIELD,
+     ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Autowired {
 
-	/**
-	 * Declares whether the annotated dependency is required.
-	 * <p>Defaults to {@code true}.
-	 */
-	boolean required() default true;
+    /**
+     * Declares whether the annotated dependency is required.
+     * <p>Defaults to {@code true}.
+     */
+    boolean required() default true;
 
 }
 ```
@@ -44,12 +44,11 @@ public @interface Autowired {
 
 ```
 @Target(
-	{ElementType.CONSTRUCTOR,  //注解位置 构造方法上
-	ElementType.METHOD,        //方法上
-	ElementType.PARAMETER,     //参数上
-	ElementType.FIELD,         //字段上
-	ElementType.ANNOTATION_TYPE})
-
+    {ElementType.CONSTRUCTOR,  //注解位置 构造方法上
+    ElementType.METHOD,        //方法上
+    ElementType.PARAMETER,     //参数上
+    ElementType.FIELD,         //字段上
+    ElementType.ANNOTATION_TYPE})
 ```
 
 **Sun.java**
@@ -77,6 +76,14 @@ public class Sun {
     public void setMoon(Moon moon) {
         this.moon = moon;
     }
+}
+```
+
+**注意下这个**
+
+```java
+public Sun(@Autowired Moon moon) { //参数上，是构造参数上，并且只能只有这个构造方法，不能有无参构造，否则就会出现问题
+        this.moon = moon;
 }
 ```
 
