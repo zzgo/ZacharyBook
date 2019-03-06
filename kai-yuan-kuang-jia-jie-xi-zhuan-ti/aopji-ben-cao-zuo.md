@@ -25,11 +25,11 @@ AOP：面向切面编程，底层就是动态代理
 
 ```java
 public class Calculator {
-	//业务逻辑方法
-	public int div(int i, int j){
-		System.out.println("----div方法内开始执行----");
-		return i/j;
-	}
+    //业务逻辑方法
+    public int div(int i, int j){
+        System.out.println("----div方法内开始执行----");
+        return i/j;
+    }
 }
 ```
 
@@ -242,6 +242,46 @@ public class Cap12MainTest {
 ```
 
 AOP的操作，当然这里还没有完，**在AOP切面 编程的中，我们可以获取许多东西，比如ProceedingJoinPoint 参数**
+
+使用JoinPoint可以拿到相关内容，比如方法名...参数等
+
+```java
+@Aspect
+public class LogAspects {
+    @Pointcut("execution(public int com.zachary.springanno.cap12.aop.Calculator.*(..))")
+    public void pointCut() {
+
+    }
+    // *(..) 不区分是哪一个方法*，任意对个参数及类型加 ".."
+    @Before("pointCut()")
+    public void logStart(JoinPoint joinPoint) {
+        System.out.println(joinPoint.getSignature().getName() + "，除法运行......参数列表是:{" + joinPoint.getArgs() + "}");
+    }
+
+    @After("com.zachary.springanno.cap12.aop.LogAspects.pointCut()")
+    public void logEnd(JoinPoint joinPoint) {
+        System.out.println(joinPoint.getSignature().getName() + "，除法结束.....");
+    }
+
+    @AfterReturning("pointCut()")
+    public void logReturn() {
+        System.out.println("除法正常返回.....运行结果是：{}");
+    }
+
+    @AfterThrowing("pointCut()")
+    public void logException() {
+        System.out.println("除法异常......异常信息是:{}");
+    }
+
+    @Around("pointCut()")
+    public Object Around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("@Around：执行目标方法之前...");
+        Object obj = proceedingJoinPoint.proceed();
+        System.out.println("@Around：执行目标方法之后...");
+        return obj;
+    }
+}
+```
 
 
 
