@@ -2,9 +2,7 @@
 
 ![](/assets/78327hfhasjj.png)
 
-
-
-@Autowired @Service @Iject
+@Autowired @Resource @Iject
 
 **总结：**
 
