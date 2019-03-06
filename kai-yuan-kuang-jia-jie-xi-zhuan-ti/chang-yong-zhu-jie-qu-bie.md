@@ -1,6 +1,6 @@
 ### @AutoWired
 
-支持根据id去找寻，支持required=false
+支持根据id去找寻，支持required=false，spring规范
 
 ### @Resource
 
@@ -17,6 +17,4 @@
 ### @Qualifier
 
 支持按名称查询，name=“”
-
-
 
