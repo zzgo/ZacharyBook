@@ -103,13 +103,13 @@ public class Plane implements ApplicationContextAware {
 
     private ApplicationContext applicationContext
     public Plane() {}
-    
+
     @PostConstruct
     public void init() {}
-    
+
     @PreDestroy
     public void destroy() {}
-    
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
@@ -161,13 +161,13 @@ public class Light implements ApplicationContextAware, BeanNameAware, EmbeddedVa
 }
 ```
 
-implements ApplicationContextAware, BeanNameAware, EmbeddedValueResolverAware 
+implements ApplicationContextAware, BeanNameAware, EmbeddedValueResolverAware
 
 **实现 ApplicationContextAware获取Application环境上下文**
 
 **实现 BeanNameAware获取设置bean name**
 
-**实现 EmbeddedValueResolverAware 实现解析**
+**实现 EmbeddedValueResolverAware 解析器\(表达式及相关脚本解析\)**
 
 运行：
 
@@ -195,25 +195,25 @@ ApplicationContextAware--&gt;ApplicationContextProcessor后置处理器来处理
 
 ```java
 if (bean instanceof Aware) {
-	if (bean instanceof EnvironmentAware) {
-		((EnvironmentAware) bean).setEnvironment(this.applicationContext.getEnvironment());
-	}
-	if (bean instanceof EmbeddedValueResolverAware) {
-		((EmbeddedValueResolverAware) bean).setEmbeddedValueResolver(this.embeddedValueResolver);
-	}
-	if (bean instanceof ResourceLoaderAware) {
-		((ResourceLoaderAware) bean).setResourceLoader(this.applicationContext);
-	}
-	if (bean instanceof ApplicationEventPublisherAware) {
-		((ApplicationEventPublisherAware) bean).setApplicationEventPublisher(this.applicationContext);
-	}
-	if (bean instanceof MessageSourceAware) {
-		((MessageSourceAware) bean).setMessageSource(this.applicationContext);
-	}
-	//在这里注入
-	if (bean instanceof ApplicationContextAware) {
-		((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
-	}
+    if (bean instanceof EnvironmentAware) {
+        ((EnvironmentAware) bean).setEnvironment(this.applicationContext.getEnvironment());
+    }
+    if (bean instanceof EmbeddedValueResolverAware) {
+        ((EmbeddedValueResolverAware) bean).setEmbeddedValueResolver(this.embeddedValueResolver);
+    }
+    if (bean instanceof ResourceLoaderAware) {
+        ((ResourceLoaderAware) bean).setResourceLoader(this.applicationContext);
+    }
+    if (bean instanceof ApplicationEventPublisherAware) {
+        ((ApplicationEventPublisherAware) bean).setApplicationEventPublisher(this.applicationContext);
+    }
+    if (bean instanceof MessageSourceAware) {
+        ((MessageSourceAware) bean).setMessageSource(this.applicationContext);
+    }
+    //在这里注入
+    if (bean instanceof ApplicationContextAware) {
+        ((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
+    }
 }
 ```
 
