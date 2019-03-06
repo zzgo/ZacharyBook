@@ -333,5 +333,33 @@ public void logException(Exception exception) {
 }
 ```
 
+测试类：
+
+```java
+public class Cap12MainTest {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(Cap12MainConfig.class);
+        //System.out.println("===========普通自己New方式===============");
+        // 普通自己New方式
+        //Calculator c1 = new Calculator();
+        //int result1 = c1.div(1, 0);
+        //System.out.println(result1);
+        System.out.println("===========Spring ioc 容器管理方式===============");
+        //Spring ioc 容器管理方式
+        Calculator c2 = app.getBean(Calculator.class);
+        int result2 = c2.div(1, 0);
+        System.out.println(result2);
+        app.close();
+
+    }
+}
+```
+
+运行结果
+
+```
+
+```
+
 
 
