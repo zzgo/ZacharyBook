@@ -14,11 +14,11 @@ AOP原理：看给容器中注册了什么组件，这个组件什么时候工�
 @Documented
 @Import(AspectJAutoProxyRegistrar.class) //导入了此类，跟进去看看
 public @interface EnableAspectJAutoProxy {
-	//proxytargetClass属性，默认false，采用JDK动态代理织入增强（实现接口的方式）
-	//如果设置为true，则采用CGLIB动态代理织入增强
-	boolean proxyTargetClass() default false;
-	//通过aop框架暴露该代理对象，aopContext能够访问
-	boolean exposeProxy() default false;
+    //proxytargetClass属性，默认false，采用JDK动态代理织入增强（实现接口的方式）
+    //如果设置为true，则采用CGLIB动态代理织入增强
+    boolean proxyTargetClass() default false;
+    //通过aop框架暴露该代理对象，aopContext能够访问
+    boolean exposeProxy() default false;
 }
 ```
 
@@ -27,23 +27,23 @@ public @interface EnableAspectJAutoProxy {
 ```java
 class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 
-	@Override
-	public void registerBeanDefinitions(
-			AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+    @Override
+    public void registerBeanDefinitions(
+            AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
-		AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry);
+        AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry);
 
-		AnnotationAttributes enableAspectJAutoProxy =
-				AnnotationConfigUtils.attributesFor(importingClassMetadata, EnableAspectJAutoProxy.class);
-		if (enableAspectJAutoProxy != null) {
-			if (enableAspectJAutoProxy.getBoolean("proxyTargetClass")) {
-				AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
-			}
-			if (enableAspectJAutoProxy.getBoolean("exposeProxy")) {
-				AopConfigUtils.forceAutoProxyCreatorToExposeProxy(registry);
-			}
-		}
-	}
+        AnnotationAttributes enableAspectJAutoProxy =
+                AnnotationConfigUtils.attributesFor(importingClassMetadata, EnableAspectJAutoProxy.class);
+        if (enableAspectJAutoProxy != null) {
+            if (enableAspectJAutoProxy.getBoolean("proxyTargetClass")) {
+                AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
+            }
+            if (enableAspectJAutoProxy.getBoolean("exposeProxy")) {
+                AopConfigUtils.forceAutoProxyCreatorToExposeProxy(registry);
+            }
+        }
+    }
 
 }
 ```
@@ -54,7 +54,7 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 public class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
     //    AnnotationMetadata:当前类的注解信息
-//	BeanDefinitionRegistry:BeanDefinition注册类
+//    BeanDefinitionRegistry:BeanDefinition注册类
 //    把所有需要的添加到容器中的bean
 //    调用BeanDefinitionRegistry.registerBeanDefinition自定义手工注册进来
     @Override
@@ -83,10 +83,6 @@ public class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinition
 在 **AspectJAutoProxyRegistrar **里可以自定义注册一些bean
 
 那么注册了什么bean呢？以debug模式进行测试一下
-
-
-
-
 
 
 
