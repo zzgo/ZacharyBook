@@ -116,6 +116,10 @@
         * [linux下mysql命名大全](chapter1/gao-ke-kao-shu-ju-cun-chu/mysqlgao-xing-neng-cun-chu/linuxxia-mysql-ming-ming-da-quan.md)
     * [异步与消息中间件](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian.md)
       * [Kafka](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian/kafka.md)
+    * [搜索引擎](chapter1/sou-suo-yin-qing.md)
+      * [Elasticsearch](chapter1/elasticsearch.md)
+        * [入门](chapter1/elasticsearch/ru-men.md)
+        * 安装
   * [微服务架构专题](wei-fu-wu-jia-gou-zhuan-ti.md)
     * [Docker虚拟化技术](dockerxu-ni-hua-ji-zhu.md)
       * [Docker背景](dockerxu-ni-hua-ji-zhu/dockerjian-dan-jie-shao.md)
