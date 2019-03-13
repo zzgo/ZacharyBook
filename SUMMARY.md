@@ -119,7 +119,7 @@
     * [搜索引擎](chapter1/sou-suo-yin-qing.md)
       * [Elasticsearch](chapter1/elasticsearch.md)
         * [入门](chapter1/elasticsearch/ru-men.md)
-        * 安装
+        * [安装](chapter1/elasticsearch/an-zhuang.md)
   * [微服务架构专题](wei-fu-wu-jia-gou-zhuan-ti.md)
     * [Docker虚拟化技术](dockerxu-ni-hua-ji-zhu.md)
       * [Docker背景](dockerxu-ni-hua-ji-zhu/dockerjian-dan-jie-shao.md)
