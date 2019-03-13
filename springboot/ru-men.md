@@ -6,5 +6,19 @@
 
 ### 第一个简单的SpringBoot项目
 
+**pom.xml导入springboot依赖**
+
+```java
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.2.RELEASE</version>
+</parent>
+```
+
 
 
