@@ -20,5 +20,5 @@
 }
 ```
 
-
+** curl -XPOST 'http://localhost:9200/shutdown' 关闭服务API命令**_ _~~_,_\_shutdown已被移除~~
 
