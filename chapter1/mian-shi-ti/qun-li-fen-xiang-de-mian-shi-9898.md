@@ -56,5 +56,25 @@ CREATE TABLE secondinfo(
 )
 ```
 
+下面的SQL执行速度比较慢，请分析原因并做优化
 
+1）SELECT \* FROM customer WHERE substring\(custname,1,6\)='beijin'
+
+2）SELECT \* FROM customer WHERE money/30 &lt; 1000
+
+3）SELECT \* FROM customer WHERE custname=3721
+
+4）SELECT \* FROM customer WHERE custname &lt;&gt; 'like'
+
+5） SELECT \* FROM secondinfo s WHERE s.custid NOT IN\(SELECT c.custid FROM customer c\)
+
+6）
+
+select \* from customer where money&lt;1000
+
+union
+
+select \* from customer where date &gt; '20180101'
+
+7）select \* from customer where money &gt; 1000
 
