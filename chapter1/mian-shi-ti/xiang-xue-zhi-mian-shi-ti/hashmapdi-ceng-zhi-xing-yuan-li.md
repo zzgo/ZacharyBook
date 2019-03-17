@@ -14,7 +14,7 @@
 
 #### hash算法
 
-所有对象都有hashCode\(使用key计算hash值\)
+所有对象都有hashCode\(使用key计算hash值\)，可以看看（同学面试题目总结-为什么要有hashcode方法？）
 
 hash值的计算
 
