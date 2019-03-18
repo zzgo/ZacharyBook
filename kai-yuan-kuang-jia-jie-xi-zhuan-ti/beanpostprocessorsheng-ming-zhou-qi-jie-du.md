@@ -118,11 +118,11 @@ protected Object initializeBean(String beanName, Object bean, @Nullable RootBean
             //声明的init方法
             this.invokeInitMethods(beanName, wrappedBean, mbd);
         } catch (Throwable var6) {
-            //拦截器后置
             throw new BeanCreationException(mbd != null ? mbd.getResourceDescription() : null, beanName, "Invocation of init method failed", var6);
         }
 
         if (mbd == null || !mbd.isSynthetic()) {
+            //拦截器后置
             wrappedBean = this.applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
         }
 
