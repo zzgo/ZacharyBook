@@ -45,5 +45,22 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 fc7165552f7f        tomcat:latest       "catalina.sh run"   4 seconds ago       Up 2 seconds        0.0.0.0:8082->8080/tcp   tomcat
 ```
 
+### 挂载主机文件到目录容器内
+
+使用 **-v 主机文件:容器内部文件**
+
+```java
+[root@VM_0_6_centos ~]# docker run -it -v /root/1.txt:/usr/local/tomcat/1.txt --name tomcat tomcat:latest /bin/bash
+root@003d58362571:/usr/local/tomcat# ls
+1.txt	      CONTRIBUTING.md  NOTICE	  RELEASE-NOTES  bin   include	logs		temp	 work
+BUILDING.txt  LICENSE	       README.md  RUNNING.txt	 conf  lib	native-jni-lib	webapps
+root@003d58362571:/usr/local/tomcat# cat 1.txt 
+123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123
+```
+
+### 复制主机文件到容器内
+
+
+
 
 
