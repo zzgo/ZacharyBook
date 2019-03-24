@@ -136,6 +136,8 @@ a31d0c5a5e89        tomcat:latest       "catalina.sh run"   21 hours ago        
 ]
 ```
 
+注意：**inspect **该命令可以查看到docker容器的配置属性，以及**一些挂载的文件**
+
 **doccker exec 进入容器环境中交互操作**
 
 ```java
