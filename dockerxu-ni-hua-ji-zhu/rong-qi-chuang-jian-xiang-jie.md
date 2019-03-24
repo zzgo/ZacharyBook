@@ -22,5 +22,28 @@ root@821e200f85e9:/usr/local/tomcat#
 
 返回的这一串，也就是容器的ID，前12位表示容器ID.
 
+### 进入已运行的容器
+
+使用**exec**命令：docker exec -it tomcat /bin/bash
+
+查看元数据：docker **inspect **tomcat
+
+```java
+[root@VM_0_6_centos /]# docker exec -it tomcat /bin/bash
+root@2085009a9b28:/usr/local/tomcat#
+```
+
+### 绑定容器端口到主机
+
+-p port1:port2 -&gt; 将port2映射到port1上，外界就是访问port1端口
+
+```java
+[root@VM_0_6_centos /]# docker run -dit -p 8082:8080  --name tomcat tomcat:latest 
+fc7165552f7f2541fceb01b8f749297b77caf4dd85c106899077ba8c64695137
+[root@VM_0_6_centos /]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+fc7165552f7f        tomcat:latest       "catalina.sh run"   4 seconds ago       Up 2 seconds        0.0.0.0:8082->8080/tcp   tomcat
+```
+
 
 
