@@ -135,6 +135,7 @@
       * [介绍](springboot/jie-shao.md)
       * [入门](springboot/ru-men.md)
       * [快速入门](springboot/kuai-su-ru-men.md)
+      * [SpringBoot登录注册演示](springboot/springbootdeng-lu-zhu-ce-yan-shi.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
