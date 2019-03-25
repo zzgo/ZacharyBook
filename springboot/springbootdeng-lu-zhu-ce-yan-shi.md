@@ -68,5 +68,18 @@ pom文件加入：
 </dependency>
 ```
 
+在application.properties加入
 
+```java
+spring.datasource.driverClassName=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/quickstart?serverTimezone=GMT%2B8
+spring.datasource.username=root
+spring.datasource.password=zhangqi
+
+mybatis.mapperLocations=classpath:mapping/*.xml
+```
+
+这里采用自动生成代码
+
+准备mybatis的生成文件generatorConfig.xml，并在相应目录创建好model,dao,mapping文件夹
 
