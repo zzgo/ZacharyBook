@@ -72,7 +72,7 @@ SpringBoot不需要使用任何特殊的代码结构，然而，这里有一些�
 
 通常建议你将main应用类放在位于其他类上面的根包（root package）中。通常使用@EnableAutoConfiguration注解你的main类，并且暗地里为某些项定义了一个基础“search package”。例如，如果你正在编写一个JPA应用，被@EnableAutoConfiguration注解的类所在包将被用来搜索@Entity项。
 
-使用根包允许你使用@ComponentScan注解而不需要定义一个basePackage属性。如果main类位于根包中，你也可以使用@SpringBootApplication注解。
+使用根包允许你使用@ComponentScan注解而不需要定义一个basePackage属性。如果main类位于根包中，你也可以使用@**SpringBootApplication**注解。
 
 ```java
 cn
