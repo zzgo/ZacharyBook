@@ -24,7 +24,7 @@ login：登陆仓库
 
 ##### tag 命令标记一个镜像
 
-docker tag 镜像名称\|镜像ID 自己的镜像名称
+docker tag 镜像名称\|镜像ID:版本 自己的镜像名称:版本
 
 ```java
 [root@VM_0_6_centos ~]# docker images
@@ -39,5 +39,35 @@ my/tomcat           latest              168588387c68        6 weeks ago         
 hello-world         latest              fce289e99eb9        2 months ago        1.84kB
 ```
 
-注意：这里的自己的镜像名称，默认使用的docker的镜像话，它会自动将前面的http:/hub.docker.com补全，如果是自己的仓库的，需要这里这个名称加上去链接。比如 http:/localhost/your/imagesname
+注意：这里的自己的镜像名称，默认使用的docker的镜像话，它会自动将前面的http:/docker.io补全，如果是自己的仓库的，需要这里这个名称加上去链接。比如 http:/localhost/your/imagesname
+
+##### push命令推送镜像到仓库
+
+docker push 镜像名称：版本
+
+### 私有仓库
+
+#### 搭建
+
+下载registry镜像：**docker pull registry**
+
+配置加速器加速下载
+
+vi /etc/docker/daemon.json
+
+```java
+{
+    "registry-mirrors": ["https://9cpn8tt6.mirror.aliyuncs.com"]
+}
+```
+
+修改一下：
+
+```java
+{
+    "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
+
 
