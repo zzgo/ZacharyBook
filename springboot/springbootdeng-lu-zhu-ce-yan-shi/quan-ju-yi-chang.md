@@ -4,7 +4,7 @@
 
 ### 异常捕获
 
-#### @ControllerAdvice 注解
+#### @ControllerAdvice 注解，@ExceptionHandler注解
 
 创建一个GlobalExceptionHandler.java
 
