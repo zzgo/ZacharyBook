@@ -199,5 +199,25 @@ pom加入测试包
 </dependency>
 ```
 
+编写测试类
+
+```java
+@SpringBootTest(classes = {App.class})
+@RunWith(SpringRunner.class)
+public class UsersMapperTest {
+    @Autowired
+    private UsersMapper usersMapper;
+
+    @Test
+    public void findByUsernameAndPasswd() throws Exception {
+        Users users = usersMapper.findByUsernameAndPasswd("admin", "admin");
+        System.out.println(users.getId());
+        System.out.println(users.getUsername());
+        System.out.println(users.getPasswd());
+    }
+
+}
+```
+
 
 
