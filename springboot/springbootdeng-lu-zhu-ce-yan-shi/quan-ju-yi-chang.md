@@ -47,7 +47,7 @@ public class BaseController {
     //这个路径与全局遗产配置的404.do一致
     @RequestMapping("/404.do")
     public Object error_404() {
-        return "你要找的页面，被lison偷吃了！";
+        return "你要找的页面，被偷吃了！";
     }
 
 }
