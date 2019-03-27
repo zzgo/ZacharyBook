@@ -223,7 +223,73 @@ public class UsersMapperTest {
 
 #### 新建Service层
 
+UsersService.java
 
+```java
+public interface UsersService {
+    boolean login(String username, String passwd);
+
+    boolean register(String username, String passwd);
+}
+```
+
+UsersServiceImpl.java
+
+```java
+@Service
+public class UsersServiceImpl implements UsersService {
+    @Autowired
+    private UsersMapper usersMapper;
+
+    @Override
+    public boolean login(String username, String passwd) {
+        Users users = usersMapper.findByUsernameAndPasswd(username, passwd);
+        return username != null;
+    }
+
+    @Override
+    public boolean register(String username, String passwd) {
+        Users users = new Users();
+        users.setUsername(username);
+        users.setPasswd(passwd);
+        int count = usersMapper.insertSelective(users);
+        return count > 0
+    }
+}
+```
+
+UsersController.java
+
+```java
+@RestController
+@RequestMapping("/users")
+public class UsersController {
+    @Autowired
+    private UsersService usersService;
+
+    @RequestMapping("login")
+    public boolean login(String username, String passwd) {
+        return usersService.login(username, passwd);
+    }
+
+    @RequestMapping("register")
+    public boolean register(String username, String passwd) {
+        return usersService.register(username, passwd);
+    }
+}
+```
+
+application.properties，部分配置
+
+```java
+#端口
+server.port=80 
+#访问带上，如localhost/root/
+#server.servlet.context-path= /root
+#SpringMvc 配置访问路径
+#spring.mvc.view.prefix=/WEB-INF/jsp/
+#spring.mvc.view.suffix=.jsp
+```
 
 
 
