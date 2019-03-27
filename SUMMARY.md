@@ -138,6 +138,7 @@
       * [SpringBoot登录注册演示](springboot/springbootdeng-lu-zhu-ce-yan-shi.md)
         * [登录](springboot/springbootdeng-lu-zhu-ce-yan-shi/deng-lu.md)
         * [事务](springboot/springbootdeng-lu-zhu-ce-yan-shi/shi-wu.md)
+        * [全局异常](springboot/springbootdeng-lu-zhu-ce-yan-shi/quan-ju-yi-chang.md)
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
