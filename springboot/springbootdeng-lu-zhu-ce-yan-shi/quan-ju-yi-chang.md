@@ -6,7 +6,20 @@
 
 #### @ControllerAdvice 注解
 
+创建一个GlobalExceptionHandler.java
 
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    //RuntimeException异常捕获
+    @ExceptionHandler(value = RuntimeException.class)
+    @ResponseBody
+    public Object defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+        e.printStackTrace();
+        return "我是个异常处理类";
+    }
+}
+```
 
 
 
