@@ -35,5 +35,7 @@ public boolean batchAdd() {
 
 SpringBoot怎么添加事务呢？
 
+在batchAdd上加入注解@Transactional即可
+
 
 
