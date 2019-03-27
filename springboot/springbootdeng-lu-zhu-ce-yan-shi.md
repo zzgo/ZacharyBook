@@ -156,5 +156,36 @@ generatorconfig.xml文件，存放在resources目录下，注释已经很详细�
 
 完成！！！
 
+#### 在App.java启动类加上@MapperScan\("包名"\)
+
+```java
+@SpringBootApplication
+@MapperScan("com.zachary.springboot.helloworld.dao")
+public class App {
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
+}
+```
+
+#### UsersMapper.java新增登录方法
+
+```java
+ Users findByUsernameAndPasswd(@Param("username") String username, @Param("passwd") String passwd);
+```
+
+对应的UsersMapper.xml
+
+```java
+<select id="findByUsernameAndPasswd" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tab_user
+    WHERE
+    username=#{username,jdbcType=VARCHAR} and passwd=#{passwd,jdbcType=VARCHAR}
+    LIMIT 1
+</select>
+```
+
 
 
