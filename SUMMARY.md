@@ -136,6 +136,8 @@
       * [入门](springboot/ru-men.md)
       * [快速入门](springboot/kuai-su-ru-men.md)
       * [SpringBoot登录注册演示](springboot/springbootdeng-lu-zhu-ce-yan-shi.md)
+        * [登录](springboot/springbootdeng-lu-zhu-ce-yan-shi/deng-lu.md)
+        * 事务
   * [Demo](demo.md)
     * [秒杀](miao-sha.md)
   * [面试题](chapter1/mian-shi-ti.md)
