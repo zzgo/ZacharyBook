@@ -44,3 +44,5 @@ public boolean batchAdd()
 
 问题得到解决，数据库进行了回滚。
 
+
+
