@@ -37,5 +37,10 @@ SpringBoot怎么添加事务呢？
 
 在batchAdd上加入注解@Transactional即可
 
+```java
+@Transactional
+public boolean batchAdd()
+```
 
+问题得到解决，数据库进行了回滚。
 
