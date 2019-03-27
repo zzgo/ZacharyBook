@@ -219,5 +219,7 @@ public class UsersMapperTest {
 }
 ```
 
+**注意测试时，junit 4.12 及 更高版本**
+
 
 
