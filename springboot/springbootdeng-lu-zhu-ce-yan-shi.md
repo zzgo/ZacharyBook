@@ -291,5 +291,13 @@ server.port=80
 #spring.mvc.view.suffix=.jsp
 ```
 
+测试路径
+
+http://localhost/users/register?username=zhangsan&passwd=zhangsan
+
+http://localhost/users/login?username=zhangsan&passwd=zhangsan
+
+返回true。
+
 
 
