@@ -1,6 +1,4 @@
-```
 全局异常
-```
 
 界面上出现这500，404等错误，这对用户来说还是不友好。一般在企业里面对这些异常一般都会统一捕获，由一个专门的异常处理类来统一处理。
 
@@ -34,6 +32,7 @@ public class GlobalExceptionHandler {
 public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
     //lambdas表达式
     return (factory -> {
+        //path = 404.do 对应BaseController一个请求
         ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.do");
         factory.addErrorPages(error404Page);
     });
@@ -41,6 +40,10 @@ public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactory
 ```
 
 新增BaseController.java
+
+```java
+
+```
 
 
 
