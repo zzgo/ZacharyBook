@@ -79,6 +79,10 @@ spring.datasource.password=zhangqi
 mybatis.mapperLocations=classpath:mapping/*.xml
 ```
 
+##### 【注意】：一个细节 spring.datasource.url=jdbc:mysql://127.0.0.1:3306/quickstart?serverTimezone=GMT%2B8
+
+##### 需要带上serverTimezone，否则可能会报错
+
 这里采用自动生成代码
 
 准备mybatis的生成文件generatorConfig.xml，并在相应目录创建好model,dao,mapping文件夹
