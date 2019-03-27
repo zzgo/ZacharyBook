@@ -29,7 +29,11 @@ public boolean batchAdd() {
 
 结果：
 
+![](/assets/dhdf8991sss.png)
 
+数据库出现了这条记录。所以尽管出现异常但是还没有回滚。
+
+SpringBoot怎么添加事务呢？
 
 
 
