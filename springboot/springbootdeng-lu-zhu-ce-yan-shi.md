@@ -187,5 +187,17 @@ public class App {
 </select>
 ```
 
+#### 单元测试
+
+pom加入测试包
+
+```java
+<!--单元测试-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+</dependency>
+```
+
 
 
