@@ -21,5 +21,9 @@ public class GlobalExceptionHandler {
 }
 ```
 
+### 404页面处理
+
+
+
 
 
