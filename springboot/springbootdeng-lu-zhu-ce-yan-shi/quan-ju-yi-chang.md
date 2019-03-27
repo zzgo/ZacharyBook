@@ -25,5 +25,7 @@ public class GlobalExceptionHandler {
 
 在浏览器上故意输错地址：localhost/batchAddx?username=enjoy&passwd=123，后端并没有这服务，虽然已经做了相关的异常捕获，但浏览器还是显示了；这个时候就要做404（其他异常代码一样）；在配置这样错误页面的时候，以前是在WEB.XML中进行配置，而在这里，需要有个WebServerFactoryCustomizer的实例进行配置。
 
+在 GlobalExceptionHandler.java 新增方法
+
 
 
