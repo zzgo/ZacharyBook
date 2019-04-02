@@ -22,6 +22,22 @@ pull \[镜像名：版本\]： 下载镜像到本地
 
 login：登陆仓库
 
+##### login登录dockerhub
+
+```java
+[root@localhost ~]# docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: zachary123
+Password: 
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+```
+
+##### 
+
 ##### tag 命令标记一个镜像
 
 docker tag 镜像名称\|镜像ID:版本 自己的镜像名称:版本
@@ -45,6 +61,18 @@ hello-world         latest              fce289e99eb9        2 months ago        
 
 docker push 镜像名称：版本
 
+```java
+[root@localhost ~]# docker push zachary123/hello:2.0 
+The push refers to repository [docker.io/zachary123/hello]
+af0b15c8625b: Pushing [==================================================>]  3.584kB
+af0b15c8625b: Pushed 
+2.0: digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a size: 524
+```
+
+![](/assets/1223fdsfds.png)
+
+
+
 ### 私有仓库
 
 #### 搭建
@@ -67,6 +95,59 @@ vi /etc/docker/daemon.json
 {
     "registry-mirrors": ["https://registry.docker-cn.com"]
 }
+```
+
+拉取镜像
+
+##### docker pull registry
+
+```java
+[root@localhost ~]# docker pull registry
+Using default tag: latest
+latest: Pulling from library/registry
+c87736221ed0: Pull complete 
+1cc8e0bb44df: Pull complete 
+54d33bcb37f5: Pull complete 
+e8afc091c171: Pull complete 
+b4541f6d3db6: Pull complete 
+Digest: sha256:3b00e5438ebd8835bcfa7bf5246445a6b57b9a50473e89c02ecc8e575be3ebb5
+Status: Downloaded newer image for registry:latest
+```
+
+启动：
+
+```java
+[root@localhost ~]# docker run -d --name reg -p 5000:5000 registry
+6ce7844282cf0e9e82813c5b88ce7eed14fd312cd0642429f512d1f94792d695
+```
+
+##### 然后通过restful接口查看仓库中的镜像（当前仓库是空的）
+
+```java
+[root@localhost ~]# curl http://192.168.111.128:5000/v2/_catalog
+{"repositories":[]}
+```
+
+#### 配置http传输
+
+私服默认只能使用https，需要配置开放http
+
+**"insecure-registries":\["192.168.111.128:5000"\]**
+
+```java
+[root@localhost ~]# vi /etc/docker/daemon.json 
+
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"],
+  "insecure-registries":["192.168.111.128:5000"]
+}
+```
+
+配置完成重启服务
+
+```java
+[root@localhost ~]# systemctl daemon-reload
+[root@localhost ~]# systemctl restart docker
 ```
 
 
