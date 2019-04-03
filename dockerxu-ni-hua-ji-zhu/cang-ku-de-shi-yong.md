@@ -168,6 +168,10 @@ hello-world                        latest              fce289e99eb9        3 mon
 
 使用 **push 命令，并查看信息**
 
+curl http://192.168.111.128:5000/v2/\_catalog   查看仓库
+
+curl http://192.168.111.128:5000/v2/hello-world/tags/list 查看版本
+
 ```
 [root@localhost ~]# docker push 192.168.111.128:5000/hello-world:2.0.0 
 The push refers to repository [192.168.111.128:5000/hello-world]
@@ -177,8 +181,87 @@ af0b15c8625b: Pushed
 {"repositories":["hello-world"]}
 [root@localhost ~]# curl http://192.168.111.128:5000/v2/hello-world/tags/list
 {"name":"hello-world","tags":["2.0.0"]}
+```
+
+### commit 镜像并上传仓库
+
+#### 创建一个centos容器
+
+启动并进入此容器，默认去library/centos拉取
+
+```java
+[root@localhost ~]# docker run -it --name centos centos /bin/bash/
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+8ba884070f61: Pull complete 
+Digest: sha256:8d487d68857f5bc9595793279b33d082b03713341ddec91054382641d14db861
+Status: Downloaded newer image for centos:latest
+```
+
+结果进不去。
 
 ```
+docker run -dit --name  centos centos:latest
+```
+
+启动容器，exec进入容器
+
+```
+docker exec -it centos /bin/bash
+```
+
+#### 容器内安装nginx服务
+
+添加nginx源：
+
+```
+rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum search nginx    ##搜索一下看看
+yum install nginx -y    ## 安装
+```
+
+启动nginx服务
+
+```
+[root@78035124e536 /]# whereis nginx   ##找一下服务
+nginx: /usr/sbin/nginx /usr/lib64/nginx /etc/nginx /usr/share/nginx
+[root@78035124e536 /]# /usr/sbin/nginx  ##启动
+[root@78035124e536 /]# curl 172.17.0.3  ## 查看，ip 可以在外面由 docker inspect centos 得到
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+```
+
+#### commit服务为一个nginx镜像
+
+现在将cent容器提交成为一个镜像，命令如下
+
+docker commit centos centos-nginx:1.0，得到新的镜像centos-nginx:1.0
+
+
 
 
 
