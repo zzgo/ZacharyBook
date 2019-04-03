@@ -153,20 +153,30 @@ Status: Downloaded newer image for registry:latest
 【注意】：这个**名字必须完整，带有链接，该链接指向私服仓库服务器**。
 
 ```java
-[root@localhost ~]# docker tag hello-world:latest 192.168.111.128:5000/hello-world:test
+[root@localhost ~]# docker tag hello-world:latest 192.168.111.128:5000/hello-world:2.0.0
 [root@localhost ~]# docker images
 REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
 registry                           latest              f32a97de94e1        3 weeks ago         25.8MB
 nginx                              latest              8c9ca4d17702        4 weeks ago         109MB
 tomcat                             latest              168588387c68        7 weeks ago         463MB
 my/tomcat                          v1                  168588387c68        7 weeks ago         463MB
-192.168.111.128:5000/hello-world   test                fce289e99eb9        3 months ago        1.84kB
+192.168.111.128:5000/hello-world   2.0.0               fce289e99eb9        3 months ago        1.84kB
 hello-world                        latest              fce289e99eb9        3 months ago        1.84kB
 ```
 
 推送到私服仓库里
 
+使用 **push 命令，并查看信息**
+
 ```
+[root@localhost ~]# docker push 192.168.111.128:5000/hello-world:2.0.0 
+The push refers to repository [192.168.111.128:5000/hello-world]
+af0b15c8625b: Pushed 
+2.0.0: digest: sha256:92c7f9c92844bbbb5d0a101b22f7c2a7949e40f8ea90c8b3bc396879d95e899a size: 524
+[root@localhost ~]# curl http://192.168.111.128:5000/v2/_catalog 
+{"repositories":["hello-world"]}
+[root@localhost ~]# curl http://192.168.111.128:5000/v2/hello-world/tags/list
+{"name":"hello-world","tags":["2.0.0"]}
 
 ```
 
