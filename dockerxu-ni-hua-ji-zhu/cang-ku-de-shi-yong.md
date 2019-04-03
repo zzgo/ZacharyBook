@@ -168,9 +168,10 @@ hello-world                        latest              fce289e99eb9        3 mon
 
 使用 **push 命令，并查看信息**
 
-curl http://192.168.111.128:5000/v2/\_catalog   查看仓库
+curl [http://192.168.111.128:5000/v2/\_catalog](http://192.168.111.128:5000/v2/_catalog)  
+   查看仓库
 
-curl http://192.168.111.128:5000/v2/hello-world/tags/list 查看版本
+curl [http://192.168.111.128:5000/v2/hello-world/tags/list](http://192.168.111.128:5000/v2/hello-world/tags/list) 查看版本
 
 ```
 [root@localhost ~]# docker push 192.168.111.128:5000/hello-world:2.0.0 
@@ -252,7 +253,6 @@ Commercial support is available at
 <p><em>Thank you for using nginx.</em></p>
 </body>
 </html>
-
 ```
 
 #### commit服务为一个nginx镜像
@@ -260,6 +260,124 @@ Commercial support is available at
 现在将cent容器提交成为一个镜像，命令如下
 
 docker commit centos centos-nginx:1.0，得到新的镜像centos-nginx:1.0
+
+```java
+[root@localhost ~]# docker commit centos centos-nginx:1.0
+sha256:0828df89613a8af9ea1b8c8d899053860347fad2466c2d5f0a9865b48e903a6f
+[root@localhost ~]# docker images
+REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
+centos-nginx                       1.0                 0828df89613a        8 seconds ago       292MB
+```
+
+#### 启动此nginx镜像
+
+```java
+[root@localhost ~]# docker run -dit --name nginx centos-nginx:1.0 
+87c462bbe29ab537311d9c60163920a55045dbbe5778e7d7b33ff3ea25c32a11[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+87c462bbe29a        centos-nginx:1.0    "/bin/bash"              5 seconds ago       Up 2 seconds                                 nginx
+[root@localhost ~]# docker exec -it nginx /bin/bash
+[root@87c462bbe29a /]# curl 172.17.0.4
+curl: (7) Failed connect to 172.17.0.4:80; Connection refused
+```
+
+进入容器发现并没有启动服务
+
+```java
+[root@87c462bbe29a /]# /usr/sbin/nginx
+[root@87c462bbe29a /]# curl 172.17.0.4
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+我们希望启动容器的时候，直接启动nginx服务，怎么做？
+
+```java
+docker run -d --name nginx centos-nginx:1.0 /usr/sbin/nginx -g "daemon 0ff"
+```
+
+启动起来：
+
+```java
+[root@localhost ~]# docker run -dit --name nginx centos-nginx:1.0 /usr/sbin/nginx -g "daemon off;"
+ae341c78f1d4a614090a39c50bd630d3e56c1b640f75244ce06e67485fad465b
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ae341c78f1d4        centos-nginx:1.0    "/usr/sbin/nginx -g …"   4 seconds ago       Up 2 seconds                                 nginx
+```
+
+【注意】
+
+后面运行的命令都是容器命令，由于nginx命令没有设置到path中，所以全路径启动，
+
+而nginx -g这个参数是指可以在外面添加指令到nginx的配置文件中，
+
+daemon off是指nginx服务不运行在后端，而是在前台运行（container中的服务必须运行在前台）
+
+**启动并在容器内nginx也启动，并且在外面也可以访问**
+
+```java
+[root@localhost ~]# docker run -p 80:80  -dit --name nginx centos-nginx:1.0 /usr/sbin/nginx -g "daemon off;"
+cd7c7175cbd9c17ad1a480cb4161a05d5d8fc89f7d81e6ffb0b1123cecc5ba7a
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+cd7c7175cbd9        centos-nginx:1.0    "/usr/sbin/nginx -g …"   2 seconds ago       Up 1 second         0.0.0.0:80->80/tcp       nginx
+78035124e536        centos:latest       "/bin/bash"              42 minutes ago      Up 42 minutes                                centos
+6ce7844282cf        registry            "/entrypoint.sh /etc…"   23 hours ago        Up 9 hours          0.0.0.0:5000->5000/tcp   reg
+[root@localhost ~]# curl 192.168.111.128
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+#### commit创建镜像方式的本质
+
+![](/assets/w839hasjdhaj.png)
 
 
 
