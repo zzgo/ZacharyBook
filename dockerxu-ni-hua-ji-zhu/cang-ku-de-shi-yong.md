@@ -71,8 +71,6 @@ af0b15c8625b: Pushed
 
 ![](/assets/1223fdsfds.png)
 
-
-
 ### 私有仓库
 
 #### 搭建
@@ -148,6 +146,28 @@ Status: Downloaded newer image for registry:latest
 ```java
 [root@localhost ~]# systemctl daemon-reload
 [root@localhost ~]# systemctl restart docker
+```
+
+#### 私服仓库推送镜像
+
+【注意】：这个**名字必须完整，带有链接，该链接指向私服仓库服务器**。
+
+```java
+[root@localhost ~]# docker tag hello-world:latest 192.168.111.128:5000/hello-world:test
+[root@localhost ~]# docker images
+REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
+registry                           latest              f32a97de94e1        3 weeks ago         25.8MB
+nginx                              latest              8c9ca4d17702        4 weeks ago         109MB
+tomcat                             latest              168588387c68        7 weeks ago         463MB
+my/tomcat                          v1                  168588387c68        7 weeks ago         463MB
+192.168.111.128:5000/hello-world   test                fce289e99eb9        3 months ago        1.84kB
+hello-world                        latest              fce289e99eb9        3 months ago        1.84kB
+```
+
+推送到私服仓库里
+
+```
+
 ```
 
 
