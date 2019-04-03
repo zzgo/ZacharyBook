@@ -377,9 +377,5 @@ Commercial support is available at
 
 #### commit创建镜像方式的本质
 
-![](/assets/w839hasjdhaj.png)
-
-
-
-
+![](/assets/w839hasjdhaj.png)原容器与commit后的镜像，在文件系统上并无区别，只是把容器原来的可写属性，置成了可读，于是变成了一个不可改的镜像
 
