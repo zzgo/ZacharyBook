@@ -19,7 +19,7 @@ volume参数创建容器数据卷
 ```java
 启动并进入容器，-v 挂载目录，即数据
 [root@localhost ~]# docker run --name data -v /opt/data -it centos:latest /bin/bash
-[root@b654b96ac630 /]# 
+[root@b654b96ac630 /]#
 ```
 
 使用 docker inspect data 查看data的元信息，其中包括：
@@ -37,7 +37,6 @@ volume参数创建容器数据卷
                 "Propagation": ""
             }
         ],
-
 ```
 
 在容器端添加一个文件
