@@ -255,5 +255,7 @@ tomcat              latest              168588387c68        3 weeks ago         
 docker save  6fa2a7f3d028  -o pathplan.tar
 ```
 
+将tar加载成镜像
 
+**docker load -i my.tar**
 
