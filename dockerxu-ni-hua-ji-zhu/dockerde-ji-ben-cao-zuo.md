@@ -249,13 +249,5 @@ tomcat              latest              168588387c68        3 weeks ago         
 ### 说明我们的镜像导入成功
 ```
 
-**docer save 保存镜像成tar包**
 
-```
-docker save  6fa2a7f3d028  -o pathplan.tar
-```
-
-将tar加载成镜像
-
-**docker load -i my.tar**
 
