@@ -249,5 +249,21 @@ tomcat              latest              168588387c68        3 weeks ago         
 ### 说明我们的镜像导入成功
 ```
 
+**docker load 加载一个tar包**
+
+```
+将一个tar包load成一个image：docker load < my.tar 
+或者 
+docker load -i my.tar
+```
+
+**docker save 镜像保存为tar包**
+
+```
+将image save成tar包： docker save logmanager:1.0 > logmanager.tar 
+或者 
+docker save 1312423bf3ee -o /root/dockerfile/my.tar
+```
+
 
 
