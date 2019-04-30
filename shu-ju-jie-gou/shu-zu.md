@@ -71,7 +71,6 @@ public void add(int index, E element) {
         elementData[index] = element;//将元素值赋值给当前位置
         size++;//计数加加
     }
-
 ```
 
 ### Remove方法
@@ -91,6 +90,12 @@ public E remove(int index) {
         return oldValue;//返回旧值
     }
 ```
+
+## 3.链表
+
+比如LinkedList\(双链表\),HashMap中的Node（单链表）
+
+
 
 
 
