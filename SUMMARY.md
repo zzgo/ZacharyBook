@@ -155,5 +155,8 @@
       * [JVM的内存布局和垃圾回收机制](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/jvmde-nei-cun-bu-ju-he-la-ji-hui-shou-ji-zhi.md)
     * [群里分享的面试题\*\*\*](chapter1/mian-shi-ti/qun-li-fen-xiang-de-mian-shi-9898.md)
   * [杂谈基础](chapter1/ji-chu.md)
+  * [数据结构](shu-ju-jie-gou.md)
+    * [概要阐述](shu-ju-jie-gou/gai-yao-chan-shu.md)
+    * [数组](shu-ju-jie-gou/shu-zu.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
 
