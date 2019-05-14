@@ -158,5 +158,6 @@
   * [数据结构](shu-ju-jie-gou.md)
     * [概要阐述](shu-ju-jie-gou/gai-yao-chan-shu.md)
     * [数组](shu-ju-jie-gou/shu-zu.md)
+    * [栈](shu-ju-jie-gou/zhan.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
 
