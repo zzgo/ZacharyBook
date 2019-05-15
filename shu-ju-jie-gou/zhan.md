@@ -44,7 +44,7 @@ public class MyStack<T> {
     //pop
     public T pop() {
         if (isEmpty()) {
-            throw new NullPointerException();
+            throw new EmptyStackException();
         }
         T data = datas[size - 1];
         datas[--size] = null;
