@@ -93,8 +93,6 @@ public class MyStack<T> {
 
 顺序表，链表实现
 
-
-
 利用栈解决+-\*/\(\)计算问题
 
 Calc.java
@@ -145,7 +143,7 @@ public class Calc {
                     calc(dataStack, charStack);
                 }
                 charStack.pop();
-            } else if (true) {
+            } else {
                 //遇到符号，判断优先级
                 while (!charStack.isEmpty() && priority(charStack.peek(), chars[i])) {
                     calc(dataStack, charStack);
@@ -235,17 +233,17 @@ public class Stack<T> {
             this.next = next;  
         }  
     }//Node  
-      
+
     public Node top = new Node();  
     public int size;  
     public Node oldNode;  
-      
+
     //入栈  
     public void push(T element){  
         top = new Node(element,top);  
         size++;  
     }  
-      
+
     //出栈  
     public T pop(){  
         oldNode = top;  
@@ -254,23 +252,23 @@ public class Stack<T> {
         size--;  
         return oldNode.data;  
     }  
-      
+
     //返回栈顶对象的数据域，但不出栈  
     public T peek(){  
         return top.data;  
     }  
-      
+
     //栈长  
     public int length(){  
         return size;  
     }  
-      
+
     //判断栈是否为空  
     public boolean isEmpty(){  
         return size == 0;  
     }  
-  
-}  
+
+}
 ```
 
 
