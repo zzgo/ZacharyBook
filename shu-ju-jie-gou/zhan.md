@@ -190,7 +190,7 @@ public class MyLinkedStack<E> {
 
 ### 面试题
 
-**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？    
+**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？      
 **
 
 栈的特性，后进先出表。因为Vector 里面有一个add方法，严格的打破了栈的定义。所以从栈的特性来看是一个不良的设计。
@@ -406,7 +406,7 @@ OutOfMemoryError ：堆溢出
 
 ![](/assets/sdkajdkja2130.png)
 
-实操
+实操，所有题目已完成。
 
 ```
 1:https://leetcode-cn.com/problems/valid-parentheses/
