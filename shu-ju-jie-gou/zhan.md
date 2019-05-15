@@ -93,6 +93,101 @@ public class MyStack<T> {
 
 顺序表，链表实现
 
+```
+import java.util.EmptyStackException;
+
+/**
+ * @Title:利用链表实现栈
+ * @Author:Zachary
+ * @Desc:
+ * @Date:2019/5/15
+ **/
+public class MyLinkedStack<E> {
+
+    int size;
+    //根节点
+    Node top;
+
+    public MyLinkedStack() {
+        this.size = 0;
+    }
+    // push
+
+    public void push(E data) {
+        top = new Node(data, top);
+        size++;
+    }
+
+    // pop
+    public E pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        E data = top.data;
+        Node cur = top;
+        top = top.next;
+        cur.next = null;//gc
+        size--;
+        return cur.data;
+    }
+
+
+    public E peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return top.data;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    //头结点
+    class Node {
+        Node next;
+        E data;
+
+        public Node(E data, Node next) {
+            this.next = next;
+            this.data = data;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public E getData() {
+            return data;
+        }
+
+        public void setData(E data) {
+            this.data = data;
+        }
+    }
+
+    public static void main(String[] args) {
+        MyLinkedStack<Object> objectMyLinkedStack = new MyLinkedStack<>();
+        objectMyLinkedStack.push(1);
+        objectMyLinkedStack.push(2);
+        objectMyLinkedStack.push(3);
+        objectMyLinkedStack.push(4);
+        System.out.println(objectMyLinkedStack.pop());
+        System.out.println(objectMyLinkedStack.peek());
+        System.out.println(objectMyLinkedStack.pop());
+    }
+
+}
+```
+
 利用栈解决+-\*/\(\)计算问题
 
 Calc.java
