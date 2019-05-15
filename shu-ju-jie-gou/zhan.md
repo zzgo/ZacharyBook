@@ -190,7 +190,7 @@ public class MyLinkedStack<E> {
 
 ### 面试题
 
-**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？  
+**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？    
 **
 
 栈的特性，后进先出表。因为Vector 里面有一个add方法，严格的打破了栈的定义。所以从栈的特性来看是一个不良的设计。
@@ -401,4 +401,19 @@ OutOfMemoryError ：堆溢出
 **JVM栈的每个栈帧（slot）大小都是4bytes，而一个slot恰好可以保持一个对象引用，所以引用永远是4bytes**
 
 **价值2千万的总结，吃饱了就是 队列，喝高了就是 堆栈**
+
+### JVM虚拟机
+
+![](/assets/sdkajdkja2130.png)
+
+实操
+
+```
+1:https://leetcode-cn.com/problems/valid-parentheses/
+2:https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/
+3:https://leetcode-cn.com/problems/implement-stack-using-queues/
+4:https://leetcode-cn.com/problems/decode-string/
+```
+
+
 
