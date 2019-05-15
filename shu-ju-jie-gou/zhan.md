@@ -190,13 +190,15 @@ public class MyLinkedStack<E> {
 
 ### 面试题
 
-**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？**
+**Java中的Stack是通过Vector来实现的，这种设计被认为是不良的设计，说说你的看法？  
+**
 
 栈的特性，后进先出表。因为Vector 里面有一个add方法，严格的打破了栈的定义。所以从栈的特性来看是一个不良的设计。
 
-只是用到了其中的，addElement\(item\);elementAt\(len - 1\);removeElementAt\(len - 1\);
-
-
+只是用到了其中的  
+，addElement\(item\);  
+elementAt\(len - 1\);  
+removeElementAt\(len - 1\);
 
 ### **利用栈解决+-\*/\(\)计算问题，逆波兰问题**
 
@@ -394,9 +396,9 @@ OutOfMemoryError ：堆溢出
 
 ### JVM内存栈
 
-**Stack与heap都运行在内存上，在内存空间上字节码指令不必担心不同机器上的区别，所以JVM实现了与平台无关的特性。**
+**Stack与heap都运行在内存上，在内存空间上字节码指令不必担心不同机器上的区别，所以JVM实现了与平台无关的特性。**
 
 **JVM栈的每个栈帧（slot）大小都是4bytes，而一个slot恰好可以保持一个对象引用，所以引用永远是4bytes**
 
-
+**价值2千万的总结，吃饱了就是 队列，喝高了就是 堆栈**
 
