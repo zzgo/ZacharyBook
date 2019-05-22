@@ -6,6 +6,8 @@
 
 #### 工厂方法
 
+反射
+
 #### 单例模式
 
 spring下默认的bean均为singleton，可通过singleton=true,false或者scope=?指定
@@ -41,6 +43,4 @@ jdbcTemplate execute
 redisTemplate
 
 ....
-
-
 
