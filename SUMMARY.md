@@ -155,6 +155,8 @@
       * [JVM的内存布局和垃圾回收机制](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/jvmde-nei-cun-bu-ju-he-la-ji-hui-shou-ji-zhi.md)
       * [类加载机制和双亲委派模型](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/lei-jia-zai-ji-zhi-he-shuang-qin-wei-pai-mo-xing.md)
       * [Spring 里面的设计模式有哪些？](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/spring-li-mian-de-she-ji-mo-shi-you-na-xie-ff1f.md)
+      * [SQL常用优化手段](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/sqlchang-yong-you-hua-shou-duan.md)
+      * [java各类型占用的字节数](chapter1/mian-shi-ti/xiang-xue-zhi-mian-shi-ti/javage-lei-xing-zhan-yong-de-zi-jie-shu.md)
     * [群里分享的面试题\*\*\*](chapter1/mian-shi-ti/qun-li-fen-xiang-de-mian-shi-9898.md)
   * [杂谈基础](chapter1/ji-chu.md)
   * [数据结构](shu-ju-jie-gou.md)
