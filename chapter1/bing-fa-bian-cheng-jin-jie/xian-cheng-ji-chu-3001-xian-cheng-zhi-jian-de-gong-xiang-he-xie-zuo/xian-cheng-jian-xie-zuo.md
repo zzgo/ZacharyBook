@@ -648,7 +648,7 @@ public class UseJoin {
 }
 ```
 
-调用`yield() `、`sleep()`、`wait()`、`notify()`等方法对锁有何影响？
+调用`yield()`、`sleep()`、`wait()`、`notify()`等方法对锁有何影响？
 
 * 线程在执行yield\(\)以后，持有的锁是不会释放的
 * sleep\(\)方法被调用以后，持有的锁是不会释放的
