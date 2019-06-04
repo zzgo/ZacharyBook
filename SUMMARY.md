@@ -163,5 +163,7 @@
     * [概要阐述](shu-ju-jie-gou/gai-yao-chan-shu.md)
     * [数组](shu-ju-jie-gou/shu-zu.md)
     * [栈](shu-ju-jie-gou/zhan.md)
+* [Java编程指南](javabian-cheng-zhi-nan.md)
+  * [编写高性能的程序注意的4个问题](javabian-cheng-zhi-nan/bian-xie-gao-xing-neng-de-cheng-xu-zhu-yi-de-4-ge-wen-ti.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
 
