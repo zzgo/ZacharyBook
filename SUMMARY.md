@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [介绍](README.md)
 * [架构师](jia-gou-shi.md)
   * [架构师筑基专题](chapter1.md)
     * [并发编程进阶](chapter1/bing-fa-bian-cheng-jin-jie.md)
