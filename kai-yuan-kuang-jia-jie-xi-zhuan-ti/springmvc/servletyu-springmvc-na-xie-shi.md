@@ -36,7 +36,6 @@ Shared libraries（共享库） and runtimes pluggability（运行时插件）�
 接下来我们只需要去**实现ServletContainerInitializer接口**
 
 ```java
-
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -118,5 +117,5 @@ public class JamesServletContainerInitializer implements ServletContainerInitial
 
 ![](/assets/jdkasdoi39487294.png)
 
-
+使用ServletContext来注册以上三个组件![](/assets/32974jfnjfdf.png)
 
