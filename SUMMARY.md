@@ -38,7 +38,7 @@
         * [6.7 Executor框架](chapter1/bing-fa-bian-cheng-jin-jie/liu-3001-xian-cheng-chi/67-executorkuang-jia.md)
         * 6.8 CompletionService
       * [七、并发安全](chapter1/bing-fa-bian-cheng-jin-jie/qi-3001-bing-fa-an-quan.md)
-        * 7.1 类的线程安全
+        * [7.1 类的线程安全](chapter1/bing-fa-bian-cheng-jin-jie/qi-3001-bing-fa-an-quan/71-lei-de-xian-cheng-an-quan.md)
         * 7.2 如何做到类的线程安全
         * 7.3 线程不安全引发的问题
         * 7.4 线程安全的单例模式
@@ -166,4 +166,5 @@
 * [Java编程指南](javabian-cheng-zhi-nan.md)
   * [编写高性能的程序注意的4个问题](javabian-cheng-zhi-nan/bian-xie-gao-xing-neng-de-cheng-xu-zhu-yi-de-4-ge-wen-ti.md)
 * [门萨测试题](men-sa-ce-shi-ti.md)
+* [项目导入问题](xiang-mu-dao-ru-wen-ti.md)
 
