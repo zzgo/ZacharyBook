@@ -117,5 +117,7 @@ public class JamesServletContainerInitializer implements ServletContainerInitial
 
 ![](/assets/jdkasdoi39487294.png)
 
-使用ServletContext来注册以上三个组件![](/assets/32974jfnjfdf.png)
+使用ServletContext来注册以上三个组件![](/assets/32974jfnjfdf.png)**注意在运行的过程中，是不可以注册组件，和IOC道理一样，出于安全考虑**
+
+
 
