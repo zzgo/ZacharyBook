@@ -14,6 +14,8 @@
 
 gitbook init 初始化
 
+gitbook build 重建
+
 gitbook serve 启动
 
 如果报错
@@ -22,9 +24,9 @@ gitbook -V 查看 版本
 
 缺失什么插件的话
 
-使用 
+使用
 
-npm install gitbook-plugin-接插件名称 
+npm install gitbook-plugin-接插件名称
 
 如配置了 可折叠目录，在根目录下 新建book.json内容
 
