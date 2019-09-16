@@ -30,7 +30,7 @@ npm install gitbook-plugin-接插件名称
 
 如配置了 可折叠目录，在根目录下 新建book.json内容
 
-```
+```java
 {
     "plugins": ["expandable-chapters-small"],
     "pluginsConfig": {
@@ -41,5 +41,5 @@ npm install gitbook-plugin-接插件名称
 
 会提示没有这个js或者css
 
-运行 npm install gitbook-plugin-expandable-chapters-small 即下载该插件
+运行** npm install gitbook-plugin-expandable-chapters-small** 即下载该插件
 
