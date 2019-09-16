@@ -6,7 +6,9 @@
 
 [https://www.v2ex.com/amp/t/345331](https://www.v2ex.com/amp/t/345331)
 
-https://blog.csdn.net/fghsfeyhdf/article/details/88403548
+[https://blog.csdn.net/fghsfeyhdf/article/details/8840354](https://blog.csdn.net/fghsfeyhdf/article/details/88403548)
+
+https://www.cnblogs.com/mingyue5826/p/10307051.html
 
 初始化cli
 
