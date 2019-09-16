@@ -8,3 +8,36 @@
 
 初始化cli
 
+**npm install gitbook-cli -g**
+
+切换到对应目录
+
+gitbook init 初始化
+
+gitbook serve 启动
+
+如果报错
+
+gitbook -V 查看 版本
+
+缺失什么插件的话
+
+使用 
+
+npm install gitbook-plugin-接插件名称 
+
+如配置了 可折叠目录，在根目录下 新建book.json内容
+
+```
+{
+    "plugins": ["expandable-chapters-small"],
+    "pluginsConfig": {
+        "expandable-chapters-small":{}
+    }
+}
+```
+
+会提示没有这个js或者css
+
+运行 npm install gitbook-plugin-expandable-chapters-small 即下载该插件
+
