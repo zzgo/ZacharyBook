@@ -6,6 +6,8 @@
 
 [https://www.v2ex.com/amp/t/345331](https://www.v2ex.com/amp/t/345331)
 
+https://blog.csdn.net/fghsfeyhdf/article/details/88403548
+
 初始化cli
 
 **npm install gitbook-cli -g**
