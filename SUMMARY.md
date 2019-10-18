@@ -56,6 +56,12 @@
         * [BIO](chapter1/netty-io/yuan-sheng-jdk-wang-luo-bian-cheng/bio.md)
         * [AIO](chapter1/netty-io/yuan-sheng-jdk-wang-luo-bian-cheng/aio.md)
         * [NIO之Reactor模式](chapter1/netty-io/yuan-sheng-jdk-wang-luo-bian-cheng/niozhi-reactor-mo-shi.md)
+    * JVM性能调优
+    * 网络编程与高效IO
+    * Tomcat系统进阶
+    * Linux基础与进阶
+    * [Mysql深度优化](mysqlshen-du-you-hua.md)
+    * 设计模式实战
     * [常见50句SQL联系](chapter1/mysqlshen-du-you-hua/chang-jian-50-ju-sql-lian-xi.md)
   * [开源框架解析专题](kai-yuan-kuang-jia-jie-xi-zhuan-ti.md)
     * [Spring](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring.md)
@@ -70,18 +76,20 @@
       * [Spring组件和AOP基本操作](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springzu-jian-he-aop-ji-ben-cao-zuo.md)
       * [AOP基本操作](kai-yuan-kuang-jia-jie-xi-zhuan-ti/aopji-ben-cao-zuo.md)
       * [Spring AOP底层源码分析](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-aopdi-ceng-yuan-ma-fen-xi.md)
-    * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
     * [SpringMVC](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc.md)
       * [servlet与springmvc那些事](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc/servletyu-springmvc-na-xie-shi.md)
       * [手写SpringMvc](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc/shou-xie-springmvc.md)
         * [开篇](kai-yuan-kuang-jia-jie-xi-zhuan-ti/springmvc/shou-xie-springmvc/kai-pian.md)
+    * [Mybstis](kai-yuan-kuang-jia-jie-xi-zhuan-ti/mybstis.md)
     * [spring 相关链接](kai-yuan-kuang-jia-jie-xi-zhuan-ti/spring-xiang-guan-lian-jie.md)
   * [高性能架构专题](chapter1/gao-xing-neng-jia-gou-zhuan-ti.md)
-    * [分布式常见场景解决方案实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan.md)
-      * [分布式锁和事务](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
-      * [分布式事务实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-shi-zhan.md)
-      * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
-      * [分布式任务调度](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-ren-wu-diao-du.md)
+    * [分布式架构思维](fen-bu-shi-jia-gou-si-wei.md)
+    * 分布式协调和分流
+    * [异步与消息中间件](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian.md)
+      * [概述](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian/gai-shu.md)
+      * ActiveMq消息中间件
+      * RabbitMq消息中间件
+      * Kafka百万级吞吐实战
     * [缓存和NoSql](chapter1/huancun-he-nosql.md)
       * [Redis](chapter1/redisbasic.md)
         * [安装](chapter1/an-zhuang.md)
@@ -114,11 +122,17 @@
         * [回顾java客户端与mongodb](chapter1/mongodb/hui-gu-java-ke-hu-duan-yu-mongodb.md)
         * [mongodbg高级](chapter1/mongodb/mongodbggao-ji.md)
         * [聚合操作日期分组](chapter1/mongodb/ju-he-cao-zuo-ri-qi-fen-zu.md)
+      * [缓存解决方案实战](chapter1/huan-cun-jie-jue-fang-an-shi-zhan.md)
     * [高可靠数据存储](chapter1/gao-ke-kao-shu-ju-cun-chu.md)
       * [MySql高性能存储](chapter1/gao-ke-kao-shu-ju-cun-chu/mysqlgao-xing-neng-cun-chu.md)
         * [linux下mysql命名大全](chapter1/gao-ke-kao-shu-ju-cun-chu/mysqlgao-xing-neng-cun-chu/linuxxia-mysql-ming-ming-da-quan.md)
-    * [异步与消息中间件](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian.md)
-      * [Kafka](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian/kafka.md)
+      * Mysql高性能存储实战
+      * FastDFS分布式文件存储实战
+    * [分布式常见场景解决方案实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan.md)
+      * [分布式锁和事务](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-he-suo.md)
+      * [分布式事务实战](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-shi-wu-shi-zhan.md)
+      * [单点登录解决方案](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/dan-dian-deng-lu.md)
+      * [分布式任务调度](chapter1/fen-bu-shi-chang-jian-chang-jing-jie-jue-fang-an-shi-zhan/fen-bu-shi-ren-wu-diao-du.md)
     * [搜索引擎](chapter1/sou-suo-yin-qing.md)
       * [Elasticsearch](chapter1/elasticsearch.md)
         * [入门](chapter1/elasticsearch/ru-men.md)
