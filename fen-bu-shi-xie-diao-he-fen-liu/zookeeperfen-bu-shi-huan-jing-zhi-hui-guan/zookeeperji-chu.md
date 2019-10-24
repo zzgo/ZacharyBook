@@ -254,25 +254,19 @@ id是验证模式，不同的scheme，id的值也不一样。
 
 scheme为auth时：
 
-username:password
+       username:password
 
 scheme为digest时:
 
-```
-username:BASE64\(SHA1\(password\)\)
-```
+	username:BASE64\(SHA1\(password\)\)
 
 scheme为ip时:
 
-```
-客户端的ip地址。
-```
+	客户端的ip地址。
 
 scheme为world时
 
-```
-anyone。
-```
+	anyone。
 
 1.3.3.3.Permission
 
