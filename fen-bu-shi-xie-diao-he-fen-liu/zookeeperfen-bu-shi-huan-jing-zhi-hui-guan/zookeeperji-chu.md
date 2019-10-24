@@ -149,35 +149,36 @@ ZooKeeper的视图结构和标准的Unix文件系统类似，其中每个节点�
 
 ![](/assets/7yh5hs0ij.png)
 
-在Zookeeper中，znode是一个跟Unix文件系统路径相似的节点，可以往这个节点存储或获取数据
+* 在Zookeeper中，znode是一个跟Unix文件系统路径相似的节点，可以往这个节点存储或获取数据
+* 通过客户端可对znode进行增删改查的操作，还可以注册watcher监控znode的变化。
 
-
-
-通过客户端可对znode进行增删改查的操作，还可以注册watcher监控znode的变化。
-
-
-
-1.2.3.Zookeeper节点类型
+#### 1.2.3.Zookeeper节点类型
 
 节点类型非常重要，是后面项目实战的基础。
 
-
-
 a、Znode有两种类型：
 
-短暂（ephemeral）（create -e /app1/test1 “test1” 客户端断开连接zk删除ephemeral类型节点） 
+短暂（ephemeral）（create -e /app1/test1 “test1” 客户端断开连接zk删除ephemeral类型节点）
 
-持久（persistent） （create -s /app1/test2 “test2” 客户端断开连接zk不删除persistent类型节点）
+持久（persistent） （create -s /app1/test2 “test2” 客户端断开连接zk不删除persistent类型节点）
 
 b、Znode有四种形式的目录节点（默认是persistent ）
 
-PERSISTENT 
+PERSISTENT
 
-PERSISTENT\_SEQUENTIAL（持久序列/test0000000019 ） 
+PERSISTENT\_SEQUENTIAL（持久序列/test0000000019 ）
 
-EPHEMERAL 
+EPHEMERAL
 
 EPHEMERAL\_SEQUENTIAL
 
-c、创建znode时设置顺序标识，znode名称后会附加一个值，顺序号是一个单调递增的计数器，由父节点维护 
+c、创建znode时设置顺序标识，znode名称后会附加一个值，顺序号是一个单调递增的计数器，由父节点维护
+
+![](/assets/8iushgf0.png)
+
+d、在分布式系统中，顺序号可以被用于为所有的事件进行全局排序，这样客户端可以通过顺序号推断事件的顺序
+
+
+
+1.2.4.Zookeeper节点状态属性
 
