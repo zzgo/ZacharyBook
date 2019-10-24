@@ -178,13 +178,11 @@ c、创建znode时设置顺序标识，znode名称后会附加一个值，顺序
 
 d、在分布式系统中，顺序号可以被用于为所有的事件进行全局排序，这样客户端可以通过顺序号推断事件的顺序
 
-### 1.2.4.Zookeeper节点状态属性
+#### 1.2.4.Zookeeper节点状态属性
 
-![](/assets/43859jfhj909i.png)1.2.5.ACL保障数据的安全
+#### ![](/assets/43859jfhj909i.png)1.2.5.ACL保障数据的安全
 
 ACL机制，表示为scheme:id:permissions，第一个字段表示采用哪一种机制，第二个id表示用户，permissions表示相关权限（如只读，读写，管理等）。
-
-
 
 zookeeper提供了如下几种机制（scheme）：
 
@@ -196,97 +194,63 @@ digest: 它对应的id为username:BASE64\(SHA1\(password\)\)，它需要先通�
 
 ip: 它对应的id为客户机的IP地址，设置的时候可以设置一个ip段，比如ip:192.168.1.0/16, 表示匹配前16个bit的IP段
 
-
-
 现在看这可能懵懵懂懂，不过没有关系，等会在客户端操作的时候会有详细的操作
 
+### 1.3.命令行
 
+#### 1.3.1.服务端常用命令
 
-1.3.命令行
+在准备好相应的配置之后，可以直接通过zkServer.sh 这个脚本进行服务的相关操作
 
-1.3.1.服务端常用命令
+启动ZK服务:       sh bin/zkServer.sh start 
 
-在准备好相应的配置之后，可以直接通过zkServer.sh 这个脚本进行服务的相关操作 
+查看ZK服务状态: sh bin/zkServer.sh status 
 
-启动ZK服务:       sh bin/zkServer.sh start 
+停止ZK服务:       sh bin/zkServer.sh stop 
 
-查看ZK服务状态: sh bin/zkServer.sh status  
+重启ZK服务:       sh bin/zkServer.sh restart
 
-停止ZK服务:       sh bin/zkServer.sh stop  
+#### 1.3.2.客户端常用命令
 
-重启ZK服务:       sh bin/zkServer.sh restart 
+使用 zkCli.sh -server 127.0.0.1:2181 连接到 ZooKeeper 服务，连接成功后，系统会输出 ZooKeeper 的相关环境以及配置信息。 命令行工具的一些简单操作如下：
 
-1.3.2.客户端常用命令
+* 显示根目录下、文件： ls / 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容
+* 显示根目录下、文件： ls2 / 查看当前节点数据并能看到更新次数等数据
+* 创建文件，并设置初始内容： create /zk "test" 创建一个新的 znode节点“ zk ”以及与它关联的字符串  \[-e\] \[-s\] 【-e 零时节点】 【-s 顺序节点】
+* 获取文件内容： get /zk 确认 znode 是否包含我们所创建的字符串  \[watch\]【watch 监听】
+* 修改文件内容： set /zk "zkbak" 对 zk 所关联的字符串进行设置 
+* 删除文件： delete /zk 将刚才创建的 znode 删除，如果存在子节点删除失败
+* 递归删除：rmr  /zk将刚才创建的 znode 删除，子节点同时删除
+* 退出客户端： quit 
+* 帮助命令： help
 
-使用 zkCli.sh -server 127.0.0.1:2181 连接到 ZooKeeper 服务，连接成功后，系统会输出 ZooKeeper 的相关环境以及配置信息。 命令行工具的一些简单操作如下：
-
-
-
-显示根目录下、文件： ls / 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容 
-
-显示根目录下、文件： ls2 / 查看当前节点数据并能看到更新次数等数据 
-
-创建文件，并设置初始内容： create /zk "test" 创建一个新的 znode节点“ zk ”以及与它关联的字符串  \[-e\] \[-s\] 【-e 零时节点】 【-s 顺序节点】
-
-获取文件内容： get /zk 确认 znode 是否包含我们所创建的字符串  \[watch\]【watch 监听】
-
-修改文件内容： set /zk "zkbak" 对 zk 所关联的字符串进行设置 
-
-删除文件： delete /zk 将刚才创建的 znode 删除，如果存在子节点删除失败 
-
-递归删除：rmr  /zk将刚才创建的 znode 删除，子节点同时删除
-
-退出客户端： quit 
-
-帮助命令： help
-
-
-
-1.3.3.ACL命令常用命令
-
-
+#### 1.3.3.ACL命令常用命令
 
 再回过头来看下ACL权限
-
-
 
 Zookeeper的ACL\(Access Control List\)，分为三个维度：scheme、id、permission
 
 通常表示为：scheme:id:permission
 
-schema:代表授权策略
+* schema:代表授权策略
+* id:代表用户
+* permission:代表权限
 
-id:代表用户
-
-permission:代表权限
-
-
-
-1.3.3.1.Scheme
+#### 1.3.3.1.Scheme
 
 world：
 
-	默认方式，相当于全世界都能访问
+默认方式，相当于全世界都能访问
 
-auth：
+auth：代表已经认证通过的用户\(可以通过addauth digest user:pwd 来添加授权用户\)
 
-	代表已经认证通过的用户\(可以通过addauth digest user:pwd 来添加授权用户\)
+digest：即用户名:密码这种方式认证，这也是业务系统中最常用的
 
-digest：
-
-	即用户名:密码这种方式认证，这也是业务系统中最常用的
-
-ip：
-
-	使用Ip地址认证
-
-
+ip：使用Ip地址认证
 
 1.3.3.2.id
 
 id是验证模式，不同的scheme，id的值也不一样。
-
-
 
 scheme为auth时：
 
@@ -294,29 +258,33 @@ username:password
 
 scheme为digest时:
 
-	username:BASE64\(SHA1\(password\)\)
+```
+username:BASE64\(SHA1\(password\)\)
+```
 
 scheme为ip时:
 
-	客户端的ip地址。
+```
+客户端的ip地址。
+```
 
 scheme为world时
 
-	anyone。
-
-
+```
+anyone。
+```
 
 1.3.3.3.Permission
 
 CREATE、READ、WRITE、DELETE、ADMIN 也就是 增、删、改、查、管理权限，这5种权限简写为crwda\(即：每个单词的首字符缩写\)
 
-CREATE\(c\)：创建子节点的权限 
+CREATE\(c\)：创建子节点的权限
 
-DELETE\(d\)：删除节点的权限 
+DELETE\(d\)：删除节点的权限
 
-READ\(r\)：读取节点数据的权限 
+READ\(r\)：读取节点数据的权限
 
-WRITE\(w\)：修改节点数据的权限 
+WRITE\(w\)：修改节点数据的权限
 
 ADMIN\(a\)：设置子节点权限的权限
 
@@ -326,31 +294,23 @@ getAcl
 
 获取指定节点的ACL信息
 
-
-
 create /testDir/testAcl deer  \# 创建一个子节点
 
 getAcl /testDir/testAcl      \# 获取该节点的acl权限信息
 
-
-
 setAcl
 
-     设置指定节点的ACL信息
-
-
+```
+ 设置指定节点的ACL信息
+```
 
 setAcl /testDir/testAcl world:anyone:crwa   \# 设置该节点的acl权限
 
 getAcl /testDir/testAcl   \# 获取该节点的acl权限信息，成功后，该节点就少了d权限
 
-
-
 create /testDir/testAcl/xyz xyz-data   \# 创建子节点
 
 delete /testDir/testAcl/xyz    \# 由于没有d权限，所以提示无法删除
-
-
 
 addauth
 
@@ -362,17 +322,11 @@ addauth digest user1:123456                \# 需要先添加一个用户
 
 setAcl /testDir/testAcl auth:user1:123456:crwa   \# 然后才可以拿着这个用户去设置权限
 
-
-
 getAcl /testDir/testAcl    \# 密码是以密文的形式存储的
 
-
-
-create /testDir/testAcl/testa aaa   
+create /testDir/testAcl/testa aaa
 
 delete /testDir/testAcl/testa   \# 由于没有d权限，所以提示无法删除
-
-
 
 退出客户端后：
 
@@ -380,15 +334,11 @@ ls /testDir/testAcl  \#没有权限无法访问
 
 create /testDir/testAcl/testb bbb \#没有权限无法访问
 
-
-
 addauth digest user1:123456  \# 重新新增权限后可以访问了
 
 Digest
 
 auth与digest的区别就是，前者使用明文密码进行登录，后者使用密文密码进行登录
-
-
 
 create /testDir/testDigest  data
 
@@ -396,25 +346,15 @@ addauth digest user1:123456
 
 setAcl /testDir/testDigest digest:user1:HYGa7IZRm2PUBFiFFu8xY2pPP/s=:crwa   \# 使用digest来设置权限
 
-
-
 注意：这里如果使用明文，会导致该znode不可访问
-
-
 
 通过明文获得密文
 
-shell&gt; 
+shell&gt;
 
 java -Djava.ext.dirs=/soft/zookeeper-3.4.12/lib -cp /soft/zookeeper-3.4.12/zookeeper-3.4.12.jar org.apache.zookeeper.server.auth.DigestAuthenticationProvider deer:123456
 
-
-
 deer:123456-&gt;deer:ACFm5rWnnKn9K9RN/Oc8qEYGYDs=
-
-
-
-
 
 acl命令行ip
 
@@ -422,79 +362,49 @@ create  /testDir/testIp data
 
 setAcl  /testDir/testIp ip:192.168.30.10:cdrwa
 
- 
-
 getAcl  /testDir/testIp
-
-
-
-
 
 1.3.4.常用四字命令
 
-ZooKeeper 支持某些特定的四字命令字母与其的交互。用来获取 ZooKeeper 服务的当前状态及相关信息。可通过 telnet 或 nc 向 ZooKeeper 提交相应的命令 ：
-
-
+ZooKeeper 支持某些特定的四字命令字母与其的交互。用来获取 ZooKeeper 服务的当前状态及相关信息。可通过 telnet 或 nc 向 ZooKeeper 提交相应的命令 ：
 
 当然，前提是安装好了nc
 
+echo stat\|nc 127.0.0.1 2181 来查看哪个节点被选择作为follower或者leader 
 
+使用echo ruok\|nc 127.0.0.1 2181 测试是否启动了该Server，若回复imok表示已经启动。 
 
-echo stat\|nc 127.0.0.1 2181 来查看哪个节点被选择作为follower或者leader 
+echo dump\| nc 127.0.0.1 2181 ,列出未经处理的会话和临时节点。 
 
-使用echo ruok\|nc 127.0.0.1 2181 测试是否启动了该Server，若回复imok表示已经启动。  
+echo kill \| nc 127.0.0.1 2181 ,关掉server 
 
-echo dump\| nc 127.0.0.1 2181 ,列出未经处理的会话和临时节点。  
+echo conf \| nc 127.0.0.1 2181 ,输出相关服务配置的详细信息。 
 
-echo kill \| nc 127.0.0.1 2181 ,关掉server  
+echo cons \| nc 127.0.0.1 2181 ,列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息 
 
-echo conf \| nc 127.0.0.1 2181 ,输出相关服务配置的详细信息。  
+echo envi \|nc 127.0.0.1 2181 ,输出关于服务环境的详细信息（区别于 conf 命令）。 
 
-echo cons \| nc 127.0.0.1 2181 ,列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息  
+echo reqs \| nc 127.0.0.1 2181 ,列出未经处理的请求。 
 
-echo envi \|nc 127.0.0.1 2181 ,输出关于服务环境的详细信息（区别于 conf 命令）。  
+echo wchs \| nc 127.0.0.1 2181 ,列出服务器 watch 的详细信息。 
 
-echo reqs \| nc 127.0.0.1 2181 ,列出未经处理的请求。  
+echo wchc \| nc 127.0.0.1 2181 ,通过 session 列出服务器 watch 的详细信息，它的输出是一个与 watch 相关的会话的列表。 
 
-echo wchs \| nc 127.0.0.1 2181 ,列出服务器 watch 的详细信息。  
+echo wchp \| nc 127.0.0.1 2181 ,通过路径列出服务器 watch 的详细信息。它输出一个与 session 相关的路径。
 
-echo wchc \| nc 127.0.0.1 2181 ,通过 session 列出服务器 watch 的详细信息，它的输出是一个与 watch 相关的会话的列表。  
-
-echo wchp \| nc 127.0.0.1 2181 ,通过路径列出服务器 watch 的详细信息。它输出一个与 session 相关的路径。
-
-
-
-1.3.5.ZooKeeper 日志可视化
+1.3.5.ZooKeeper 日志可视化
 
 前面以及讲了两个非常重要的配置一个是dataDir，存放的快照数据，一个是dataLogDir，存放的是事务日志文件
 
-
-
 java -cp /soft/zookeeper-3.4.12/zookeeper-3.4.12.jar:/soft/zookeeper-3.4.12/lib/slf4j-api-1.7.25.jar org.apache.zookeeper.server.LogFormatter log.1
-
-
 
 java -cp /soft/zookeeper-3.4.12/zookeeper-3.4.12.jar:/soft/zookeeper-3.4.12/lib/slf4j-api-1.7.25.jar org.apache.zookeeper.server.SnapshotFormatter log.1
 
-
-
 1.4.Java客户端框架（\*重要）
-
-
 
 1.4.1.Zookeeper原生客户端
 
 1.4.2.ZkClient
 
 1.4.3.Curator
-
-
-
-
-
-
-
-
-
-
 
