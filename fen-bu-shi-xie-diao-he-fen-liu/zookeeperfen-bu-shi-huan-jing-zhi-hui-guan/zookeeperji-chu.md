@@ -133,25 +133,51 @@ Zk的特性会从会话、数据节点，版本，Watcher，ACL权限控制，�
 
 会话（session）是zookepper非常重要的概念，客户端和服务端之间的任何交互操作都与会话有关
 
-
-
 会话状态
 
 看下这图，Zk客户端和服务端成功连接后，就创建了一次会话，ZK会话在整个运行期间的生命周期中，会在不同的会话状态之间切换，这些状态包括：
 
 CONNECTING、CONNECTED、RECONNECTING、RECONNECTED、CLOSE
 
-
-
 一旦客户端开始创建Zookeeper对象，那么客户端状态就会变成CONNECTING状态，同时客户端开始尝试连接服务端，连接成功后，客户端状态变为CONNECTED，通常情况下，由于断网或其他原因，客户端与服务端之间会出现断开情况，一旦碰到这种情况，Zookeeper客户端会自动进行重连服务，同时客户端状态再次变成CONNCTING，直到重新连上服务端后，状态又变为CONNECTED，在通常情况下，客户端的状态总是介于CONNECTING和CONNECTED之间。但是，如果出现诸如会话超时、权限检查或是客户端主动退出程序等情况，客户端的状态就会直接变更为CLOSE状态
 
-
-
-1.2.2.ZK数据模型
+#### 1.2.2.ZK数据模型
 
 ZooKeeper的视图结构和标准的Unix文件系统类似，其中每个节点称为“数据节点”或ZNode,每个znode可以存储数据，还可以挂载子节点，因此可以称之为“树”
 
-
-
 第二点需要注意的是，每一个znode都必须有值，如果没有值，节点是不能创建成功的。
+
+![](/assets/7yh5hs0ij.png)
+
+在Zookeeper中，znode是一个跟Unix文件系统路径相似的节点，可以往这个节点存储或获取数据
+
+
+
+通过客户端可对znode进行增删改查的操作，还可以注册watcher监控znode的变化。
+
+
+
+1.2.3.Zookeeper节点类型
+
+节点类型非常重要，是后面项目实战的基础。
+
+
+
+a、Znode有两种类型：
+
+短暂（ephemeral）（create -e /app1/test1 “test1” 客户端断开连接zk删除ephemeral类型节点） 
+
+持久（persistent） （create -s /app1/test2 “test2” 客户端断开连接zk不删除persistent类型节点）
+
+b、Znode有四种形式的目录节点（默认是persistent ）
+
+PERSISTENT 
+
+PERSISTENT\_SEQUENTIAL（持久序列/test0000000019 ） 
+
+EPHEMERAL 
+
+EPHEMERAL\_SEQUENTIAL
+
+c、创建znode时设置顺序标识，znode名称后会附加一个值，顺序号是一个单调递增的计数器，由父节点维护 
 
