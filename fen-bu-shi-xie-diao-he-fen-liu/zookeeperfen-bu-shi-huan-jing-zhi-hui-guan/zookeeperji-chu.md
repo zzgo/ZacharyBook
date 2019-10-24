@@ -45,11 +45,20 @@ zkServer为服务器，启动后默认端口为2181
 
 zkCli为命令行客户端
 
-
-
-1.1.2.2.conf目录
+#### 1.1.2.2.conf目录
 
 Conf目录为配置文件存放的目录，zoo.cfg为核心的配置文件
 
 这里面的配置很多，这配置是运维的工作，目前没必要，也没办法全部掌握。
+
+| 序号 | 参数名 | 说明 |
+| :--- | :--- | :--- |
+| 1 | clientPort | 客户端连接server的端口，即对外服务端口，一般设置为2181吧。 |
+| 2 | dataDir | 存储快照文件snapshot的目录。默认情况下，事务日志也会存储在这里。建议同时配置参数dataLogDir, 事务日志的写性能直接影响zk性能。 |
+| 3 | tickTime |  |
+| 4 | dataLogDir |  |
+| 5 | globalOutstandingLimit |  |
+| 6 | preAllocSize |  |
+
+
 
