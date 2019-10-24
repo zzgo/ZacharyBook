@@ -260,7 +260,7 @@ scheme为ip时:客户端的ip地址。
 
 scheme为world时:anyone。
 
-1.3.3.3.Permission
+#### 1.3.3.3.Permission
 
 CREATE、READ、WRITE、DELETE、ADMIN 也就是 增、删、改、查、管理权限，这5种权限简写为crwda\(即：每个单词的首字符缩写\)
 
@@ -274,7 +274,7 @@ WRITE\(w\)：修改节点数据的权限
 
 ADMIN\(a\)：设置子节点权限的权限
 
-1.3.3.4.ACL命令
+#### 1.3.3.4.ACL命令
 
 getAcl
 
@@ -284,11 +284,7 @@ create /testDir/testAcl deer  \# 创建一个子节点
 
 getAcl /testDir/testAcl      \# 获取该节点的acl权限信息
 
-setAcl
-
-```
- 设置指定节点的ACL信息
-```
+setAcl: 设置指定节点的ACL信息
 
 setAcl /testDir/testAcl world:anyone:crwa   \# 设置该节点的acl权限
 
@@ -350,35 +346,35 @@ setAcl  /testDir/testIp ip:192.168.30.10:cdrwa
 
 getAcl  /testDir/testIp
 
-1.3.4.常用四字命令
+#### 1.3.4.常用四字命令
 
 ZooKeeper 支持某些特定的四字命令字母与其的交互。用来获取 ZooKeeper 服务的当前状态及相关信息。可通过 telnet 或 nc 向 ZooKeeper 提交相应的命令 ：
 
 当然，前提是安装好了nc
 
-echo stat\|nc 127.0.0.1 2181 来查看哪个节点被选择作为follower或者leader 
+echo stat\|nc 127.0.0.1 2181 来查看哪个节点被选择作为follower或者leader 
 
-使用echo ruok\|nc 127.0.0.1 2181 测试是否启动了该Server，若回复imok表示已经启动。 
+使用echo ruok\|nc 127.0.0.1 2181 测试是否启动了该Server，若回复imok表示已经启动。 
 
-echo dump\| nc 127.0.0.1 2181 ,列出未经处理的会话和临时节点。 
+echo dump\| nc 127.0.0.1 2181 ,列出未经处理的会话和临时节点。 
 
-echo kill \| nc 127.0.0.1 2181 ,关掉server 
+echo kill \| nc 127.0.0.1 2181 ,关掉server 
 
-echo conf \| nc 127.0.0.1 2181 ,输出相关服务配置的详细信息。 
+echo conf \| nc 127.0.0.1 2181 ,输出相关服务配置的详细信息。 
 
-echo cons \| nc 127.0.0.1 2181 ,列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息 
+echo cons \| nc 127.0.0.1 2181 ,列出所有连接到服务器的客户端的完全的连接 / 会话的详细信息 
 
-echo envi \|nc 127.0.0.1 2181 ,输出关于服务环境的详细信息（区别于 conf 命令）。 
+echo envi \|nc 127.0.0.1 2181 ,输出关于服务环境的详细信息（区别于 conf 命令）。 
 
-echo reqs \| nc 127.0.0.1 2181 ,列出未经处理的请求。 
+echo reqs \| nc 127.0.0.1 2181 ,列出未经处理的请求。 
 
-echo wchs \| nc 127.0.0.1 2181 ,列出服务器 watch 的详细信息。 
+echo wchs \| nc 127.0.0.1 2181 ,列出服务器 watch 的详细信息。 
 
-echo wchc \| nc 127.0.0.1 2181 ,通过 session 列出服务器 watch 的详细信息，它的输出是一个与 watch 相关的会话的列表。 
+echo wchc \| nc 127.0.0.1 2181 ,通过 session 列出服务器 watch 的详细信息，它的输出是一个与 watch 相关的会话的列表。 
 
 echo wchp \| nc 127.0.0.1 2181 ,通过路径列出服务器 watch 的详细信息。它输出一个与 session 相关的路径。
 
-1.3.5.ZooKeeper 日志可视化
+#### 1.3.5.ZooKeeper 日志可视化
 
 前面以及讲了两个非常重要的配置一个是dataDir，存放的快照数据，一个是dataLogDir，存放的是事务日志文件
 
