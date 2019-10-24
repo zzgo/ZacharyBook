@@ -1,5 +1,7 @@
 ## Zookeeper基础
 
+---
+
 ### 1.1.单基部署
 
 先把ZK安装起来，后面的很多操作，都是的前提都是由ZK的操作环境，先来把ZK安装好，
@@ -202,11 +204,11 @@ ip: 它对应的id为客户机的IP地址，设置的时候可以设置一个ip�
 
 在准备好相应的配置之后，可以直接通过zkServer.sh 这个脚本进行服务的相关操作
 
-启动ZK服务:       sh bin/zkServer.sh start 
+启动ZK服务:       sh bin/zkServer.sh start
 
-查看ZK服务状态: sh bin/zkServer.sh status 
+查看ZK服务状态: sh bin/zkServer.sh status
 
-停止ZK服务:       sh bin/zkServer.sh stop 
+停止ZK服务:       sh bin/zkServer.sh stop
 
 重启ZK服务:       sh bin/zkServer.sh restart
 
