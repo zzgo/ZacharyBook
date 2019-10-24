@@ -95,11 +95,45 @@ Conf目录为配置文件存放的目录，zoo.cfg为核心的配置文件
 
 21    cnxTimeout    Leader选举过程中，打开一次连接的超时时间，默认是5s。\(Java system property: zookeeper. cnxTimeout\)
 
-22	zookeeper.DigestAuthenticationProvider.superDigest	ZK权限设置相关，具体参见 《 使用super 身份对有权限的节点进行操作》 和 《 ZooKeeper 权限控制》
+22    zookeeper.DigestAuthenticationProvider.superDigest    ZK权限设置相关，具体参见 《 使用super 身份对有权限的节点进行操作》 和 《 ZooKeeper 权限控制》
 
-23	skipACL	对所有客户端请求都不作ACL检查。如果之前节点上设置有权限限制，一旦服务器上打开这个开头，那么也将失效。\(Java system property: zookeeper.skipACL\)
+23    skipACL    对所有客户端请求都不作ACL检查。如果之前节点上设置有权限限制，一旦服务器上打开这个开头，那么也将失效。\(Java system property: zookeeper.skipACL\)
 
-24	forceSync	这个参数确定了是否需要在事务日志提交的时候调用 FileChannel.force来保证数据完全同步到磁盘。\(Java system property: zookeeper.forceSync\)
+24    forceSync    这个参数确定了是否需要在事务日志提交的时候调用 FileChannel.force来保证数据完全同步到磁盘。\(Java system property: zookeeper.forceSync\)
 
-25	jute.maxbuffer	每个节点最大数据量，是默认是1M。这个限制必须在server和client端都进行设置才会生效。\(Java system property: jute.maxbuffer\)
+25    jute.maxbuffer    每个节点最大数据量，是默认是1M。这个限制必须在server和client端都进行设置才会生效。\(Java system property: jute.maxbuffer\)
+
+在这挑选几个讲解：
+
+
+
+clientPort：参数无默认值，必须配置，用于配置当前服务器对外的服务端口，客户端必须使用这端口才能进行连接
+
+dataDir：用于存放内存数据库快照的文件夹，同时用于集群的myid文件也存在这个文件夹里（注意：一个配置文件只能包含一个dataDir字样，即使它被注释掉了。）
+
+dataLogDir：用于单独设置transaction log的目录，transaction log分离可以避免和普通log还有快照的竞争
+
+
+
+dataDir：新安装zk这文件夹里面是没有文件的，可以通过snapCount参数配置产生快照的时机
+
+
+
+以下配置集群中才会使用，后面再讨论
+
+
+
+tickTime：心跳时间，为了确保连接存在的，以毫秒为单位，最小超时时间为两个心跳时间
+
+initLimit：多少个心跳时间内，允许其他server连接并初始化数据，如果ZooKeeper管理的数据较大，则应相应增大这个值
+
+syncLimit：多少个tickTime内，允许follower同步，如果follower落后太多，则会被丢弃。
+
+1.2.ZK的特性
+
+Zk的特性会从会话、数据节点，版本，Watcher，ACL权限控制，集群角色这些部分来了解，其中重点需要掌握的数据节点与Watcher
+
+1.2.1.会话
+
+客户端与服务端的一次会话连接，本质是TCP长连接，通过会话可以进行心跳检测和数据传输；
 
