@@ -258,15 +258,15 @@ scheme为auth时：
 
 scheme为digest时:
 
-	username:BASE64\(SHA1\(password\)\)
+       username:BASE64\(SHA1\(password\)\)
 
 scheme为ip时:
 
-	客户端的ip地址。
+       客户端的ip地址。
 
 scheme为world时
 
-	anyone。
+anyone。
 
 1.3.3.3.Permission
 
