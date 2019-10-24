@@ -88,6 +88,7 @@
       * [Zookeeper分布式环境指挥官](fen-bu-shi-xie-diao-he-fen-liu/zookeeperfen-bu-shi-huan-jing-zhi-hui-guan.md)
         * [前言](fen-bu-shi-xie-diao-he-fen-liu/zookeeperfen-bu-shi-huan-jing-zhi-hui-guan/qian-yan.md)
         * [Zookeeper基础](fen-bu-shi-xie-diao-he-fen-liu/zookeeperfen-bu-shi-huan-jing-zhi-hui-guan/zookeeperji-chu.md)
+        * [Zookeeper Java Api](fen-bu-shi-xie-diao-he-fen-liu/zookeeperfen-bu-shi-huan-jing-zhi-hui-guan/zookeeper-java-api.md)
       * Nginx高并发分流进阶实战
     * [异步与消息中间件](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian.md)
       * [概述](chapter1/yi-bu-yu-xiao-xi-zhong-jian-jian/gai-shu.md)
