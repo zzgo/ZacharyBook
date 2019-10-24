@@ -55,10 +55,10 @@ Conf目录为配置文件存放的目录，zoo.cfg为核心的配置文件
 | :--- | :--- | :--- |
 | 1 | clientPort | 客户端连接server的端口，即对外服务端口，一般设置为2181吧。 |
 | 2 | dataDir | 存储快照文件snapshot的目录。默认情况下，事务日志也会存储在这里。建议同时配置参数dataLogDir, 事务日志的写性能直接影响zk性能。 |
-| 3 | tickTime |  |
-| 4 | dataLogDir |  |
-| 5 | globalOutstandingLimit |  |
-| 6 | preAllocSize |  |
+| 3 | tickTime | ZK中的一个时间单元。ZK中所有时间都是以这个时间单元为基础，进行整数倍配置的。例如，session的最小超时时间是2\*tickTime。 |
+| 4 | dataLogDir | 事务日志输出目录。尽量给事务日志的输出配置单独的磁盘或是挂载点，这将极大的提升ZK性能。（No Java system property） |
+| 5 | globalOutstandingLimit | 最大请求堆积数。默认是1000。ZK运行的时候， 尽管server已经没有空闲来处理更多的客户端请求了，但是还是允许客户端将请求提交到服务器上来，以提高吞吐性能。当然，为了防止Server内存溢出，这个请求堆积数还是需要限制下的。\(Java system property: zookeeper.globalOutstandingLimit.\) |
+| 6 | preAllocSize | 预先开辟磁盘空间，用于后续写入事务日志。默认是64M，每个事务日志大小就是64M。如果ZK的快照频率较大的话，建议适当减小这个参数。\(Java system property: zookeeper.preAllocSize\) |
 
 
 
