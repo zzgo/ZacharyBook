@@ -338,9 +338,7 @@ java -Djava.ext.dirs=/soft/zookeeper-3.4.12/lib -cp /soft/zookeeper-3.4.12/zooke
 
 deer:123456-&gt;deer:ACFm5rWnnKn9K9RN/Oc8qEYGYDs=
 
-使用CMD 运行Java命令得到加密的字符串![](/assets/2187hdshfjhs0.png)
-
-acl命令行ip
+使用CMD 运行Java命令得到加密的字符串![](/assets/2187hdshfjhs0.png)acl命令行ip
 
 create  /testDir/testIp data
 
