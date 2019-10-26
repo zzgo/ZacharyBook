@@ -190,4 +190,6 @@
 * [门萨测试题](men-sa-ce-shi-ti.md)
 * [项目导入问题](xiang-mu-dao-ru-wen-ti.md)
 * [gitbook 安装启动游览（windows）](gitbook-an-zhuang-qi-dong-you-lan-ff08-windows.md)
+* [自动化](zi-dong-hua.md)
+  * [获取表格信息](zi-dong-hua/huo-qu-biao-ge-xin-xi.md)
 
